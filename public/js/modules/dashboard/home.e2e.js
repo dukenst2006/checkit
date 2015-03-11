@@ -1,59 +1,60 @@
 define([
   'services/test-utils',
-  'services/db'
-], function(Utils, Db) {
+  'services/router',
+  'services/firebase'
+], function(Utils, Router, firebase) {
 
   describe('dashboard.home', function() {
     var authUser = {};
-    var tests = Db.retrieveCollection(Db.tests());
+    var tests = firebase.collection(firebase.child('tests'));
     var $tests, $btn;
 
     beforeEach(function(done) {
-      Utils.createUser(authUser, true, done);
+      Utils.createAuthenticatedUser(authUser, done);
     });
 
     beforeEach(function(done) {
-      Utils
-        .navigateTo('dashboard.home')
-        .waitForElementExists('.tests', function() {
-          $tests = $('.tests');
-          $btn = $('.__new-test-btn');
-          done();
-        });
+      Router.navigateTo('dashboard_home');
+
+      Utils.waitForElementExists('.tests', function() {
+        $tests = document.querySelector('.tests');
+        $btn = document.querySelector('.__new-test-btn');
+        done();
+      });
     });
 
     beforeEach(function(done) {
-      Db.tests().remove(done);
+      firebase.child('tests').remove(done);
     });
 
     afterEach(function(done) {
-      Db.tests().remove(done);
+      firebase.child('tests').remove(done);
     });
 
     describe('home()', function() {
       it('should show message if no test', function() {
         expect(tests.length).toBe(0);
-        expect($('.test.__no-result').length).toBeGreaterThan(0);
+        expect(document.querySelector('.test.__no-result')).not.toBeNull();
       });
 
       it('should create a new test', function(done) {
-        expect($btn.length).toBeGreaterThan(0);
-        expect($('.__new-test').length).toBe(0);
-        expect($('.__saved-test').length).toBe(0);
-        $btn.trigger('click');
+        expect($btn).not.toBeNull();
+        expect(document.querySelector('.__new-test')).toBeNull();
+        expect(document.querySelector('.__saved-test')).toBeNull();
+        Utils.triggerEvent('click', $btn);
 
         Utils.waitForElementVisible('.__new-test', function() {
-          var $newTest = $('.__new-test');
-          expect($newTest.length).toBe(1);
-          expect($('.__saved-test').length).toBe(0);
+          var $newTest = document.querySelector('.__new-test');
+          expect($newTest).not.toBeNull();
+          expect(document.querySelector('.__saved-test')).toBeNull();
 
-          Utils.value($newTest.find('input'), 'test name');
-          Utils.value($newTest.find('textarea'), 'test code');
-          $newTest.find('.__save-btn').trigger('click');
+          Utils.value($newTest.querySelector('input'), 'test name');
+          Utils.value($newTest.querySelector('textarea'), 'test code');
+          Utils.triggerEvent('click', $newTest.querySelector('.__save-btn'));
 
           Utils.waitForElementVisible('.__saved-test', function() {
-            var $savedTest = $('.__saved-test');
-            expect($savedTest.length).toEqual(1);
+            var $savedTest = document.querySelector('.__saved-test');
+            expect($savedTest).toBeDefined;
             done();
           });
         });
