@@ -1,0 +1,57 @@
+.list-unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hide {
+  display: none;
+}
+
+code {
+  background: rgba(0,0,0,.1);
+  padding: 2px;
+  border-radius: 2px;
+}
+
+%clearfix, .clearfix {
+  &:before, &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.masonry {
+  column-gap: 12px;
+
+  &.__2 { column-count: 2; }
+  &.__3 { column-count: 3; }
+  &.__4 { column-count: 4; }
+  &.__5 { column-count: 5; }
+
+  > * {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+@each $name, $color in $colors {
+  .color-#{$name} { color: $color; }
+  .background-#{$name} { background: $color; }
+}

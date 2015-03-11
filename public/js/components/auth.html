@@ -1,0 +1,43 @@
+<article class="modal" v-class="open: isOpen">
+  <header class="modal_slider __top">
+    <h2 class="modal_title" v-class="getFormClass(0)">Reset Password</h2>
+    <h2 class="modal_title" v-class="getFormClass(1)">Sign In</h2>
+    <h2 class="modal_title" v-class="getFormClass(2)">Sign Up</h2>
+  </header>
+  <article class="modal_content">
+    <p class="notif" v-show="message">{{ message }}</p>
+    <div class="modal_slider">
+
+      <form name="resetPass" v-on="submit:resetPassword" v-class="getFormClass(0)" novalidate>
+        <input type="email" placeholder="Email to send a new password" v-model="user.email">
+        <a class="form-label" v-on="click: formIndex = 1">Back to Sign In</a>
+        <button type="submit" class="form-btn __green __pull-right">Reset password</button>
+      </form>
+
+      <form name="signIn" v-on="submit:signIn" v-class="getFormClass(1)" novalidate>
+        <input type="email"     placeholder="Email"     v-model="user.email">
+        <input type="password"  placeholder="Password"  v-model="user.password">
+
+        <a class="reset-pass" tabindex="-1" v-on="click: formIndex = 0">Forgot your password <b>?</b></a>
+        <a class="sign-up form-label" v-on="click: formIndex = 2">Don't have an account yet?</a>
+        <button type="submit" class="form-btn __green __pull-right">Log In</button>
+      </form>
+
+      <form name="signUp" v-on="submit:signUp" v-class="getFormClass(2)" novalidate>
+        <input type="email"     placeholder="Email"     v-model="user.email">
+        <input type="password"  placeholder="Password"  v-model="user.password">
+
+        <a class="form-label" v-on="click: formIndex = 1">Already have an account?</a>
+        <button type="submit" class="form-btn __green __pull-right">Create Account</button>
+      </form>
+
+    </div>
+    <div class="modal_footer">
+      <h4 class="modal_subtitle">or Sign In using:</h4>
+      <button class="social __twitter" v-on="click: signInWithProvider('twitter')">Twitter</button>
+      <button class="social __facebook" v-on="click: signInWithProvider('facebook')">Facebook</button>
+      <button class="social __google" v-on="click: signInWithProvider('google')">GPlus</button>
+      <button class="social __github" v-on="click: signInWithProvider('github')">Github</button>
+    </div>
+  </article>
+</article>

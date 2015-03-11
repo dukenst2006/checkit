@@ -1,0 +1,102 @@
+button, .btn {
+  @extend .__default;
+  @extend .__M;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &[disabled] {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  // ========================================================================
+  // Colors
+  // ========================================================================
+
+  @mixin btn-color($background, $color: #fff) {
+    background: $background;
+    color: $color;
+
+    &:hover {
+      background: lighten($background, 4%);
+    }
+
+    &.__faded {
+      color: $background;
+      background: lighten($background, 40%);
+
+      &:hover {
+        background: lighten($background, 30%);
+      }
+    }
+  }
+
+  &.__default { @include btn-color(color(concrete)); }
+  &.__yellow  { @include btn-color(color(sun-flower)); }
+  &.__blue    { @include btn-color(color(peter-river)); }
+  &.__red     { @include btn-color(color(alizarin)); }
+  &.__green   { @include btn-color(color(green-sea)); }
+  &.__dark    { @include btn-color(color(midnight-blue)); }
+
+
+  // ========================================================================
+  // Sizes
+  // ========================================================================
+
+  &.__S {
+    line-height: 12px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  &.__M {
+    line-height: 16px;
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  &.__L {
+    line-height: 24px;
+    font-size: 24px;
+    padding: 10px 20px;
+  }
+
+  // ========================================================================
+  // Misc.
+  // ========================================================================
+
+  &.__block {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+  }
+
+  &.__pull-right {
+    float: right;
+  }
+
+  &.__square {
+    border-radius: 0;
+  }
+
+  &.__static {
+    cursor: default;
+  }
+
+  &.__link {
+    background: none;
+    border: none;
+  }
+}

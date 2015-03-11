@@ -1,0 +1,66 @@
+.tests {
+  @extend .list-unstyled;
+}
+
+.test {
+  background: #fff;
+  border: 1px solid #d6d8da;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.12);
+  transition: all .8s ease;
+  margin-bottom: 16px;
+  position: relative;
+
+  &.__no-result {
+    background: none;
+    border: none;
+    margin-top: 20%;
+    box-shadow: none;
+  }
+
+  &:first-child.v-enter, &:first-child.v-leave {
+    box-shadow: 0 0 12px #FFDC00;
+  }
+}
+
+.test_top {
+  padding: 14px;
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+
+  input {
+    display: table-cell;
+    border: none;
+    font-size: 13px;
+    width: 100%;
+  }
+
+  .test_actions {
+    display: table-cell;
+    text-align: right;
+    width: auto;
+
+    .__remove-btn {
+      position: absolute;
+      right: -18px;
+      border-radius: 0 16px 16px 0;
+      padding: 4px 6px 4px 2px;
+    }
+  }
+}
+
+.test_bottom {
+  border-top: 1px solid #d6d8da;
+
+  textarea {
+    width: 100%;
+    min-height: 80px;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    margin-bottom: -4px;
+    background: #f8f8f8;
+    padding: 14px;
+  }
+}

@@ -1,0 +1,6 @@
+public/libs/
+public/var/
+
+config/karma.conf.js
+config/nginx.conf
+config/security-rules.json

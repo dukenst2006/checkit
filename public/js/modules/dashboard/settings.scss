@@ -1,0 +1,32 @@
+.settings {
+  background: #fff;
+}
+
+.settings_table {
+
+  > li {
+    @extend .clearfix;
+    padding: 12px;
+    border-bottom: 1px solid color(clouds);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .__left, &.__left {
+      float: left;
+      font-weight: bold;
+    }
+
+    .__right, &.__right {
+      float: right;
+      text-align: right;
+      min-width: 60%;
+
+      [disabled] {
+        text-align: right;
+      }
+    }
+  }
+
+}

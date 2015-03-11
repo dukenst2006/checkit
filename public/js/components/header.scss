@@ -1,0 +1,64 @@
+.header {
+  margin-bottom: 32px;
+  padding: 8px;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.12);
+  border-bottom: 1px solid color(clouds);
+
+  button, .btn {
+    @extend .__S;
+    @extend .__green;
+    @extend .__faded;
+  }
+}
+
+.header_title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 22px;
+}
+
+.header_gravatar {
+  span {
+    line-height: 28px;
+    margin-right: 8px;
+  }
+
+  img {
+    border-radius: 50%;
+    height: 28px;
+    vertical-align: bottom;
+  }
+}
+
+.header_menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  margin: 0;
+  padding: 8px 0;
+  border-radius: 3px;
+  background: #333;
+  box-shadow: 0 0 5px rgba(0,0,0,.12);
+
+  opacity: 0;
+  max-height: 0;
+  transition: all .6s;
+
+  &.open {
+    opacity: 1;
+    max-height: 1000px;
+  }
+
+  li {
+    padding: 6px 24px;
+  }
+
+  a {
+    color: #fff;
+
+    &:hover {
+      color: color(peter-river);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.section {
+  @extend .clearfix;
+  width: 940px;
+  margin: 0 auto 40px;
+}
+
+.section_wrap {
+  @extend .clearfix;
+  margin-bottom: 22px;
+}
+
+.section_title {
+  margin: 12px 0;
+  font-weight: normal;
+}

@@ -1,0 +1,6 @@
+<div class="notifications">
+  <div v-repeat="notif: notifications" class="notification __scale __show __{{ notif.type }}">
+    <p>{{ notif.msg }}</p>
+    <span class="close" v-on="click: remove(notif)"></span>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.panel {
+  padding: 4px;
+  border: none;
+
+  fieldset {
+    margin: 12px 4px;
+    border: none;
+  }
+
+  @mixin panel-color($background, $color) {
+    background: $background;
+    border-color: darken($background, 8%);
+    color: $color;
+  }
+
+  // ========================================================================
+  // Colors
+  // ========================================================================
+
+  &.__red {
+    @include panel-color(#F7E9E2, #8B3825);
+  }
+
+  &.__green {
+    @include panel-color(#DBF0C7, #848483);
+  }
+
+  &.__blue {
+    @include panel-color(#DEECFE, #000B3E);
+  }
+
+  // ========================================================================
+  // Misc
+  // ========================================================================
+
+  &.__padded {
+    padding: 12px;
+  }
+
+}

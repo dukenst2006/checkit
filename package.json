@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "firebase": "latest",
+    "grunt-autoprefixer": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-sass": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-karma": "latest",
+    "karma": "latest",
+    "karma-chrome-launcher": "latest",
+    "karma-firefox-launcher": "latest",
+    "karma-jasmine": "~0.2.0",
+    "karma-phantomjs-launcher": "latest",
+    "karma-requirejs": "latest",
+    "requirejs": "latest",
+    "router": "latest",
+    "underscore": "latest"
+  }
+}

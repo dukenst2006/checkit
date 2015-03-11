@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@import 'variables';
+@import 'mixins/*';
+@import 'reset';
+@import 'base/*';
+@import '../js/**/*.scss';
+
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  color: color(wet-asphalt);
+  background: color(clouds);
+
+  a {
+    color: color(belize-hole);
+  }
+}
+
+.root {
+  height: 100%;
+}
