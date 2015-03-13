@@ -2,7 +2,7 @@
 
 $grid-columns: 24;
 $grid-column-width: (100% / $grid-columns);
-$grid-gutter-half: 16px / 2;
+$grid-gutter-half: 20px / 2;
 
 .grid {
   @extend %clearfix;

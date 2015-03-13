@@ -1,3 +1,9 @@
-<div v-component="header"></div>
+<header v-if="user.uid">
+  <center>
+    You are authenticated
+    <a v-route="dashboard_home" class="btn __S __blue">Go to Dashboard ➝</a>
+  </center>
+  <br><br>
+</header>
 <section class="section" v-component="{{ mainView }}"></section>
 <div class="overlay hide" v-component="auth" v-ref="authModal"></div>

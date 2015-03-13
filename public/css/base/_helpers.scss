@@ -37,20 +37,6 @@ code {
   border-radius: 50%;
 }
 
-.masonry {
-  column-gap: 12px;
-
-  &.__2 { column-count: 2; }
-  &.__3 { column-count: 3; }
-  &.__4 { column-count: 4; }
-  &.__5 { column-count: 5; }
-
-  > * {
-    display: inline-block;
-    width: 100%;
-  }
-}
-
 @each $name, $color in $colors {
   .color-#{$name} { color: $color; }
   .background-#{$name} { background: $color; }

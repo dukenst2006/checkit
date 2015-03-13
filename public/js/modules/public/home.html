@@ -1,102 +1,107 @@
-<div class="8">
-  <ul class="masonry __2 _|_ color-clouds list-unstyled">
-    <li class="swatch" v-repeat="tool: TOOLS">
-      <div class="swatch_img background-{{ tool.colors[0] }}">
-        <img v-attr="src: '/img/tools/' + tool.name + '.png'">
+
+<div class="12">
+
+  <div class="swatch-main">
+    <button class="__S __blue __pull-right create-account" v-on="click: openAuthModal">Create your Account</button>
+    <h1>Be notified as soon as something happen</h1>
+    <p>
+      Whether you need to know when a domain become available,
+      your website goes down, someone send a tweet .. or anything else.
+      It's 100% customisable.
+    </p>
+  </div>
+
+
+  <ul class="swatch-container">
+
+    <li class="swatch __light-blue">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/60/">
       </div>
-      <div class="swatch_url background-{{ tool.colors[1] }}">
-        <a class="color-clouds" href="//{{ tool.url }}" target="_blank">{{ tool.url }}</a>
+      <div class="swatch_bottom">
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+      </div>
+    </li>
+
+    <li class="swatch __yellow">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/100/">
+      </div>
+      <div class="swatch_bottom">
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+      </div>
+    </li>
+
+    <li class="swatch __light-green">
+        <div class="swatch_top">
+          <img src="http://lorempixel.com/160/100/">
+        </div>
+        <div class="swatch_bottom">
+          <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+        </div>
+    </li>
+
+    <li class="swatch __red">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/60/">
+      </div>
+      <div class="swatch_bottom">
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
       </div>
     </li>
   </ul>
 </div>
 
-<div class="16">
-  <div class="section_wrap home-notif notif">
-    <p><strong>Congrats!</strong> Your seed has been successfully installed.</p>
-    <p>
-      To get started, open <code><a href="/js/config.js">config.js</a></code> in your editor and
-      replace <code>FIREBASE</code> parameter with your firebase url (You can get a new one in your
-      <a href="https://firebase.com/account" target="_blank">firebase account</a>).
-    </p>
-    <p>
-      <strong>Your current firebase url is: <code><a href="{{ CONFIG.FIREBASE }}">{{ CONFIG.FIREBASE }}</a></code>.</strong>
-    </p>
-    <p>
-      To start coding run <code>grunt watch</code> in your terminal, it will automatically compile sass files for you.
-      If you want to launch tests, run <code>grunt test</code> command.
-    </p>
-    <p>
-      You can start working by opening <code>public/js/modules/public/home.js</code> in your editor, it's the controller
-      of the page your currently looking at.
-    </p>
-    <p>
-      Please report back bugs to <a href="https://github.com/julesbou/fbseed">https://github.com/julesbou/fb-seed</a>.
-      Thanks a lot.
-    </p>
-  </div>
+<div class="12">
 
-  <h2 class="_|_ no-margin">CSS Toolkit <small><em>to get you started</em></small></h2>
-  <h2 class="_|_ no-margin">↯ ↯ ↯ ↯ ↯ ↯</h2>
+  <ul class="swatch-container">
+    <li class="swatch __green">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/180/">
+      </div>
+      <div class="swatch_bottom">
+        <span>Blogger »</span>
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+      </div>
+    </li>
 
-  <h3 class="section_title"><em>_btn.scss</em><hr></h3>
-  <div class="section_wrap">
-    <button>Default</button>
-    <button class="__yellow">Yellow</button>
-    <button class="__blue">Blue</button>
-    <button class="__red">Red</button>
-    <button class="__green">Green</button>
-    <button class="__dark">Dark</button>
-    <br><br>
+    <li class="swatch __dark-red">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/160/">
+      </div>
+      <div class="swatch_bottom">
+        <span>Blogger »</span>
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+      </div>
+    </li>
 
-    <button class="__default __faded">default</button>
-    <button class="__yellow __faded">Yellow</button>
-    <button class="__blue __faded">Blue</button>
-    <button class="__red __faded">Red</button>
-    <button class="__green __faded">Green</button>
-    <button class="__dark __faded">Dark</button>
-    <br><br>
+    <li class="swatch __light-yellow">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/160/">
+      </div>
+      <div class="swatch_bottom">
+        <span>Blogger »</span>
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+      </div>
+    </li>
 
-    <button class="__S">Small</button>
-    <button>Medium</button>
-    <button class="__L">Large</button>
-    <button class="__square">Square</button>
-    <button disabled>Disabled</button>
-    <button class="__pull-right">Pull right</button>
-    <br><br>
+    <li class="swatch __blue">
+      <div class="swatch_top">
+        <img src="http://lorempixel.com/160/180/">
+      </div>
+      <div class="swatch_bottom">
+        <span>Blogger »</span>
+        <p>Easily share your posts on Google+ so that you can expand the audience for your blog.</p>
+      </div>
+    </li>
 
-    <button class="__block">Block</button>
-  </div>
-
-  <h3 class="section_title"><em>_grid.scss</em><hr></h3>
-  <div class="section_wrap">
-    <style>
-      .row > div {
-        padding: 6px;
-        background: #ddd;
-        border: 1px solid rgba(0, 0, 0, .1);
-      }
-    </style>
-    <small>Width (0 to 24):</small>
-    <div class="row _|_">
-      <div class="3">12.5%</div>
-      <div class="6">25%</div>
-      <div class="12">50%</div>
-      <div class="3">12.5%</div>
-    </div>
-    <br><br>
-    <small>Offset:</small>
-    <div class="row _|_">
-      <div class="12 ++3 6++">12.5% left - 25% right</div>
-      <div class="3">12.5%</div>
-    </div>
-    <br><br>
-    <small>Align:</small>
-    <div class="row _|_">
-      <div class="8 |_">left</div>
-      <div class="8 _|_">center</div>
-      <div class="8 _|">right</div>
-    </div>
-  </div>
-
+  </ul>
 </div>
+
+<footer class="footer 24">
+  <ul>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Help</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+</footer>

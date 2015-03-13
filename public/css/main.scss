@@ -6,8 +6,12 @@
 @import 'base/*';
 @import '../js/**/*.scss';
 
+@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400,600);
+
 body {
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Exo', sans-serif;
+  font-size: 14px;
+  font-weight: 200;
   color: color(wet-asphalt);
   background: color(clouds);
 
