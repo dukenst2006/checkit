@@ -18,7 +18,7 @@ define([
 
       Utils.waitForElementExists('.tests', function() {
         $tests = document.querySelector('.tests');
-        $btn = document.querySelector('.__new-test-btn');
+        $btn = document.querySelector('.new-check-btn');
         done();
       });
     });
@@ -39,21 +39,21 @@ define([
 
       it('should create a new test', function(done) {
         expect($btn).not.toBeNull();
-        expect(document.querySelector('.__new-test')).toBeNull();
-        expect(document.querySelector('.__saved-test')).toBeNull();
+        expect(document.querySelector('.new-check')).toBeNull();
+        expect(document.querySelector('.saved-check')).toBeNull();
         Utils.triggerEvent('click', $btn);
 
-        Utils.waitForElementVisible('.__new-test', function() {
-          var $newTest = document.querySelector('.__new-test');
+        Utils.waitForElementVisible('.new-check', function() {
+          var $newTest = document.querySelector('.new-check');
           expect($newTest).not.toBeNull();
-          expect(document.querySelector('.__saved-test')).toBeNull();
+          expect(document.querySelector('.saved-check')).toBeNull();
 
           Utils.value($newTest.querySelector('input'), 'test name');
           Utils.value($newTest.querySelector('textarea'), 'test code');
           Utils.triggerEvent('click', $newTest.querySelector('.__save-btn'));
 
-          Utils.waitForElementVisible('.__saved-test', function() {
-            var $savedTest = document.querySelector('.__saved-test');
+          Utils.waitForElementVisible('.saved-check', function() {
+            var $savedTest = document.querySelector('.saved-check');
             expect($savedTest).toBeDefined;
             done();
           });

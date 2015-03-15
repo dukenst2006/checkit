@@ -10,3 +10,4 @@
 - Test when torvalds publish a new post on g+ (to be the first to comment)
 
 - When there's full moon
+- When webiste become famous (trafic +300% for example)

@@ -8,6 +8,10 @@ define([
     testToCreate: null,
 
     createTest: function() {
+      if (Router.routeName !== 'dashboard_home') {
+        Router.navigateTo('dashboard_home');
+      }
+
       return this.testToCreate = {
         name: 'New Test',
         code: '... code ...'

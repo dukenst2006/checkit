@@ -11,6 +11,10 @@ define([
       : err
   }
 
+  function formIndex(formName) {
+    return ['resetPass', 'signIn', 'signUp'].indexOf(formName)
+  }
+
   return Vue.component('auth', {
 
     template: template,
@@ -20,7 +24,7 @@ define([
         user: {},
         message: null,
         isOpen: false,
-        formIndex: 1
+        formName: 'signIn'
       }
     },
 
@@ -30,7 +34,8 @@ define([
 
     methods: {
 
-      open: function() {
+      open: function(formName) {
+        if (formName && typeof formName === 'string') this.$data.formName = formName
         this.$data.isOpen = true
         this.$el.classList.add('active')
         this.$el.style.display = 'block'
@@ -48,9 +53,9 @@ define([
         }
       },
 
-      getFormClass: function(formIndex) {
-        if (this.$data.formIndex > formIndex) return 'slide-left'
-        if (this.$data.formIndex < formIndex) return 'slide-right'
+      getFormClass: function(formName) {
+        if (formIndex(this.$data.formName) > formIndex(formName)) return 'slide-left'
+        if (formIndex(this.$data.formName) < formIndex(formName)) return 'slide-right'
         return 'current'
       },
 

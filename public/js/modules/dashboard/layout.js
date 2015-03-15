@@ -2,8 +2,9 @@ define([
   'vue',
   'services/auth',
   'services/router',
+  'services/test-helper',
   'text!./layout.html'
-], function(Vue, Auth, Router, template) {
+], function(Vue, Auth, Router, testHelper, template) {
 
   return Vue.component('dashboard', {
 
@@ -19,6 +20,7 @@ define([
     },
 
     methods: {
+      createTest: testHelper.createTest.bind(testHelper),
       openAuthModal: _.noop
     }
   })

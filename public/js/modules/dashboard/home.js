@@ -16,7 +16,6 @@ define([
     data: function() {
       return {
         testHelper: testHelper,
-        createTest: testHelper.createTest.bind(testHelper),
         tests: firebase.collection(firebase.child('tests'))
       }
     }

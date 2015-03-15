@@ -10,8 +10,8 @@ define([
     template: template,
 
     methods: {
-      openAuthModal: function() {
-        this.$.authModal.open()
+      openAuthModal: function(formName) {
+        this.$.authModal.open(formName)
       }
     }
   })

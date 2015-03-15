@@ -77,6 +77,15 @@ button, .btn {
   // Misc.
   // ========================================================================
 
+  &.__empty {
+    background: none;
+    border: 2px solid;
+
+    &:hover {
+      background: none;
+    }
+  }
+
   &.__block {
     box-sizing: border-box;
     display: block;

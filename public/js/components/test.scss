@@ -11,13 +11,6 @@
   margin-bottom: 16px;
   position: relative;
 
-  &.__no-result {
-    background: none;
-    border: none;
-    margin-top: 20%;
-    box-shadow: none;
-  }
-
   &:first-child.v-enter, &:first-child.v-leave {
     box-shadow: 0 0 12px #FFDC00;
   }

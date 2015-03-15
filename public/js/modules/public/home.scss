@@ -2,6 +2,7 @@ $gutter: 20px;
 
 body#home {
   padding: $gutter;
+  padding-top: 0;
 }
 
 .swatch-main {
@@ -59,7 +60,7 @@ body#home {
 }
 
 .footer {
-  margin-top: 40px;
+  margin: 20px;
 
   ul {
     list-style-type: none;

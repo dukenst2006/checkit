@@ -10,12 +10,35 @@
     @extend .__green;
     @extend .__faded;
   }
+
+  button.create-btn {
+    border-radius: 50px;
+    max-width: 28px;
+    height: 28px;
+    font-size: 20px;
+    box-sizing: border-box;
+    padding: 0px 6px 2px;
+    transition: max-width 0.5s;
+
+    span {
+      display: none;
+      font-size: 12px;
+    }
+
+    &:hover {
+      max-width: 120px;
+
+      span {
+        display: inline;
+      }
+    }
+  }
 }
 
 .header_title {
   margin: 0;
   font-size: 22px;
-  line-height: 22px;
+  line-height: 28px;
 }
 
 .header_gravatar {
@@ -52,6 +75,12 @@
 
   li {
     padding: 6px 24px;
+
+    &.divider {
+      box-shadow: 0 1px 1px #666;
+      height: 1px;
+      padding: 0;
+    }
   }
 
   a {

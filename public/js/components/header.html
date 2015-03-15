@@ -1,32 +1,35 @@
-<header class="header 24">
-  <div class="8 |_">&nbsp;</div>
+<header class="header section">
+  <div class="24">
+    <div class="8 |_">&nbsp;</div>
 
-  <div class="8 _|_">
-    <h1 class="header_title">
-      <a class="__active" v-route="home">Firebase Seed</a>
-    </h1>
-  </div>
+    <div class="8 _|_">
+      <h1 class="header_title">
+        <a class="__active" v-route="home">Check & Notify</a>
+      </h1>
+    </div>
 
-  <div class="8 _|" v-if="!user.uid">
-    <button class="create-account" v-on="click: openAuthModal">Sign In</button>
-  </div>
 
-  <div class="8 _| relative" v-if="user.uid">
-    <a class="header_gravatar" v-route="dashboard_home" v-on="
-      mouseover:  showUserMenu,
-      mouseleave: hideUserMenu
-    ">
-      <span>{{ user.name }}</span>
-      <img v-attr="src: user.email | gravatar 50">
-    </a>
-    <ul class="header_menu list-unstyled |_" v-class="open: isMenuOpen" v-on="
-      mouseover:  showUserMenu,
-      mouseleave: hideUserMenu,
-      click:      hideUserMenu
-    ">
-      <li><a v-route="dashboard_home">Dashboard</a></li>
-      <li><a v-route="dashboard_settings">Settings</a></li>
-      <li><a v-on="click: logout">Logout</a></li>
-    </ul>
+    <div class="8 _| relative" v-if="user.uid">
+      <button class="create-btn __empty" v-on="click: createTest">+ <span>Create a Check</span></button>
+
+      <a class="header_gravatar" v-route="dashboard_home" v-on="
+        mouseover:  showUserMenu,
+        mouseleave: hideUserMenu
+      ">
+        <span>{{ user.name }}</span>
+        <img v-attr="src: user.email | gravatar 50">
+      </a>
+      <ul class="header_menu list-unstyled |_" v-class="open: isMenuOpen" v-on="
+        mouseover:  showUserMenu,
+        mouseleave: hideUserMenu,
+        click:      hideUserMenu
+      ">
+        <li><a v-route="dashboard_home">Dashboard</a></li>
+        <li><a v-route="dashboard_settings">Account Settings</a></li>
+        <li><a href="#">Help</a></li>
+        <li class="divider"></li>
+        <li><a v-on="click: logout">Logout</a></li>
+      </ul>
+    </div>
   </div>
 </header>
