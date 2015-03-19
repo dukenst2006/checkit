@@ -74,8 +74,6 @@
   }
 
   li {
-    padding: 6px 24px;
-
     &.divider {
       box-shadow: 0 1px 1px #666;
       height: 1px;
@@ -85,6 +83,8 @@
 
   a {
     color: #fff;
+    display: block;
+    padding: 6px 24px;
 
     &:hover {
       color: color(peter-river);
