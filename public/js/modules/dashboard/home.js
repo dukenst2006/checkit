@@ -15,6 +15,7 @@ define([
 
     data: function() {
       return {
+        expanded: false,
         testHelper: testHelper,
         tests: firebase.collection(firebase.child('tests'))
       }

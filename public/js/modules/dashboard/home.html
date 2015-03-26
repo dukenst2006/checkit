@@ -1,9 +1,21 @@
-<div class="12 ++6">
+<div class="18 3--">
+  <div class="message-create-check expandable 12 6--" style="min-height:200px"
+    v-class="__expanded: expanded" v-if="!tests.length">
 
-  <div class="message-create-check" v-if="!tests.length">
-    <h1>Hey</h1>
-    <p>Let check for something.</p>
-    <button class="btn __M __green new-check-btn" v-if="user.uid" v-on="click: createTest">Create a Check</button>
+    <div class="expandable-content">
+      <h2>About Parsley</h2>
+      <button class="btn __M __green new-check-btn" v-on="click: expanded = !expanded">Create a Check</button>
+      <p>Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.</p>
+      <p>Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.</p>
+    </div>
+
+
+    <div class="expandable-trigger">
+      <h1>Hey</h1>
+      <p>Let check for something.</p>
+      <button class="btn __M __green new-check-btn" v-on="click: expanded = !expanded">Create a Check</button>
+    </div>
+
   </div>
 
   <ul class="tests">
