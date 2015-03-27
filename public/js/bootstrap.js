@@ -10,10 +10,11 @@ require.config({
     es5:      '../libs/es5-shim/es5-shim',
     es6:      '../libs/es6-shim/es6-shim',
     md5:      '../libs/js-md5/js/md5',
-    $:        '../libs/zepto/zepto'
+    $:        '../libs/zepto/zepto',
+    dom4:     '../libs/dom4/build/dom4'
   },
 
-  deps: ['$', '_', 'es5', 'es6', 'vue'],
+  deps: ['$', '_', 'es5', 'es6', 'vue', 'dom4'],
 
   shim: {
     $: { exports: '$' },
