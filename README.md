@@ -12,6 +12,8 @@
 - When there's full moon
 - When webiste become famous (trafic +300% for example)
 
+- When new StackOverflow question
+
 # TODO
 
 - remove animation for header menu

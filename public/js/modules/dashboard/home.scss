@@ -4,3 +4,38 @@
   padding: 20px;
   text-align: center;
 }
+
+.test-form {
+  .save-test-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  textarea {
+    min-height: 180px;
+  }
+}
+
+.editor {
+  position: relative;
+
+  textarea {
+    font-family: 'monaco-invisible';
+    font-size: 14px;
+    background: #0B1022;
+    color: #FFF;
+    padding: 10px;
+    border: 0;
+  }
+
+  pre {
+    font-family: Monaco, courier, monospace;
+    pointer-events: none;
+    background: transparent;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

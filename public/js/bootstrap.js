@@ -11,6 +11,8 @@ require.config({
     es6:      '../libs/es6-shim/es6-shim',
     md5:      '../libs/js-md5/js/md5',
     $:        '../libs/zepto/zepto',
+    behave:   '../libs/behave/behave',
+    rainbow:  '../libs/rainbow/js/rainbow',
     dom4:     '../libs/dom4/build/dom4'
   },
 
@@ -19,7 +21,22 @@ require.config({
   shim: {
     $: { exports: '$' },
     _: { exports: '_' },
-    backbone: { deps: ['_'] }
+    backbone: { deps: ['_'] },
+    rainbow: { init: function() {
+      require([
+        '../libs/rainbow/js/language/generic',
+        '../libs/rainbow/js/language/javascript'
+      ])
+
+      Rainbow.extend('javascript', [
+        {
+          name: 'newLine',
+          pattern: /^\s*\n/
+        }
+      ])
+
+      return Rainbow
+    }}
   }
 
 })
@@ -34,6 +51,7 @@ define([
   'components/notifications',
   'components/test',
   'directives/route',
+  'directives/colorize',
   'filters/gravatar'
 ], function (Layout, Auth, Router) {
 
