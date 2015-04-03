@@ -10,26 +10,14 @@
     @extend .__green;
   }
 
-  button.create-btn {
-    border-radius: 50px;
-    max-width: 28px;
-    height: 28px;
-    font-size: 20px;
-    box-sizing: border-box;
-    padding: 0px 6px 2px;
-    transition: max-width 0.5s;
-
-    span {
-      display: none;
-      font-size: 12px;
-    }
+  .settings {
+    color: #a7adba;
+    font-size: 28px;
+    line-height: 16px;
+    vertical-align: text-bottom;
 
     &:hover {
-      max-width: 120px;
-
-      span {
-        display: inline;
-      }
+      color: #2980B9;
     }
   }
 }

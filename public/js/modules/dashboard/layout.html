@@ -9,9 +9,12 @@
     </div>
 
     <div class="8 _| relative">
-      <button class="create-btn __empty" v-on="click: createTest">+ <span>Create a Check</span></button>
 
-      <a class="header_gravatar" v-route="dashboard_home" v-on="
+      <a class="settings">
+        <i class="icon-cog"></i>
+      </a>
+
+      <a class="hide header_gravatar" v-route="dashboard_home" v-on="
         mouseover:  showUserMenu,
         mouseleave: hideUserMenu
       ">
