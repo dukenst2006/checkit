@@ -16,36 +16,3 @@
     min-height: 180px;
   }
 }
-
-.editor {
-  position: relative;
-
-  textarea {
-    font-family: 'monaco-invisible';
-    font-size: 14px;
-    background: #0B1022;
-    color: #FFF;
-    padding: 10px;
-    border: 0;
-  }
-
-  pre {
-    font-family: Monaco, courier, monospace;
-    background: transparent;
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    pointer-events: none;
-    text-align: left;
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    code {
-      background: none;
-      height: 100%;
-      box-sizing: border-box;
-    }
-  }
-}

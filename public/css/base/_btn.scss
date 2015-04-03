@@ -1,8 +1,8 @@
 button, .btn {
   @extend .__default;
-  @extend .__M;
+  @extend .__S;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -25,30 +25,22 @@ button, .btn {
   // Colors
   // ========================================================================
 
-  @mixin btn-color($background, $color: #fff) {
-    background: $background;
-    color: $color;
+  @mixin btn-color($background, $border: #d9d9d9, $color: #333) {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    color: #333;
 
     &:hover {
-      background: lighten($background, 4%);
-    }
-
-    &.__faded {
-      color: $background;
-      background: lighten($background, 40%);
-
-      &:hover {
-        background: lighten($background, 30%);
-      }
+      color: $color;
+      background: $background;
+      border-color: $border;
     }
   }
 
-  &.__default { @include btn-color(color(concrete)); }
-  &.__yellow  { @include btn-color(color(sun-flower)); }
-  &.__blue    { @include btn-color(color(peter-river)); }
-  &.__red     { @include btn-color(color(alizarin)); }
-  &.__green   { @include btn-color(color(green-sea)); }
-  &.__dark    { @include btn-color(color(midnight-blue)); }
+  &.__default { @include btn-color(#fafafa, #d9d9d9); }
+  &.__info    { @include btn-color(color(peter-river)); }
+  &.__danger  { @include btn-color(color(alizarin)); }
+  &.__success { @include btn-color(#95D7A6, #73C984, #fff); }
 
 
   // ========================================================================
@@ -84,6 +76,12 @@ button, .btn {
     &:hover {
       background: none;
     }
+  }
+
+  &.__primary {
+    color: #fff;
+    border-color: #186FC0;
+    background: #2789E4;
   }
 
   &.__block {
