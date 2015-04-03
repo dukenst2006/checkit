@@ -8,7 +8,7 @@ define([
 
     bind: function() {
       this.textareaEl = this.el.querySelector('textarea')
-      this.preEl = this.el.querySelector('pre')
+      this.codeEl = this.el.querySelector('code')
 
       this.editor = new Behave({
         textarea: this.textareaEl,
@@ -22,13 +22,13 @@ define([
 
       // synchronize scroll
       this.textareaEl.addEventListener('scroll', function(event) {
-        this.preEl.scrollTop = this.textareaEl.scrollTop
+        this.codeEl.scrollTop = this.textareaEl.scrollTop
       }.bind(this))
     },
 
     colorize: function() {
       Rainbow.color(this.textareaEl.value, 'javascript', function(colorized) {
-        this.preEl.innerHTML = colorized
+        this.codeEl.innerHTML = colorized
       }.bind(this))
     }
   })

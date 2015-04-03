@@ -3,9 +3,8 @@ define([
   'services/auth',
   'services/firebase',
   'services/router',
-  'services/notifier',
   'text!./settings.html'
-], function(Vue, Auth, firebase, Router, Notifier, template) {
+], function(Vue, Auth, firebase, Router, template) {
 
   return Vue.component('dashboard_settings', {
 
@@ -27,7 +26,7 @@ define([
           name: this.$data.user.name,
           email: this.$data.user.email
         }, function() {
-          Notifier.success('Profile successfully saved.')
+          //Notifier.success('Profile successfully saved.')
         })
       },
 
@@ -40,14 +39,14 @@ define([
           if (err) {
             switch (err.code) {
               case 'INVALID_PASSWORD':
-                Notifier.warning('Specified password is incorrect.')
+                //Notifier.warning('Specified password is incorrect.')
                 break
               case 'INVALID_USER':
-                Notifier.warning('Specified user is incorrect (bug).')
+                //Notifier.warning('Specified user is incorrect (bug).')
                 break
             }
           } else {
-            Notifier.success('Password successfully updated.')
+            //Notifier.success('Password successfully updated.')
           }
         }.bind(this))
       },
@@ -67,14 +66,14 @@ define([
           if (err) {
             switch (err.code) {
               case 'INVALID_PASSWORD':
-                Notifier.warning('Specified password is incorrect.')
+                //Notifier.warning('Specified password is incorrect.')
                 break
               case 'INVALID_USER':
-                Notifier.warning('Specified user is incorrect (bug).')
+                //Notifier.warning('Specified user is incorrect (bug).')
                 break
             }
           } else {
-            Notifier.success('Account successfully deleted.')
+            //Notifier.success('Account successfully deleted.')
 
             setTimeout(function() {
               Router.navigateTo('home')

@@ -1,9 +1,8 @@
 define([
   'services/auth',
-  'services/notifier',
   'services/router',
   'services/test-utils'
-], function(Auth, Notifier, Router, Utils) {
+], function(Auth, Router, Utils) {
 
   describe('modules/dashboard/settings', function() {
     var authUser = {}
@@ -17,7 +16,7 @@ define([
     })
 
     afterEach(function(done) {
-      Notifier.reset()
+      //Notifier.reset()
       Utils.logout()
       Utils.deleteUser(authUser, done)
     })

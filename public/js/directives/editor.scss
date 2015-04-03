@@ -1,7 +1,7 @@
 .editor {
   position: relative;
 
-  $fontSize: 12px;
+  $fontSize: 13px;
 
   textarea {
     font-family: 'monaco-invisible';
@@ -57,7 +57,7 @@ pre .string, pre .comment.docstring {
 }
 
 pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
-  color: #fff;
+  color: #eff1f5;
 }
 
 pre .keyword, pre .selector {
