@@ -31,11 +31,21 @@
 
   pre {
     font-family: Monaco, courier, monospace;
-    pointer-events: none;
     background: transparent;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    pointer-events: none;
     text-align: left;
     position: absolute;
     top: 0;
     left: 0;
+
+    code {
+      background: none;
+      height: 100%;
+      box-sizing: border-box;
+    }
   }
 }

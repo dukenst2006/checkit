@@ -26,7 +26,7 @@ define([
 
     ready: function() {
       this.formEl = this.$el.querySelector('.expandable-content')
-      this.codeEl = this.formEl.querySelector('pre')
+      this.preEl = this.formEl.querySelector('pre')
       this.textareaEl = this.formEl.querySelector('textarea');
 
       this.editor = new Behave({
@@ -42,20 +42,24 @@ define([
       var evt = document.createEvent('HTMLEvents');
       evt.initEvent('input', false, true);
 
-      this.codeEl.addEventListener('keypress', function(event) {
+      this.preEl.addEventListener('keypress', function(event) {
         event.preventDefault()
         this.textareaEl.value += String.fromCharCode(event.charCode)
         this.textareaEl.dispatchEvent(evt)
+      }.bind(this))
+
+      this.textareaEl.addEventListener('scroll', function(event) {
+        this.preEl.scrollTop = this.textareaEl.scrollTop
       }.bind(this))
     },
 
     methods: {
 
       colorize: function() {
-        var codeEl = this.codeEl
+        var preEl = this.preEl
 
         Rainbow.color(this.textareaEl.value, 'javascript', function(colorized) {
-          codeEl.innerHTML = colorized
+          preEl.innerHTML = colorized
         })
       },
 
