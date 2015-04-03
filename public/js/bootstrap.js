@@ -50,6 +50,7 @@ define([
   'components/header',
   'components/notifications',
   'components/test',
+  'directives/editor',
   'directives/route',
   'directives/colorize',
   'filters/gravatar'

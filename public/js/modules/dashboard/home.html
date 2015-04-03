@@ -24,7 +24,8 @@
   <h1>Test Form</h1>
   <button class="btn __M __green __faded __square __pull-right save-test-btn" v-on="click: expand">Save Check</button>
 
-  <div class="editor">
+  <div class="editor" v-editor>
     <textarea v-model="code"></textarea>
     <pre><code data-language="javascript" v-colorize="code"></code></pre>
+  </div>
 </form>

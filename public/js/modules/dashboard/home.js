@@ -1,11 +1,9 @@
 define([
   'vue',
-  'rainbow',
-  'behave',
   'services/firebase',
   'services/test-helper',
   'text!./home.html'
-], function(Vue, Rainbow, Behave, firebase, testHelper, template) {
+], function(Vue, firebase, testHelper, template) {
 
   return Vue.component('dashboard_home', {
 
@@ -17,7 +15,7 @@ define([
 
     data: function() {
       return {
-        code: 'function sum(x, y) {\n return x + y;\n}',
+        code: 'function sum(x, y) {\n  return x + y;\n}',
         expanded: false,
         testHelper: testHelper,
         tests: firebase.collection(firebase.child('tests'))
@@ -26,42 +24,9 @@ define([
 
     ready: function() {
       this.formEl = this.$el.querySelector('.expandable-content')
-      this.preEl = this.formEl.querySelector('pre')
-      this.textareaEl = this.formEl.querySelector('textarea');
-
-      this.editor = new Behave({
-        textarea: this.textareaEl,
-        tabSize: 2,
-        softTabs: true,
-        autoIndent: true
-      })
-
-      this.textareaEl.addEventListener('keydown', this.colorize.bind(this))
-      this.textareaEl.addEventListener('keyup', this.colorize.bind(this))
-
-      var evt = document.createEvent('HTMLEvents');
-      evt.initEvent('input', false, true);
-
-      this.preEl.addEventListener('keypress', function(event) {
-        event.preventDefault()
-        this.textareaEl.value += String.fromCharCode(event.charCode)
-        this.textareaEl.dispatchEvent(evt)
-      }.bind(this))
-
-      this.textareaEl.addEventListener('scroll', function(event) {
-        this.preEl.scrollTop = this.textareaEl.scrollTop
-      }.bind(this))
     },
 
     methods: {
-
-      colorize: function() {
-        var preEl = this.preEl
-
-        Rainbow.color(this.textareaEl.value, 'javascript', function(colorized) {
-          preEl.innerHTML = colorized
-        })
-      },
 
       expand: function(event) {
         var el = this.$el
