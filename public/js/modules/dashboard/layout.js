@@ -12,12 +12,6 @@ define([
 
     template: template,
 
-    data: function() {
-      return {
-        isMenuOpen: false
-      }
-    },
-
     ready: function() {
       if (!Auth.isAuthenticated()) {
         console.error('You must be authenticated to access this url')
@@ -26,16 +20,9 @@ define([
     },
 
     methods: {
-      createTest: testHelper.createTest.bind(testHelper),
-
-      showUserMenu: function() {
-        this.$data.isMenuOpen = true
-      },
-
-      hideUserMenu: function() {
-        this.$data.isMenuOpen = false
+      openSettingsModal: function() {
+        this.$.settingsModal.open()
       }
-
     }
   })
 })

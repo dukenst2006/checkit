@@ -55,6 +55,10 @@ define([
   $(document).on('click', 'a:not([data-bypass])', function (event) {
     var href = $(this).attr('href')
 
+    if (href === '') {
+      return
+    }
+
     if (/https?\:\/\//.exec(href) || /^\/\//.exec(href)) {
       return
     }

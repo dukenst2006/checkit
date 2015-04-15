@@ -25,8 +25,8 @@ button, .btn {
   // Colors
   // ========================================================================
 
-  @mixin btn-color($background, $border: #d9d9d9, $color: #333) {
-    background: #fff;
+  @mixin btn-color($background, $border: #d9d9d9, $color: #333, $defaultBg: #fff) {
+    background: $defaultBg;
     border: 1px solid #d9d9d9;
     color: #333;
 
@@ -38,8 +38,9 @@ button, .btn {
   }
 
   &.__default { @include btn-color(#fafafa, #d9d9d9); }
+  &.__grey    { @include btn-color(#fafafa, #d9d9d9, #333, color(clouds)); }
   &.__info    { @include btn-color(color(peter-river)); }
-  &.__danger  { @include btn-color(color(alizarin)); }
+  &.__danger  { @include btn-color(#fa6569, #f93338, #fff); }
   &.__success { @include btn-color(#95D7A6, #73C984, #fff); }
 
 
@@ -56,7 +57,7 @@ button, .btn {
   &.__M {
     line-height: 16px;
     font-size: 16px;
-    padding: 8px 16px;
+    padding: 6px 16px;
   }
 
   &.__L {
@@ -71,7 +72,7 @@ button, .btn {
 
   &.__empty {
     background: none;
-    border: 2px solid;
+    border: none;
 
     &:hover {
       background: none;

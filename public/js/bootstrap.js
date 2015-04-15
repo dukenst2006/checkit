@@ -45,12 +45,10 @@ define([
   'modules/layout',
   'services/auth',
   'services/router',
-  'components/auth',
   'components/test',
   'directives/editor',
   'directives/route',
-  'directives/colorize',
-  'filters/gravatar'
+  'directives/colorize'
 ], function (Layout, Auth, Router) {
 
   // wait for authentication state

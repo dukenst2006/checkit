@@ -1,52 +1,44 @@
 define([
   'vue',
+  'mixins/modal',
   'services/auth',
   'services/firebase',
   'services/router',
   'text!./settings.html'
-], function(Vue, Auth, firebase, Router, template) {
+], function(Vue, ModalMixin, Auth, firebase, Router, template) {
 
-  return Vue.component('dashboard_settings', {
-
-    layout: 'dashboard',
+  return Vue.component('settings', {
 
     template: template,
 
+    inherit: true,
+
+    mixins: [ModalMixin],
+
     data: function() {
       return {
-        user: Auth.user,
-        toggleChangePassword: false
+        user: Auth.user, // needed
+        passwordSuccess: null
       }
     },
 
     methods: {
 
-      updateUser: function() {
-        firebase.child('users/' + this.$data.user.uid).set({
-          name: this.$data.user.name,
-          email: this.$data.user.email
-        }, function() {
-          //Notifier.success('Profile successfully saved.')
-        })
-      },
-
       changePassword: function() {
+        var oldPassword = prompt('Please enter old password:')
+        if(!oldPassword) return
+        var newPassword = prompt('Please enter new password:')
+        if(!newPassword) return
+
         firebase.changePassword({
           email: this.$data.user.email,
-          oldPassword: this.$data.changePasswordOld,
-          newPassword: this.$data.changePasswordNew
+          oldPassword: oldPassword,
+          newPassword: newPassword
         }, function(err) {
           if (err) {
-            switch (err.code) {
-              case 'INVALID_PASSWORD':
-                //Notifier.warning('Specified password is incorrect.')
-                break
-              case 'INVALID_USER':
-                //Notifier.warning('Specified user is incorrect (bug).')
-                break
-            }
+            alert('Error: ' + err.message)
           } else {
-            //Notifier.success('Password successfully updated.')
+            this.$data.passwordSuccess = 'Password successfully updated.'
           }
         }.bind(this))
       },
@@ -64,23 +56,12 @@ define([
           password: password
         }, function(err) {
           if (err) {
-            switch (err.code) {
-              case 'INVALID_PASSWORD':
-                //Notifier.warning('Specified password is incorrect.')
-                break
-              case 'INVALID_USER':
-                //Notifier.warning('Specified user is incorrect (bug).')
-                break
-            }
+            alert('Error: ' + err.message)
           } else {
-            //Notifier.success('Account successfully deleted.')
-
-            setTimeout(function() {
-              Router.navigateTo('home')
-              firebase.unauth()
-            }, 100)
+            Router.navigateTo('home')
+            firebase.unauth()
           }
-        }.bind(this))
+        })
       }
     }
   })

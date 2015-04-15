@@ -4,5 +4,7 @@
     <a v-on="click: openAuthModal('signIn')" v-if="!user.uid" class="btn __S __blue">Signin</a>
   </p>
 </header>
+
 <section class="section" v-component="{{ mainView }}"></section>
+
 <div class="overlay hide" v-component="auth" v-ref="authModal"></div>

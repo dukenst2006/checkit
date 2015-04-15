@@ -1,5 +1,19 @@
-.settings {
-  background: #fff;
+.modal_settings {
+  flex-direction: column;
+  display: flex;
+
+  .modal_content {
+    background: #FFF;
+    overflow-y: scroll;
+    flex: 1;
+    height: auto;
+    position: relative;
+  }
+
+  .modal_footer {
+    padding: 12px;
+    border: 1px solid #EBEEE2;
+  }
 }
 
 .settings_table {
@@ -15,7 +29,6 @@
 
     .__left, &.__left {
       float: left;
-      font-weight: bold;
     }
 
     .__right, &.__right {
@@ -23,10 +36,17 @@
       text-align: right;
       min-width: 60%;
 
+      input {
+        padding: 4px;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+
       [disabled] {
         text-align: right;
       }
     }
   }
-
 }

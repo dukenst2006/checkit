@@ -1,9 +1,11 @@
 define([
   'vue',
+  'mixins/modal',
   'services/firebase',
   'services/router',
+  'services/auth',
   'text!./auth.html'
-], function(Vue, firebase, Router, template) {
+], function(Vue, ModalMixin, firebase, Router, Auth, template) {
 
   function formatFirebaseError(err) {
     return (err && err.message)
@@ -19,37 +21,29 @@ define([
 
     template: template,
 
+    mixins: [ModalMixin],
+
     data: function() {
       return {
         user: {},
         message: null,
-        isOpen: false,
         formName: 'signIn'
       }
     },
 
-    ready: function() {
-      this.$el.addEventListener('click', this.hide.bind(this))
+    created: function() {
+      this.$on('open', this.onOpen.bind(this))
     },
 
     methods: {
 
-      open: function(formName) {
-        if (formName && typeof formName === 'string') this.$data.formName = formName
-        this.$data.isOpen = true
-        this.$el.classList.add('active')
-        this.$el.style.display = 'block'
-      },
+      onOpen: function(formName) {
+        if (Auth.isAuthenticated()) {
+          return Router.navigateTo('dashboard_home')
+        }
 
-      hide: function(event) {
-        if (event.target.classList.contains('overlay')) {
-          this.$data.isOpen = false
-          this.$el.classList.remove('active')
-
-          // wait for css animation
-          setTimeout(function() {
-            this.$el.style.display = 'none'
-          }.bind(this), 300)
+        if (formName && typeof formName === 'string') {
+          this.$data.formName = formName
         }
       },
 

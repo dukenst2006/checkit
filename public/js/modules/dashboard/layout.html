@@ -10,30 +10,22 @@
 
     <div class="8 _| relative">
 
-      <a class="settings">
+      <a class="settings" v-on="click: openSettingsModal">
         <i class="icon-cog"></i>
       </a>
 
-      <a class="hide header_gravatar" v-route="dashboard_home" v-on="
-        mouseover:  showUserMenu,
-        mouseleave: hideUserMenu
-      ">
-        <span>{{ user.name }}</span>
-        <img v-attr="src: user.email | gravatar 50">
-      </a>
-      <ul class="header_menu list-unstyled |_" v-class="open: isMenuOpen" v-on="
-        mouseover:  showUserMenu,
-        mouseleave: hideUserMenu,
-        click:      hideUserMenu
-      ">
+      <!--
         <li><a v-route="dashboard_home">Dashboard</a></li>
         <li><a v-route="dashboard_settings">Account Settings</a></li>
         <li><a href="#">Help</a></li>
         <li class="divider"></li>
         <li><a v-on="click: logout">Logout</a></li>
-      </ul>
+        -->
+
     </div>
   </div>
 </header>
 
 <section class="section" v-component="{{ mainView }}"></section>
+
+<div class="overlay __light hide" v-component="settings" v-ref="settingsModal"></div>

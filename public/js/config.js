@@ -13,13 +13,12 @@ define({
     './modules/dashboard/settings',
 
     './modules/public/layout',
+    './modules/public/auth',
     './modules/public/home'
   ],
 
   ROUTES: [
     { name: 'dashboard_home', url: 'dashboard/' },
-    { name: 'dashboard_settings', url: 'dashboard/settings' },
-
     { name: 'home', url: '' },
     { name: 'notFound', url: '*404' }
   ]
