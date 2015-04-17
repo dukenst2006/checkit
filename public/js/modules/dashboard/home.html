@@ -1,6 +1,35 @@
-<div class="18 3--">
+<div class="24 items">
 
-  <div class="message-create-check expandable 12 6--" style="min-height:160px"
+  <a class="create-box item 8" v-on="click: loadContent($event)">
+    <div class="expandable-trigger">
+      <h1>Hey</h1>
+      <p>Let check for something.</p>
+      <button class="btn __M" test="new-btn">Create a Check</button>
+    </div>
+  </a>
+
+  <a class="8 item" v-on="click: loadContent($event, 'foo')" style="background: #FCFCFC">
+    <p>Lorem ipsum dolor sit amet</p>
+    <p>Lorem ipsum dolor sit amet</p>
+    <p>Lorem ipsum dolor sit amet</p>
+    <p>Lorem ipsum dolor sit amet</p>
+  </a>
+
+  <form class="content" v-on="submit: submit">
+    <h1 class="content-name"><input v-model="test.name" tabindex="1"></h1>
+    <button class="btn __M __primary save-button" v-on="click: submit">Save</button>
+    <button class="close-button" v-on="click: hideContent"><i class="icon-cancel"></i><span>Close</span></button>
+
+    <div class="editor" v-editor>
+      <textarea v-model="test.code" tabindex="2"></textarea>
+      <pre><code data-language="javascript" v-colorize="test.code"></code></pre>
+    </div>
+  </form>
+
+
+
+  <!--
+  <div class="message-create-check expandable 8" style="min-height:160px"
     v-class="__expanded: expanded" v-if="!tests.length">
     <div class="expandable-trigger">
       <h1>Hey</h1>
@@ -8,24 +37,10 @@
       <button class="btn __M" test="new-btn" v-on="click: expand">Create a Check</button>
     </div>
   </div>
-
   <ul class="tests">
-
-    <!-- new test -->
     <li class="test new-check" v-if="testHelper.testToCreate" v-component="test" v-with="test: testHelper.testToCreate, isOpen: 'y'"></li>
-
-    <!-- saved tests -->
     <li class="test saved-check" v-repeat="test: tests | orderBy 'id' -1" v-component="test" v-transition></li>
-
   </ul>
+  -->
+
 </div>
-
-<form class="expandable-content form test-form hide" v-on="submit: submit">
-  <h1>Test Form</h1>
-  <button class="btn __pull-right __M __primary save-test-btn" v-on="click: expand">Save</button>
-
-  <div class="editor" v-editor>
-    <textarea v-model="code"></textarea>
-    <pre><code data-language="javascript" v-colorize="code"></code></pre>
-  </div>
-</form>

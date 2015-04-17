@@ -10,6 +10,7 @@
     color: #FFF;
     padding: 10px;
     border: 0;
+    border-radius: 0;
   }
 
   pre {
@@ -33,6 +34,8 @@
 
 
     code {
+      padding: 0;
+      margin: 0;
       background: none;
       height: 100%;
       box-sizing: border-box;

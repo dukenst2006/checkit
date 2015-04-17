@@ -12,6 +12,12 @@ define({
         this.close();
       }
     }.bind(this))
+
+    document.body.addEventListener('keyup', function(event) {
+      if (event.keyCode === 27) { // Escape
+        this.close();
+      }
+    }.bind(this))
   },
 
   methods: {

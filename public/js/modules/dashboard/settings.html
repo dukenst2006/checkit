@@ -17,7 +17,7 @@
         <label class="__left">Password</label>
         <div class="__right">
           <span ng-if="passwordSuccess" class="text __success">{{ passwordSuccess }}</span>
-          <button class="__grey" v-on="click:changePassword" test="change-password-toggle">Change Password</button>
+          <button class="btn __grey" v-on="click:changePassword" test="change-password-toggle">Change Password</button>
         </div>
       </li>
       <li>
@@ -27,12 +27,12 @@
         </div>
       </li>
       <li class="_|" v-if="user.provider == 'password'">
-        <button class="text __danger" test="delete-user" v-on="click: deleteUser">Delete Account</button>
+        <button class="btn text __danger" test="delete-user" v-on="click: deleteUser">Delete Account</button>
       </li>
     </ul>
   </article>
   <footer class="modal_footer">
-    <button class="__danger __M">Logout</button>
-    <button class="__M __pull-right" v-on="click: close">Close</button>
+    <button class="btn __danger __M">Logout</button>
+    <button class="btn __M __pull-right" v-on="click: close">Close</button>
   </footer>
 </article>
