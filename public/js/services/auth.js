@@ -28,7 +28,7 @@ define([
           firebase.child('users/' + authData.uid).on('value', function(snap) {
             // user already exists
             if (snap.val() !== null) {
-              _.extend(self.user, snap.val(), { uid: snap.name() })
+              _.extend(self.user, snap.val(), { uid: snap.key() })
               clearTimeout(timeout)
               callback()
             }

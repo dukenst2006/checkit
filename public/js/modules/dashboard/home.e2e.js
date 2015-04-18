@@ -7,7 +7,7 @@ define([
   describe('dashboard.home', function() {
     var authUser = {};
     var tests = firebase.collection(firebase.child('tests'));
-    var $tests, $btn;
+    var $tests, $newTest;
 
     beforeEach(function(done) {
       Utils.createAuthenticatedUser(authUser, done);
@@ -16,9 +16,9 @@ define([
     beforeEach(function(done) {
       Router.navigateTo('dashboard_home');
 
-      Utils.waitForElementExists('.tests', function() {
-        $tests = document.querySelector('.tests');
-        $btn = document.querySelector('.new-check-btn');
+      Utils.waitForElementExists('.item', function() {
+        $tests = document.querySelectorAll('.item.__saved');
+        $newTest = document.querySelector('.item.__new');
         done();
       });
     });
@@ -34,32 +34,23 @@ define([
     describe('home()', function() {
       it('should show message if no test', function() {
         expect(tests.length).toBe(0);
-        expect(document.querySelector('.test.__no-result')).not.toBeNull();
+        expect($newTest).not.toBeNull();
       });
 
       it('should create a new test', function(done) {
-        expect($btn).not.toBeNull();
-        expect(document.querySelector('.new-check')).toBeNull();
-        expect(document.querySelector('.saved-check')).toBeNull();
-        Utils.triggerEvent('click', $btn);
+        Utils.triggerEvent('click', $newTest);
 
-        Utils.waitForElementVisible('.new-check', function() {
-          var $newTest = document.querySelector('.new-check');
-          expect($newTest).not.toBeNull();
-          expect(document.querySelector('.saved-check')).toBeNull();
+        Utils.waitForElementVisible('.content', function() {
+          Utils.value(document.querySelector('.content input'), 'test name');
+          Utils.value(document.querySelector('.content textarea'), 'test code');
+          Utils.triggerEvent('click', document.querySelector('.content [test=save-button]'));
 
-          Utils.value($newTest.querySelector('input'), 'test name');
-          Utils.value($newTest.querySelector('textarea'), 'test code');
-          Utils.triggerEvent('click', $newTest.querySelector('.__save-btn'));
-
-          Utils.waitForElementVisible('.saved-check', function() {
-            var $savedTest = document.querySelector('.saved-check');
-            expect($savedTest).toBeDefined;
+          Utils.waitForElementVisible('.item.__saved', function() {
+            expect(document.querySelector('.item.__saved')).toBeDefined;
             done();
           });
         });
       });
     });
-
   });
 });

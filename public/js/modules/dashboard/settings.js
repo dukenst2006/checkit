@@ -62,6 +62,11 @@ define([
             firebase.unauth()
           }
         })
+      },
+
+      logout: function() {
+        firebase.unauth()
+        Router.navigateTo('home')
       }
     }
   })

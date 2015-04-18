@@ -14,6 +14,7 @@
 
 - When new StackOverflow question
 
-# TODO
 
-- remove animation for header menu
+# IDEAS
+
+- badge like github

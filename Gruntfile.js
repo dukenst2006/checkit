@@ -21,8 +21,7 @@ module.exports = function(grunt) {
     karma: {
       options: {
         configFile: 'config/karma.conf.js',
-        singleRun: true,
-        reportSlowerThan: 5000
+        singleRun: true
       },
 
       // singleRun

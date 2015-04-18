@@ -7,7 +7,7 @@ define({
   },
 
   ready: function() {
-    this.$el.addEventListener('click', function() {
+    this.$el.addEventListener('click', function(event) {
       if (event.target.classList.contains('overlay')) {
         this.close();
       }

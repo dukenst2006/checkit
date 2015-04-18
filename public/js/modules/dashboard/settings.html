@@ -7,17 +7,14 @@
       <li>
         <label class="__left">Email</label>
         <div class="__right">
-          <input type="email"
-            v-model="user.email"
-            v-on="change: updateUser"
-            v-attr="disabled: (user.provider == 'password')">
+          <input type="email" v-model="user.email" disabled>
         </div>
       </li>
       <li class="settings_password" v-if="user.provider == 'password'">
         <label class="__left">Password</label>
         <div class="__right">
-          <span ng-if="passwordSuccess" class="text __success">{{ passwordSuccess }}</span>
-          <button class="btn __grey" v-on="click:changePassword" test="change-password-toggle">Change Password</button>
+          <span v-if="passwordSuccess" class="text __success" test="password-success">{{ passwordSuccess }}</span>
+          <button class="btn __grey" v-on="click:changePassword" test="change-password">Change Password</button>
         </div>
       </li>
       <li>
@@ -32,7 +29,7 @@
     </ul>
   </article>
   <footer class="modal_footer">
-    <button class="btn __danger __M">Logout</button>
+    <button class="btn __danger __M" v-on="click: logout">Logout</button>
     <button class="btn __M __pull-right" v-on="click: close">Close</button>
   </footer>
 </article>

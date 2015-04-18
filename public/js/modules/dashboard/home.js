@@ -32,16 +32,17 @@ define([
     },
 
     ready: function() {
-      this.content = document.querySelector('.content')
       this.gridItemsContainer = document.querySelector('.items')
-      this.closeCtrl = document.querySelector('.close-button')
+      this.content = document.querySelector('.content')
+      this.closeCtrl = this.content.querySelector('.close-button')
     },
 
     methods: {
 
       submit: function(event) {
         event.preventDefault()
-        console.log('submit')
+        firebase.child('tests').push(this.$data.test)
+        this.hideContent()
       },
 
       loadContent: function(event, test) {
@@ -65,6 +66,8 @@ define([
           }
         }
 
+        item.classList.add('current')
+
         setTimeout(function() {
           dummy.style.WebkitTransform = dummy.style.transform = 'translate3d(0px, ' + scrollY() + 'px, 0px)';
         }, 25);
@@ -75,8 +78,6 @@ define([
 
           this.content.style.top = scrollY() + 'px';
           this.content.classList.add('__show');
-
-          item.classList.add('current')
           this.closeCtrl.classList.add('__show');
 
           if (!test) {
@@ -87,7 +88,7 @@ define([
       },
 
       hideContent: function() {
-        var gridItem = this.gridItemsContainer.querySelector(' .current')
+        var gridItem = this.gridItemsContainer.querySelector('.current')
 
         this.content.classList.remove('__show');
         this.closeCtrl.classList.remove('__show');
@@ -101,10 +102,11 @@ define([
           )
 
           setTimeout(function() {
-            this.content.parentNode.scrollTop = 0;
-            this.gridItemsContainer.removeChild(dummy);
-          }.bind(this), 500);
-        }.bind(this), 25);
+            this.content.parentNode.scrollTop = 0
+            this.gridItemsContainer.removeChild(dummy)
+            gridItem.classList.remove('current')
+          }.bind(this), 500)
+        }.bind(this), 25)
       }
     }
   })

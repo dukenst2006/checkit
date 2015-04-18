@@ -1,6 +1,6 @@
 <div class="24 items">
 
-  <a class="create-box item 8" v-on="click: loadContent($event)">
+  <a class="item __new 8" v-on="click: loadContent($event)">
     <div class="expandable-trigger">
       <h1>Hey</h1>
       <p>Let check for something.</p>
@@ -8,39 +8,19 @@
     </div>
   </a>
 
-  <a class="8 item" v-on="click: loadContent($event, 'foo')" style="background: #FCFCFC">
-    <p>Lorem ipsum dolor sit amet</p>
-    <p>Lorem ipsum dolor sit amet</p>
-    <p>Lorem ipsum dolor sit amet</p>
+  <a class="item __saved 8" v-repeat="test: tests | orderBy 'id' -1" v-on="click: loadContent($event, test)" style="background: #FCFCFC">
+    <h1>{{ test.name }}</h1>
     <p>Lorem ipsum dolor sit amet</p>
   </a>
 
   <form class="content" v-on="submit: submit">
     <h1 class="content-name"><input v-model="test.name" tabindex="1"></h1>
-    <button class="btn __M __primary save-button" v-on="click: submit">Save</button>
-    <button class="close-button" v-on="click: hideContent"><i class="icon-cancel"></i><span>Close</span></button>
-
+    <button class="btn __M __primary save-button" test="save-button">Save</button>
+    <button class="close-button" type="button" v-on="click: hideContent"><i class="icon-cancel"></i><span>Close</span></button>
     <div class="editor" v-editor>
       <textarea v-model="test.code" tabindex="2"></textarea>
       <pre><code data-language="javascript" v-colorize="test.code"></code></pre>
     </div>
   </form>
-
-
-
-  <!--
-  <div class="message-create-check expandable 8" style="min-height:160px"
-    v-class="__expanded: expanded" v-if="!tests.length">
-    <div class="expandable-trigger">
-      <h1>Hey</h1>
-      <p>Let check for something.</p>
-      <button class="btn __M" test="new-btn" v-on="click: expand">Create a Check</button>
-    </div>
-  </div>
-  <ul class="tests">
-    <li class="test new-check" v-if="testHelper.testToCreate" v-component="test" v-with="test: testHelper.testToCreate, isOpen: 'y'"></li>
-    <li class="test saved-check" v-repeat="test: tests | orderBy 'id' -1" v-component="test" v-transition></li>
-  </ul>
-  -->
 
 </div>

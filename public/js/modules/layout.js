@@ -3,9 +3,8 @@ define([
   'text!./layout.html',
   'config',
   'services/auth',
-  'services/firebase',
   'services/router'
-], function(Vue, template, Config, Auth, firebase, Router) {
+], function(Vue, template, Config, Auth, Router) {
 
   return new Vue({
 
@@ -33,6 +32,10 @@ define([
     },
 
     _updateView: function(routeName) {
+      if (routeName === 'notFound') {
+        return document.write('Not found - 404')
+      }
+
       // add 'layout' option for Vue.component(...)
       var layout = this.components[routeName].prototype.constructor.options.layout;
 
@@ -41,12 +44,6 @@ define([
         this.mainView = routeName
       } else {
         this.layouView = routeName
-      }
-    },
-
-    methods: {
-      logout: function() {
-        firebase.unauth()
       }
     }
   })

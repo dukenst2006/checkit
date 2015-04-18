@@ -22,11 +22,12 @@ define([
     var coll = []
 
     ref.on('child_added', function(snap) {
-      coll.push(_.extend(snap.val(), { id: snap.name() }))
+      coll.push(_.extend(snap.val(), { id: snap.key() }))
     })
 
     ref.on('child_removed', function(snap) {
-      coll = _.without(coll, _.findWhere(coll, { id: snap.name() }))
+      var index = _.findIndex(coll, function(item) { return item.id === snap.key() })
+      coll.splice(index, 1)
     })
 
     return coll

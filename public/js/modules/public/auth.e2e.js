@@ -20,7 +20,7 @@ define([
         $notif = $modal.querySelector('.notif')
 
         // open modal
-        Utils.triggerEvent('click', document.querySelector('.create-account'))
+        Utils.triggerEvent('click', document.querySelector('[test=create-account]'))
       })
 
       Utils.waitForElementExists('.modal.open', done)
