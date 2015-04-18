@@ -36,15 +36,57 @@ form.content {
 
 
 .items {
-  position: relative;
 
   .item {
-    &.__new {
-      background: #FCFCFC;
-      border: 2px dashed color(green-sea);
-      padding: 20px;
-      text-align: center;
+    position: relative;
+    color: #34495E;
+    height: 150px;
+    padding: 20px;
+    text-align: center;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      content: ' ';
+      top: 5px;
+      right: 5px;
+      bottom: 5px;
+      left: 5px;
     }
+
+    &.__new {
+      &::before {
+        background: #FCFCFC;
+        border: 2px dashed color(green-sea);
+      }
+    }
+
+    &.__saved {
+      &::before {
+        background: #fff;
+      }
+    }
+  }
+}
+
+.check-something {
+  text-align: center;
+  padding-bottom: 4px;
+  padding-top: 24px;
+
+  a {
+    display: inline-block;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    background: #ffffff;
+    color: #3986BB;
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding: 8px 16px 6px 12px;
+  }
+
+  i {
+    font-size: 12px;
   }
 }
 
@@ -162,5 +204,17 @@ $anim-time: 0.5s;
 
   span {
     display: none;
+  }
+}
+
+.dashboard-wrap {
+  position: relative;
+  flex-direction: column;
+  min-height: calc(100% - 90px);
+  display :flex;
+
+  .wrap {
+    flex: 1;
+    box-flex: 1;
   }
 }

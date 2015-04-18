@@ -1,10 +1,10 @@
-<header class="section">
+<header class="page">
   <p  class="24 _|">
-    <a v-route="dashboard_home" v-if="user.uid" class="btn __S __blue">Go to Dashboard ➝</a>
+    <a href="/dashboard/" v-if="user.uid" class="btn __S __blue">Go to Dashboard ➝</a>
     <a v-on="click: openAuthModal('signIn')" v-if="!user.uid" class="btn __S __blue">Signin</a>
   </p>
 </header>
 
-<section class="section" v-component="{{ mainView }}"></section>
+<div class="page" v-component="{{ mainView }}"></div>
 
 <div class="overlay hide" v-component="auth" v-ref="authModal"></div>

@@ -28,3 +28,9 @@ body {
 .root {
   height: 100%;
 }
+
+.page {
+  @extend .clearfix;
+  width: 940px;
+  margin: 0 auto;
+}

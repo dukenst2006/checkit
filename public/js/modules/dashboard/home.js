@@ -2,7 +2,9 @@ define([
   'vue',
   'services/firebase',
   'services/test-helper',
-  'text!./home.html'
+  'text!./home.html',
+  'directives/editor',
+  'directives/colorize'
 ], function(Vue, firebase, testHelper, template) {
 
   function scrollY() {
@@ -14,6 +16,37 @@ define([
     var inner = window.innerHeight;
     return client < inner ? inner : client;
   }
+
+  function whichTransitionEvent(){
+    var el = document.createElement('fakeelement');
+    var transitions = {
+      'transition':'transitionend',
+      'OTransition':'oTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
+    }
+
+    for (var t in transitions) {
+      if (el.style[t] !== undefined) {
+        return transitions[t];
+      }
+    }
+  }
+
+  function onTransitionEnd(el, cb) {
+    var transitionEvent = whichTransitionEvent()
+    if (transitionEvent) {
+      var once = function() {
+        cb()
+        el.removeEventListener(transitionEvent, once)
+      }
+      el.addEventListener(transitionEvent, once)
+    } else {
+      setTimeout(cb, 1000 / 60)
+    }
+  }
+
+  var gridItemsContainer, content, closeCtrl
 
   return Vue.component('dashboard_home', {
 
@@ -32,9 +65,9 @@ define([
     },
 
     ready: function() {
-      this.gridItemsContainer = document.querySelector('.items')
-      this.content = document.querySelector('.content')
-      this.closeCtrl = this.content.querySelector('.close-button')
+      gridItemsContainer = document.querySelector('.items')
+      content = document.querySelector('.content')
+      closeCtrl = content.querySelector('.close-button')
     },
 
     methods: {
@@ -46,18 +79,16 @@ define([
       },
 
       loadContent: function(event, test) {
-        var item = event.target.closest('.item')
-        var dummy = document.createElement('div')
+        var item = event.target.closest('.item') || event.target
+        var placeholder = document.createElement('div')
 
-        dummy.classList.add('placeholder')
-        dummy.classList.add('__trans-in')
+        placeholder.classList.add('placeholder')
+        placeholder.classList.add('__trans-in')
 
-        dummy.style.transform = dummy.style.WebkitTransform = (
-          'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px)' +
-          'scale3d(' + item.offsetWidth/this.gridItemsContainer.offsetWidth + ',' + item.offsetHeight/ viewPortY()  + ',1)'
+        placeholder.style.transform = placeholder.style.WebkitTransform = (
+          'translate3d(' + item.offsetLeft + 'px, ' + item.offsetTop + 'px, 0px)' +
+          'scale3d(' + item.offsetWidth / gridItemsContainer.offsetWidth + ',' + item.offsetHeight / viewPortY()  + ',1)'
         );
-
-        this.gridItemsContainer.appendChild(dummy);
 
         if (!test) {
           this.$data.test = {
@@ -66,47 +97,48 @@ define([
           }
         }
 
-        item.classList.add('current')
+        requestAnimationFrame(function() {
+          item.classList.add('current-grid-item')
+          item.parentNode.appendChild(placeholder);
 
-        setTimeout(function() {
-          dummy.style.WebkitTransform = dummy.style.transform = 'translate3d(0px, ' + scrollY() + 'px, 0px)';
-        }, 25);
+          requestAnimationFrame(function() {
+            placeholder.style.WebkitTransform = placeholder.style.transform = 'translate3d(0px, ' + scrollY() + 'px, 0px)';
+          })
+        })
 
-        setTimeout(function() {
-          dummy.classList.remove('__trans-in');
-          dummy.classList.add('__trans-out');
+        onTransitionEnd(placeholder, function() {
+          placeholder.classList.remove('__trans-in');
+          placeholder.classList.add('__trans-out');
 
-          this.content.style.top = scrollY() + 'px';
-          this.content.classList.add('__show');
-          this.closeCtrl.classList.add('__show');
+          content.style.top = scrollY() + 'px';
+          content.classList.add('__show');
+          closeCtrl.classList.add('__show');
 
           if (!test) {
-            this.content.querySelector('input').select()
+            content.querySelector('input').select()
           }
-
-        }.bind(this), 500);
+        })
       },
 
       hideContent: function() {
-        var gridItem = this.gridItemsContainer.querySelector('.current')
+        var placeholder = document.querySelector('.placeholder')
+        var gridItem = document.querySelector('.current-grid-item')
 
-        this.content.classList.remove('__show');
-        this.closeCtrl.classList.remove('__show');
+        content.classList.remove('__show');
+        closeCtrl.classList.remove('__show');
 
-        setTimeout(function() {
-          var dummy = this.gridItemsContainer.querySelector('.placeholder');
-
-          dummy.style.WebkitTransform = dummy.style.transform = (
+        requestAnimationFrame(function() {
+          placeholder.style.WebkitTransform = placeholder.style.transform = (
             'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) ' +
-            'scale3d(' + gridItem.offsetWidth/this.gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/viewPortY() + ',1)'
+            'scale3d(' + gridItem.offsetWidth / gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight / viewPortY() + ',1)'
           )
+        })
 
-          setTimeout(function() {
-            this.content.parentNode.scrollTop = 0
-            this.gridItemsContainer.removeChild(dummy)
-            gridItem.classList.remove('current')
-          }.bind(this), 500)
-        }.bind(this), 25)
+        onTransitionEnd(placeholder, function() {
+          content.parentNode.scrollTop = 0
+          placeholder.parentNode.removeChild(placeholder)
+          gridItem.classList.remove('current-grid-item')
+        })
       }
     }
   })

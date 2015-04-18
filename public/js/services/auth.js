@@ -20,6 +20,8 @@ define([
       var self = this
 
       firebase.onAuth(function(authData) {
+        callback()
+
         if (authData) {
           // if user not found
           var timeout = setTimeout(callback, 1200)
@@ -28,9 +30,15 @@ define([
           firebase.child('users/' + authData.uid).on('value', function(snap) {
             // user already exists
             if (snap.val() !== null) {
-              _.extend(self.user, snap.val(), { uid: snap.key() })
               clearTimeout(timeout)
-              callback()
+
+              Object.assign(self.user, snap.val())
+
+              // https://github.com/yyx990803/vue/issues/538
+              self.user.$add('uid', snap.key())
+              for (var k in snap.val()) {
+                self.user.$add(k, snap.val()[k])
+              }
             }
           })
 
@@ -39,8 +47,8 @@ define([
           for (var k in self.user) {
             self.user[k] = null
           }
-          callback()
         }
+
       })
     }
   }

@@ -1,3 +1,5 @@
+console.time('bootstrap')
+console.time('started')
 
 require.config({
 
@@ -44,17 +46,15 @@ require.config({
 define([
   'modules/layout',
   'services/auth',
-  'services/router',
-  'components/test',
-  'directives/editor',
-  'directives/route',
-  'directives/colorize'
+  'services/router'
 ], function (Layout, Auth, Router) {
+  console.timeEnd('started')
 
   // wait for authentication state
   Auth.listen(_.once(function() {
     Router.start()
     Layout.$mount(document.body)
+    console.timeEnd('bootstrap')
   }))
 
 })

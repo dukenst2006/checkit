@@ -17,7 +17,7 @@ define([
 
     data: function() {
       return {
-        user: Auth.user, // needed
+        user: Auth.user,
         passwordSuccess: null
       }
     },

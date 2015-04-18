@@ -8,24 +8,24 @@ module.exports = function (config) {
     files: [
       'public/js/test.js',
       { pattern: 'public/js/**/*.js', included: false },
-      { pattern: 'public/js/modules/**/*.html', included: false },
-      { pattern: 'public/js/partials/**/*.html', included: false },
-      { pattern: 'public/js/components/**/*.html', included: false },
+      { pattern: 'public/js/**/*.html', included: false },
       { pattern: 'public/img/**/*', included: false },
+      { pattern: 'public/fonts/*', included: false },
       { pattern: 'public/libs/**/*.js', included: false },
       { pattern: 'public/var/*.css', included: false },
       { pattern: 'public/var/*.map', included: false }
     ],
 
     proxies: {
-      '/img/': '/base/public/img/'
+      '/img/': '/base/public/img/',
+      '/fonts/': '/base/public/fonts/'
     },
 
     exclude: [
       'public/libs/**/*spec.js'
     ],
 
-    reporters: ['dots'],
+    reporters: ['mocha'],
 
     // web server port
     // CLI --port 9876
@@ -69,6 +69,6 @@ module.exports = function (config) {
 
     // report which specs are slower than 500ms
     // CLI --report-slower-than 500
-    reportSlowerThan: 3000
+    reportSlowerThan: 10000
   });
 };
