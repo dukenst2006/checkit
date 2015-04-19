@@ -8,13 +8,10 @@ define([
 
     createUser: function(user, cb) {
       var rand = this.random()
-
-      _.extend(user, {
-        name: 'foo-' + rand,
-        email: 'foo-' + rand + '@bar.com',
-        provider: user.provider || 'password',
-        password: '****'
-      })
+      user.name = 'foo-' + rand
+      user.email = 'foo-' + rand + '@bar.com'
+      user.provider = user.provider || 'password'
+      user.password = '****'
 
       firebase.createUser(user, function(err, authData) {
         if (err) throw err
@@ -26,7 +23,7 @@ define([
     createAuthenticatedUser: function(user, cb) {
       this.createUser(user, function() {
         this.login(user, function() {
-          Auth.listen(_.once(cb))
+          Auth.listen(cb)
         })
       }.bind(this))
     },

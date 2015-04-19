@@ -21,12 +21,21 @@ define([
   firebase.collection = function(ref) {
     var coll = []
 
+    ref.on('value', function() {
+      // TODO ajax loader
+      // console.log('--', arguments, ref, coll)
+    })
+
     ref.on('child_added', function(snap) {
-      coll.push(_.extend(snap.val(), { id: snap.key() }))
+      var child = snap.val()
+      child.id = snap.key()
+      coll.push(child)
     })
 
     ref.on('child_removed', function(snap) {
-      var index = _.findIndex(coll, function(item) { return item.id === snap.key() })
+      var index = coll.findIndex(function(item) {
+        return item.id === snap.key()
+      })
       coll.splice(index, 1)
     })
 

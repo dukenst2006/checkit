@@ -13,22 +13,22 @@ define([
     },
 
     start: function() {
-      require(Config.MODULES, function() {
-        var opts = { pushState: Config.PUSH_STATE }
+      var opts = { pushState: Config.PUSH_STATE }
 
-        // fix to have router working with urls like http://fb-seed.dev/index.html
-        if (/\/[a-z0-9]+(.html)$/.exec(location.pathname)) {
-          opts.root = location.pathname
-          opts.pushState = false
-        }
+      // fix to have router working with urls like http://fb-seed.dev/index.html
+      if (/\/[a-z0-9]+(.html)$/.exec(location.pathname)) {
+        opts.root = location.pathname
+        opts.pushState = false
+      }
 
-        Backbone.$ = Zepto
-        Backbone.history.start(opts)
-      })
+      Backbone.$ = Zepto
+      Backbone.history.start(opts)
     },
 
     generateUrl: function(routeName) {
-      var route = _.findWhere(Config.ROUTES, { name: routeName })
+      var route = Config.ROUTES.find(function(route) {
+        return route.name === routeName
+      })
 
       if (!route) {
         console.warn('app: route "' + routeName + '" not found')

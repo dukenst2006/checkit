@@ -3,10 +3,10 @@ define([
 ], function(firebase) {
 
   return {
-
     user: {
-      name: null,
-      email: null
+      uid: null,
+      email: null,
+      provider: null
     },
 
     isAuthenticated: function() {
@@ -17,38 +17,29 @@ define([
      * Listen to authentication state change
      */
     listen: function(callback) {
-      var self = this
+      var callbackCalled = false, self = this
 
       firebase.onAuth(function(authData) {
-        callback()
-
-        if (authData) {
-          // if user not found
-          var timeout = setTimeout(callback, 1200)
-
-          // if there's a user authenticated, automatically fetch his profile
-          firebase.child('users/' + authData.uid).on('value', function(snap) {
-            // user already exists
-            if (snap.val() !== null) {
-              clearTimeout(timeout)
-
-              Object.assign(self.user, snap.val())
-
-              // https://github.com/yyx990803/vue/issues/538
-              self.user.$add('uid', snap.key())
-              for (var k in snap.val()) {
-                self.user.$add(k, snap.val()[k])
-              }
-            }
-          })
-
-        } else {
-          // clean user object
-          for (var k in self.user) {
-            self.user[k] = null
-          }
+        if (!callbackCalled) {
+          callbackCalled = true
+          callback()
         }
 
+        // athenticated, fetch profile
+        if (authData) {
+          firebase.child('users/' + authData.uid).on('value', function(snap) {
+            if (snap.val() !== null) {
+              self.user.uid = authData.uid
+              self.user.email = snap.val().email
+              self.user.provider = snap.val().provider
+            }
+          })
+        }
+
+        // logout, clean user
+        else {
+          for (var k in self.user) self.user[k] = null
+        }
       })
     }
   }

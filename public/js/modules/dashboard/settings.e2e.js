@@ -16,7 +16,7 @@ define([
 
       Utils.waitForElementExists('.header .settings', function() {
         Utils.triggerEvent('click', document.querySelector('.header .settings'));
-        done();
+        done()
       });
     })
 
@@ -26,6 +26,10 @@ define([
     })
 
     describe('changePassword()', function() {
+      beforeEach(function(done) {
+        Utils.waitForElementVisible('[test=change-password]', done)
+      })
+
       it('shows an error for invalid password', function(done) {
         spyOn(window, 'alert')
         spyOn(window, 'prompt').and.returnValue('invalid pass')
@@ -51,13 +55,8 @@ define([
     })
 
     describe('deleteUser()', function() {
-      var $submit
-
       beforeEach(function(done) {
-        Utils.waitForElementExists('.settings', function() {
-          $submit = document.querySelector('.settings .js-delete-user-btn')
-          done()
-        })
+        Utils.waitForElementVisible('[test=delete-user]', done)
       })
 
       it('shows an error for invalid password', function(done) {

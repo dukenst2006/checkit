@@ -108,12 +108,11 @@ define([
 
           // finally, login
           firebase.authWithPassword(this.$data.user, function(err, authData) {
-
-            var userData = _.omit(this.$data.user, 'password')
-            userData.provider = 'password'
+            delete this.$data.user.password
+            this.$data.user.provider = 'password'
 
             // save new user's profile
-            firebase.child('users/' + authData.uid).set(userData, function() {
+            firebase.child('users/' + authData.uid).set(this.$data.user, function() {
               this.$data.message = 'Your account has been created.'
               Router.navigateTo('dashboard_home')
             }.bind(this))

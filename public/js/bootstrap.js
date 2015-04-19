@@ -21,9 +21,14 @@ require.config({
   deps: ['$', '_', 'es5', 'es6', 'vue', 'dom4'],
 
   shim: {
-    $: { exports: '$' },
+    $: { exports: '$', init: function() {
+      // for backbone
+      define('jquery', ['$'], function() {
+        return $
+      })
+    }},
     _: { exports: '_' },
-    backbone: { deps: ['_'] },
+    backbone: { deps: ['_', '$'] },
     rainbow: { init: function() {
       require([
         '../libs/rainbow/js/language/generic',
@@ -46,30 +51,26 @@ require.config({
 define([
   'modules/layout',
   'services/auth',
-  'services/router'
+  'services/router',
 ], function (Layout, Auth, Router) {
+
+  Layout.$mount(document.body)
+
   console.timeEnd('started')
 
   // wait for authentication state
-  Auth.listen(_.once(function() {
-    Router.start()
-    Layout.$mount(document.body)
-    console.timeEnd('bootstrap')
-  }))
+  Auth.listen(function() {
+    require([
+      './modules/dashboard/layout',
+      './modules/dashboard/home',
+      './modules/dashboard/settings',
+      './modules/public/layout',
+      './modules/public/auth',
+      './modules/public/home'
+    ], function() {
+      Router.start()
 
+      console.timeEnd('bootstrap')
+    })
+  })
 })
-
-
-// ----
-// Misc
-
-define('underscore', function() {
-  return _
-})
-
-define('jquery', ['$'], function() {
-  return $
-})
-
-// (debug) fix for warn() not supporting stack traces
-//console.warn = console.error;
