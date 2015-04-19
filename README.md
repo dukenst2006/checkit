@@ -18,3 +18,7 @@
 # IDEAS
 
 - badge like github
+
+# TODO
+
+- remove gem in install.sh

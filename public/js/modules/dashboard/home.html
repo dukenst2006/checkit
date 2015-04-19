@@ -1,27 +1,32 @@
 <section class="items wrap">
 
-  <a class="item __saved 8" v-repeat="test: tests | orderBy 'id' -1" v-on="click: loadContent($event, test)">
+  <form class="content" v-on="submit: submit" v-if="test">
+    <h1 class="name-title"><input v-model="test.name" tabindex="1"></h1>
+    <button class="btn __M __primary save-button" test="save-button">Save</button>
+    <a class="close-button" aria-label="close" v-on="click: hideContent">
+      <i class="icon-cancel"></i>
+    </a>
+    <div class="editor" v-editor>
+      <textarea v-model="test.code" tabindex="2"></textarea>
+      <pre><code data-language="javascript" v-colorize="test.code"></code></pre>
+    </div>
+  </form>
+
+  <a class="item __saved" v-repeat="test: tests | orderBy 'id' -1" v-on="click: loadContent($event, test)">
     <h1>{{ test.name }}</h1>
-    <p>Lorem ipsum dolor sit amet</p>
+    <hr>
+    <p>
+      <i class="icon-{{ test.status}}"></i> ~ 2min ago
+    </p>
   </a>
 
-  <a class="item __new 8" v-on="click: loadContent($event)" v-if="!tests.length">
+  <a class="item __new" v-on="click: loadContent($event)" v-if="!tests.length">
     <div class="expandable-trigger">
       <h1>Hey</h1>
       <p>Let check for something.</p>
       <button class="btn __M" test="new-btn">Create a Check</button>
     </div>
   </a>
-
-  <form class="content" v-on="submit: submit">
-    <h1 class="content-name"><input v-model="test.name" tabindex="1"></h1>
-    <button class="btn __M __primary save-button" test="save-button">Save</button>
-    <button class="close-button" type="button" v-on="click: hideContent"><i class="icon-cancel"></i><span>Close</span></button>
-    <div class="editor" v-editor>
-      <textarea v-model="test.code" tabindex="2"></textarea>
-      <pre><code data-language="javascript" v-colorize="test.code"></code></pre>
-    </div>
-  </form>
 </section>
 
 <footer class="check-something">

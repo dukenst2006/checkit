@@ -74,7 +74,13 @@ define([
 
       submit: function(event) {
         event.preventDefault()
-        firebase.child('tests').push(this.$data.test)
+
+        if (this.$data.test.id) {
+          firebase.child('tests').child(this.$data.test.id).set(this.$data.test)
+        } else {
+          firebase.child('tests').push(this.$data.test)
+        }
+
         this.hideContent()
       },
 
@@ -83,61 +89,71 @@ define([
         var placeholder = document.createElement('div')
 
         placeholder.classList.add('placeholder')
-        placeholder.classList.add('__trans-in')
 
         placeholder.style.transform = placeholder.style.WebkitTransform = (
-          'translate3d(' + item.offsetLeft + 'px, ' + item.offsetTop + 'px, 0px)' +
-          'scale3d(' + item.offsetWidth / gridItemsContainer.offsetWidth + ',' + item.offsetHeight / viewPortY()  + ',1)'
+          'translate3d(' + (item.offsetLeft - 1) + 'px, ' + item.offsetTop + 'px, 0px)' +
+          'scale3d(' +
+            (item.offsetWidth + 1) / gridItemsContainer.offsetWidth + ',' +
+            item.offsetHeight / (viewPortY() - 70) +
+          ',1)'
         );
 
-        if (!test) {
-          this.$data.test = {
-            code: '',
-            name: 'Please explain HERE what your test do'
-          }
+        this.$data.test = test || {
+          code: '',
+          name: 'Please explain HERE what your test do'
         }
 
-        requestAnimationFrame(function() {
-          item.classList.add('current-grid-item')
-          item.parentNode.appendChild(placeholder);
+        item.classList.add('__current')
+        item.parentNode.appendChild(placeholder);
 
-          requestAnimationFrame(function() {
-            placeholder.style.WebkitTransform = placeholder.style.transform = 'translate3d(0px, ' + scrollY() + 'px, 0px)';
-          })
+        requestAnimationFrame(function() {
+          placeholder.classList.add('__trans-in')
         })
 
         onTransitionEnd(placeholder, function() {
-          placeholder.classList.remove('__trans-in');
-          placeholder.classList.add('__trans-out');
+          requestAnimationFrame(function() {
+            placeholder.style.WebkitTransform =
+            placeholder.style.transform =
+              'translate3d(0px, 0px, 0px)';
+          })
 
-          content.style.top = scrollY() + 'px';
-          content.classList.add('__show');
-          closeCtrl.classList.add('__show');
+          onTransitionEnd(placeholder, function() {
+            placeholder.classList.remove('__trans-in');
+            placeholder.classList.add('__trans-out');
 
-          if (!test) {
-            content.querySelector('input').select()
-          }
+            content.classList.add('__show');
+            closeCtrl.classList.add('__show');
+
+            if (!test) {
+              content.querySelector('input').select()
+            }
+          })
         })
       },
 
       hideContent: function() {
         var placeholder = document.querySelector('.placeholder')
-        var gridItem = document.querySelector('.current-grid-item')
+        var gridItem = document.querySelector('.__current')
 
         content.classList.remove('__show');
         closeCtrl.classList.remove('__show');
 
+        this.$data.test = {}
+
         requestAnimationFrame(function() {
           placeholder.style.WebkitTransform = placeholder.style.transform = (
             'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) ' +
-            'scale3d(' + gridItem.offsetWidth / gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight / viewPortY() + ',1)'
+            'scale3d(' +
+              gridItem.offsetWidth / gridItemsContainer.offsetWidth + ',' +
+              gridItem.offsetHeight / (viewPortY() - 70) +
+            ',1)'
           )
         })
 
         onTransitionEnd(placeholder, function() {
-          content.parentNode.scrollTop = 0
+          //content.parentNode.scrollTop = 0
           placeholder.parentNode.removeChild(placeholder)
-          gridItem.classList.remove('current-grid-item')
+          gridItem.classList.remove('__current')
         })
       }
     }

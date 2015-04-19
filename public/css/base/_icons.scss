@@ -53,3 +53,24 @@
 .icon-plus:before { content: '\e800'; } /* '' */
 .icon-cog:before { content: '\e801'; } /* '' */
 .icon-cancel:before { content: '\e802'; } /* 'î ‚' */
+.icon-ok:before { content: '\e803'; } /* 'î ƒ' */
+.icon-attention-alt:before { content: '\e804'; } /* 'î „' */
+.icon-spin1:before { content: '\e805'; } /* 'î …' */
+
+/*
+ Animation example, for spinners
+ */
+.animate-spin {
+  animation: spin 2s infinite linear;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
