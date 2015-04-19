@@ -3,6 +3,7 @@ form.content {
   top: 0;
   left: 0;
   width: 100%;
+  background: #222730;
   pointer-events: none;
   height: 0; /* Avoid second scroll bar in Chrome! */
   visibility: hidden;
@@ -22,10 +23,15 @@ form.content {
 
     input {
       border: none;
-      margin: 24px 0;
-      font-size: 18px;
-      width: 70%;
       text-align: center;
+      background: #64737E;
+      color: #F0F0F0;
+      padding: 7px;
+      font-family: courier;
+      font-size: 16px;
+      text-shadow: 0 0 2px #000;
+      margin: 20px 0;
+      width: 60%;
     }
   }
 
@@ -72,6 +78,9 @@ form.content {
 
 
 .items {
+  margin-left: -10px;
+  margin-right: -10px;
+
   .item {
     display: inline-block;
     box-sizing: border-box;
@@ -81,7 +90,7 @@ form.content {
     padding: 20px;
     text-align: center;
     width: calc(33% - 10px);
-    margin: 0 5px 10px 5px;
+    margin: 0 0 10px 10px;
 
     &.__new {
       background: #FCFCFC;
@@ -171,6 +180,7 @@ form.content {
   top: 0;
   left: 0;
   background: #fff;
+  //background: rgba(125, 0, 0, .5);
   transform-origin: 0 0;
   transition: transform 0.5s, opacity 0.2s;
   transition-timing-function: cubic-bezier(0.165,0.84,0.44,1);

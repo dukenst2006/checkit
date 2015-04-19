@@ -1,18 +1,25 @@
-.modal_settings {
-  flex-direction: column;
-  display: flex;
+.overlay.__settings {
+  background: rgba(225, 225, 225, 0.6);
 
-  .modal_content {
-    background: #FFF;
-    overflow-y: scroll;
-    flex: 1;
-    height: auto;
-    position: relative;
-  }
+  .modal {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
+    background: #fff;
+    border: 1px solid #DDD;
+    flex-direction: column;
+    display: flex;
 
-  .modal_footer {
-    padding: 12px;
-    border: 1px solid #EBEEE2;
+    .modal_content {
+      background: #FFF;
+      overflow-y: scroll;
+      flex: 1;
+      height: auto;
+      position: relative;
+    }
+
+    .modal_footer {
+      padding: 12px;
+      border: 1px solid #EBEEE2;
+    }
   }
 }
 

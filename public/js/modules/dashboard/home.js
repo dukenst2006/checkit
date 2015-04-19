@@ -91,9 +91,9 @@ define([
         placeholder.classList.add('placeholder')
 
         placeholder.style.transform = placeholder.style.WebkitTransform = (
-          'translate3d(' + (item.offsetLeft - 1) + 'px, ' + item.offsetTop + 'px, 0px)' +
+          'translate3d(' + item.offsetLeft + 'px, ' + item.offsetTop + 'px, 0px)' +
           'scale3d(' +
-            (item.offsetWidth + 1) / gridItemsContainer.offsetWidth + ',' +
+            item.offsetWidth / (gridItemsContainer.offsetWidth - 20) + ',' +
             item.offsetHeight / (viewPortY() - 70) +
           ',1)'
         );
@@ -144,7 +144,7 @@ define([
           placeholder.style.WebkitTransform = placeholder.style.transform = (
             'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) ' +
             'scale3d(' +
-              gridItem.offsetWidth / gridItemsContainer.offsetWidth + ',' +
+              gridItem.offsetWidth / (gridItemsContainer.offsetWidth - 20) + ',' +
               gridItem.offsetHeight / (viewPortY() - 70) +
             ',1)'
           )
