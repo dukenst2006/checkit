@@ -24,14 +24,13 @@ module.exports = function(grunt) {
         singleRun: true
       },
 
+      run:      { browsers: ['Chrome', 'Firefox'] },
+
       // singleRun
-      run:      { browsers: ['Chrome', 'Firefox', 'PhantomJS'] },
-      phantom:  { browsers: ['PhantomJS'] },
       chrome:   { browsers: ['Chrome'] },
       firefox:  { browsers: ['Firefox'] },
 
       // watch
-      phantomW: { browsers: ['PhantomJS'], singleRun: false },
       chromeW:  { browsers: ['Chrome'], singleRun: false },
       firefoxW: { browsers: ['Firefox'], singleRun: false }
     },

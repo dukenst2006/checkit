@@ -1,5 +1,5 @@
 language: node_js
-script: "grunt karma:firefox karma:chrome"
+script: "grunt karma:firefox"
 node_js:
   - 0.10
 before_install:
