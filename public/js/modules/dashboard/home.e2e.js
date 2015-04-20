@@ -40,10 +40,10 @@ define([
       it('should create a new test', function(done) {
         Utils.triggerEvent('click', $newTest);
 
-        Utils.waitForElementVisible('.content', function() {
-          Utils.value(document.querySelector('.content input'), 'test name');
-          Utils.value(document.querySelector('.content textarea'), 'test code');
-          Utils.triggerEvent('click', document.querySelector('.content [test=save-button]'));
+        Utils.waitForElementVisible('.editor', function() {
+          Utils.value(document.querySelector('.editor input'), 'test name');
+          Utils.value(document.querySelector('.editor textarea'), 'test code');
+          Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'));
 
           Utils.waitForElementVisible('.item.__saved', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined;
