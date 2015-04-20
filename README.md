@@ -22,3 +22,4 @@
 # TODO
 
 - remove gem in install.sh
+- test.output max length

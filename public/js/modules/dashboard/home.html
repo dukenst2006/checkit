@@ -1,18 +1,31 @@
 <section class="items wrap">
 
   <form class="editor" v-if="test">
+
     <a class="editor-close" aria-label="close" v-on="click: hideEditor">
       <i class="icon-cancel"></i>
     </a>
-    <div class="editor-code" v-editor>
-      <textarea v-model="test.code" tabindex="2"></textarea>
-      <pre><code data-language="javascript" v-colorize="test.code"></code></pre>
+
+    <div class="editor-window" v-editor>
+      <textarea class="editor-textarea" v-model="test.code" tabindex="2"></textarea>
+      <pre class="editor-pre"><code class="editor-code" data-language="javascript" v-colorize="test.code"></code></pre>
+
+      <div class="editor-message __{{ test.status }}" v-if="test.status" v-el="editorMessage">
+        <a v-on="click: this.$$.editorMessage.classList.toggle('__expand')">
+          <i class="icon-{{ test.status }}"></i>
+          <span v-if="test.status != 'pending'"> {{ test.status }}</span>
+          <span v-if="test.status == 'pending'" class="dotter"> running ...</span>
+        </a>
+        <pre>{{ test.output }}</pre>
+      </div>
     </div>
+
     <div class="editor-bar">
       <input v-model="test.name" tabindex="1">
       <button type="button" class="btn __M" v-on="submit: submit" test="save-button">Run</button>
       <button type="button" class="btn __M" v-on="submit: submit" test="save-button">Save</button>
     </div>
+
   </form>
 
   <a class="item __saved" v-repeat="test: tests | orderBy 'id' -1" v-on="click: loadEditor($event, test)">

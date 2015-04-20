@@ -7,9 +7,9 @@ define([
   return Vue.directive('editor', {
 
     bind: function() {
-      this.textareaEl = this.el.querySelector('textarea')
-      this.preEl = this.el.querySelector('pre')
-      this.codeEl = this.el.querySelector('code')
+      this.textareaEl = this.el.querySelector('.editor-textarea')
+      this.preEl = this.el.querySelector('.editor-pre')
+      this.codeEl = this.el.querySelector('.editor-code')
 
       this.editor = new Behave({
         textarea: this.textareaEl,

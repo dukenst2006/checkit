@@ -17,6 +17,11 @@
     visibility: visible;
   }
 
+  ::selection {
+    // not working properly for webkit
+    // background: #515B65;
+  }
+
   .editor-close {
     position: absolute;
     top: 0;
@@ -39,13 +44,13 @@
     }
   }
 
-  .editor-code {
+  .editor-window {
     height: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
 
-    textarea {
+    .editor-textarea {
       width: 100%;
       height: 100%;
       line-height: 17px;
@@ -59,13 +64,9 @@
       padding: 10px;
       border: 0;
       border-radius: 2px 2px 0 0;
-
-      &::selection {
-        background: #515B65;
-      }
     }
 
-    pre {
+    .editor-pre {
       font-family: Monaco, courier, monospace;
       background: transparent;
       height: 100%;
@@ -84,12 +85,84 @@
       font-size: 13px;
       margin-bottom: 20px;
 
-      code {
+      .editor-code {
         padding: 0;
         margin: 0;
         background: none;
         height: 100%;
-        box-sizing: border-box;
+      }
+    }
+  }
+
+  .editor-message {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    color: #1C1F26;
+    border-radius: 0 2px 0 0;
+    border-left: 4px solid #1C1F26;
+    border-right: 4px solid #1C1F26;
+    transition: transform .2s ease;
+    transform: translateY(calc(100% - 26px));
+
+    a {
+      color: #1C1F26;
+      padding: 4px 20px 4px 4px;
+      display: inline-block;
+    }
+
+    pre {
+      padding: 6px;
+      padding-top: 10px;
+      margin: 0;
+      max-height: 40vh;
+      overflow: scroll;
+    }
+
+    &.__expand {
+      transform: translateY(0);
+    }
+
+    &.__pass {
+      a, pre {
+        background: color(emerald);
+      }
+    }
+
+    &.__fail {
+      a, pre {
+        background: color(alizarin);
+      }
+    }
+
+    &.__pending {
+      a, pre {
+        background: #FEE798;
+      }
+
+      .icon-pending::before {
+        vertical-align: text-bottom;
+        color: #1C1F26;
+      }
+
+      .dotter {
+        position: relative;
+        &::before {
+          content: '';
+          display: inline-block;
+          animation: dotter .8s ease infinite;
+          position: absolute;
+          right: 0;
+          background: #FEE798;
+          height: 20px;
+
+          @keyframes dotter {
+            from { width: 12px; }
+            to { width: 0px; }
+          }
+        }
       }
     }
   }
@@ -102,14 +175,12 @@
     display: inline-flex;
     flex-direction: row;
     margin-top: -1px; // FF
-    box-shadow: 0 0 5px rgba(225, 225, 255, 0.12);
 
     input {
       border: none;
       background: #2B313B;
       color: #F0F0F0;
       padding: 7px;
-      font-family: courier;
       font-size: 16px;
       text-shadow: 0 0 2px #000;
       width: 100%;
@@ -120,10 +191,12 @@
       border: none;
       margin-left: 4px;
       padding: 4px 32px;
-      color: #232830;
+      width: 120px;
+      color: #8FB4B4;
       background: #363E46;
 
       &:hover {
+        color: #363E46;
         background: #8FB4B4;
       }
     }
@@ -134,6 +207,21 @@
 .items {
   margin-left: -10px;
   margin-right: -10px;
+
+  .icon {
+    &-pass {
+      @extend .icon-ok;
+    }
+    &-fail {
+      @extend .icon-attention-alt;
+    }
+    &-pending {
+      @extend .icon-spin1;
+      &::before {
+        @extend .animate-spin;
+      }
+    }
+  }
 
   .item {
     display: inline-block;
@@ -172,33 +260,20 @@
     }
 
     .icon {
-      &-pass {
-        @extend .icon-ok;
-
-        &::before {
-          background-color: rgba(color(emerald), 0.05);
-          border-color: color(emerald);
-          color: color(emerald);
-        }
+      &-pass::before {
+        background-color: rgba(color(emerald), 0.05);
+        border-color: color(emerald);
+        color: color(emerald);
       }
-      &-pending {
-        @extend .icon-spin1;
-        @extend .animate-spin;
-
-        &::before {
-          background-color: rgba(color(concrete), 0.05);
-          border-color: color(concrete);
-          color: color(concrete);
-        }
+      &-pending::before {
+        background-color: rgba(color(concrete), 0.05);
+        border-color: color(concrete);
+        color: color(concrete);
       }
-      &-fail {
-        @extend .icon-attention-alt;
-
-        &::before {
-          background-color: rgba(color(alizarin), 0.05);
-          border-color: color(alizarin);
-          color: color(alizarin);
-        }
+      &-fail::before {
+        background-color: rgba(color(alizarin), 0.05);
+        border-color: color(alizarin);
+        color: color(alizarin);
       }
     }
   }
