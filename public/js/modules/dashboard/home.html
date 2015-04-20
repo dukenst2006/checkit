@@ -22,8 +22,8 @@
 
     <div class="editor-bar">
       <input v-model="test.name" tabindex="1">
-      <button type="button" class="btn __M" v-on="submit: submit" test="save-button">Run</button>
-      <button type="button" class="btn __M" v-on="submit: submit" test="save-button">Save</button>
+      <button type="button" class="btn __M" v-on="click: submit" test="run-button">Run</button>
+      <button type="button" class="btn __M" v-on="click: submit" test="save-button">Save</button>
     </div>
 
   </form>

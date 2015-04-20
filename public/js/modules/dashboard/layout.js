@@ -2,9 +2,8 @@ define([
   'vue',
   'services/auth',
   'services/router',
-  'services/test-helper',
   'text!./layout.html'
-], function(Vue, Auth, Router, testHelper, template) {
+], function(Vue, Auth, Router, template) {
 
   return Vue.component('dashboard', {
 

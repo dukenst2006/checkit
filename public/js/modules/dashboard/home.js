@@ -1,11 +1,10 @@
 define([
   'vue',
   'services/firebase',
-  'services/test-helper',
   'text!./home.html',
   'directives/editor',
   'directives/colorize'
-], function(Vue, firebase, testHelper, template) {
+], function(Vue, firebase, template) {
 
   function scrollY() {
     return window.pageYOffset || window.document.documentElement.scrollTop;
@@ -65,7 +64,6 @@ define([
     data: function() {
       return {
         test: { name: null, code: '' },
-        testHelper: testHelper,
         tests: firebase.collection(firebase.child('tests'))
       }
     },
