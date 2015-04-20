@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     sass: {
       options: {
         quiet: true,
-        require: ['sass-globbing', './public/css/sass_extensions.rb'],
+        require: ['sass-globbing'],
         loadPath: ['public/js', 'public/css'],
         //style: 'compressed'
       },

@@ -4,6 +4,33 @@ $grid-columns: 24;
 $grid-column-width: (100% / $grid-columns);
 $grid-gutter-half: 20px / 2;
 
+$escapes: (
+ 1: '\\31 ',
+ 2: '\\32 ',
+ 3: '\\33 ',
+ 4: '\\34 ',
+ 5: '\\35 ',
+ 6: '\\36 ',
+ 7: '\\37 ',
+ 8: '\\38 ',
+ 9: '\\39 ',
+ 10: '\\31 0',
+ 11: '\\31 1',
+ 12: '\\31 2',
+ 13: '\\31 3',
+ 14: '\\31 4',
+ 15: '\\31 5',
+ 16: '\\31 6',
+ 17: '\\31 7',
+ 18: '\\31 8',
+ 19: '\\31 9',
+ 20: '\\32 0',
+ 21: '\\32 1',
+ 22: '\\32 2',
+ 23: '\\32 3',
+ 24: '\\32 4'
+);
+
 .grid {
   @extend %clearfix;
   height: 100%;
@@ -28,7 +55,7 @@ $grid-gutter-half: 20px / 2;
 
 @for $i from 1 through $grid-columns {
 
-  .#{escape-css($i)} {
+  .#{map-get($escapes, $i)} {
     @extend %grid-columns-all;
     width: $i * $grid-column-width;
   }
@@ -38,35 +65,35 @@ $grid-gutter-half: 20px / 2;
 
   $grid-current-column-width: $i * $grid-column-width;
 
-  .#{escape-css('++#{$i}')} {
+  .\+\+#{$i} {
     @extend %grid-columns-all;
     margin-left: $grid-current-column-width;
   }
 
-  .#{escape-css('#{$i}++')} {
+  .#{map-get($escapes, $i)}\+\+ {
     @extend %grid-columns-all;
     margin-right: $grid-current-column-width;
   }
 
-  .#{escape-css('--#{$i}')} {
+  .\-\-#{$i} {
     @extend %grid-columns-push-pull;
     left: -$grid-current-column-width;
   }
 
-  .#{escape-css('#{$i}--')} {
+  .#{map-get($escapes, $i)}\-\- {
     @extend %grid-columns-push-pull;
     left: $grid-current-column-width;
   }
 }
 
-.#{escape-css('|_')} {
+.\|_ {
   text-align: left;
 }
 
-.#{escape-css('_|')} {
+.\_\| {
   text-align: right;
 }
 
-.#{escape-css('_|_')} {
+.\_\|_ {
   text-align: center;
 }
