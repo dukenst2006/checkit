@@ -8,6 +8,7 @@ define([
 
     bind: function() {
       this.textareaEl = this.el.querySelector('textarea')
+      this.preEl = this.el.querySelector('pre')
       this.codeEl = this.el.querySelector('code')
 
       this.editor = new Behave({
@@ -22,7 +23,7 @@ define([
 
       // synchronize scroll
       this.textareaEl.addEventListener('scroll', function(event) {
-        this.codeEl.scrollTop = this.textareaEl.scrollTop
+        this.preEl.scrollTop = this.textareaEl.scrollTop
       }.bind(this))
     },
 

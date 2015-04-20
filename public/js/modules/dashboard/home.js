@@ -46,7 +46,13 @@ define([
     }
   }
 
-  var gridItemsContainer, content, closeCtrl
+  window.requestAnimationFrame =
+    window.requestAnimationFrame       ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame    ||
+    function (callback) { window.setTimeout(callback, 1000 / 60); }
+
+  var gridItemsContainer, editor, closeCtrl
 
   return Vue.component('dashboard_home', {
 
@@ -66,8 +72,8 @@ define([
 
     ready: function() {
       gridItemsContainer = document.querySelector('.items')
-      content = document.querySelector('.content')
-      closeCtrl = content.querySelector('.close-button')
+      editor = document.querySelector('.editor')
+      closeCtrl = editor.querySelector('.editor-close')
     },
 
     methods: {
@@ -81,10 +87,10 @@ define([
           firebase.child('tests').push(this.$data.test)
         }
 
-        this.hideContent()
+        this.hideEditor()
       },
 
-      loadContent: function(event, test) {
+      loadEditor: function(event, test) {
         var item = event.target.closest('.item') || event.target
         var placeholder = document.createElement('div')
 
@@ -106,9 +112,9 @@ define([
         item.classList.add('__current')
         item.parentNode.appendChild(placeholder);
 
-        requestAnimationFrame(function() {
+        setTimeout(function() {
           placeholder.classList.add('__trans-in')
-        })
+        }, 25)
 
         onTransitionEnd(placeholder, function() {
           requestAnimationFrame(function() {
@@ -121,21 +127,30 @@ define([
             placeholder.classList.remove('__trans-in');
             placeholder.classList.add('__trans-out');
 
-            content.classList.add('__show');
+            editor.classList.add('__show');
             closeCtrl.classList.add('__show');
 
             if (!test) {
-              content.querySelector('input').select()
+              editor.querySelector('input').select()
             }
+
+            // force flex repaint
+            // https://code.google.com/p/chromium/issues/detail?id=401185
+            requestAnimationFrame(function() {
+              editor.querySelector('input').style.display = 'block'
+              requestAnimationFrame(function() {
+                editor.querySelector('input').style.display = 'flex'
+              })
+            })
           })
         })
       },
 
-      hideContent: function() {
+      hideEditor: function() {
         var placeholder = document.querySelector('.placeholder')
         var gridItem = document.querySelector('.__current')
 
-        content.classList.remove('__show');
+        editor.classList.remove('__show');
         closeCtrl.classList.remove('__show');
 
         this.$data.test = {}
@@ -151,7 +166,7 @@ define([
         })
 
         onTransitionEnd(placeholder, function() {
-          //content.parentNode.scrollTop = 0
+          //editor.parentNode.scrollTop = 0
           placeholder.parentNode.removeChild(placeholder)
           gridItem.classList.remove('__current')
         })
