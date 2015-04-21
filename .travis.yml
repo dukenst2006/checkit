@@ -1,8 +1,9 @@
 language: node_js
-script: "grunt karma:firefox"
+script: "make test_ff"
 node_js:
   - 0.10
 before_install:
+  - sudo gem install sass
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:

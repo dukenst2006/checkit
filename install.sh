@@ -7,15 +7,12 @@ do
 done
 
 npm install -g bower
-npm install -g grunt
-npm install -g grunt-cli
-npm install -g nodemon
+npm install -g karma
+npm install -g autoprefixer
 npm install -g chokidar-cli
 npm update
 
 bower prune
 bower update
 
-brew install sassc
-
-grunt
+make css
