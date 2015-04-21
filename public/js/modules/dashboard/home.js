@@ -161,6 +161,12 @@ define([
 
         this.$data.test = {}
 
+        onTransitionEnd(placeholder, function() {
+          //editor.parentNode.scrollTop = 0
+          placeholder.parentNode.removeChild(placeholder)
+          gridItem.classList.remove('__current')
+        })
+
         requestAnimationFrame(function() {
           placeholder.style.WebkitTransform = placeholder.style.transform = (
             'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) ' +
@@ -169,12 +175,6 @@ define([
               gridItem.offsetHeight / (viewPortY() - 70) +
             ',1)'
           )
-        })
-
-        onTransitionEnd(placeholder, function() {
-          //editor.parentNode.scrollTop = 0
-          placeholder.parentNode.removeChild(placeholder)
-          gridItem.classList.remove('__current')
         })
       }
     }
