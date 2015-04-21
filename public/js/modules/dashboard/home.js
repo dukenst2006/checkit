@@ -63,9 +63,17 @@ define([
 
     data: function() {
       return {
+        testsLoaded: false,
         test: { name: null, code: '' },
         tests: firebase.collection(firebase.child('tests'))
       }
+    },
+
+
+    compiled: function() {
+      firebase.child('tests').on('value', function() {
+        this.$data.testsLoaded = true
+      }.bind(this))
     },
 
     ready: function() {

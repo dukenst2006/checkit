@@ -36,16 +36,20 @@
     </p>
   </a>
 
-  <a class="item __new" v-on="click: loadEditor($event)" v-if="!tests.length">
+  <a class="item __new" v-on="click: loadEditor($event)" v-if="!tests.length && testsLoaded">
     <div class="expandable-trigger">
       <h1>Hey</h1>
       <p>Let check for something.</p>
       <button class="btn __M" test="new-btn">Create a Check</button>
     </div>
   </a>
+
+  <center v-if="!testsLoaded">
+    <p><i class="icon-spin1 animate-spin"></i> loading</p>
+  </center>
 </section>
 
-<footer class="check-something">
+<footer class="check-something" v-if="testsLoaded">
   <a class="btn __primary" v-on="click: loadEditor($event)">
     <i class="icon-plus"></i>
     check something
