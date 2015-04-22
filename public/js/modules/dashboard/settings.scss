@@ -1,12 +1,14 @@
 .overlay.__settings {
-  background: rgba(225, 225, 225, 0.6);
 
   .modal {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
     background: #fff;
-    border: 1px solid #DDD;
+    box-shadow: 0 0 95px 5px rgba(0,0,0,0.6);
     flex-direction: column;
     display: flex;
+
+    .modal_header {
+      background: #ECF0F1;
+    }
 
     .modal_content {
       background: #FFF;
@@ -18,12 +20,36 @@
 
     .modal_footer {
       padding: 12px;
-      border: 1px solid #EBEEE2;
+      background: #ECF0F1;
+      border-top: 1px solid #ddd;
     }
   }
 }
 
+.logout-user {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 28px;
+  color: #a7adba;
+
+  &:hover {
+    color: #2980B9;
+  }
+}
+
 .settings_table {
+
+  .delete-user {
+    background: #EA6064;
+    color: #fff;
+    border-color: #f93338;
+
+    &:hover {
+    background: #fa6569;
+    }
+  }
+
 
   > li {
     @extend .clearfix;

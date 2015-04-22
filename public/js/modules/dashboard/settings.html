@@ -1,6 +1,7 @@
 <article class="modal" v-class="open: isOpen">
-  <header>
+  <header class="modal_header">
     <h2 class="modal_title">Settings</h2>
+    <a class="logout-user" title="Logout" v-on="click: logout"><i class="icon-logout"></i></a>
   </header>
   <article class="modal_content">
     <ul class="settings_table list-unstyled form">
@@ -24,12 +25,8 @@
         </div>
       </li>
       <li class="_|" v-if="user.provider == 'password'">
-        <button class="btn text __danger" test="delete-user" v-on="click: deleteUser">Delete Account</button>
+        <button class="btn text __danger delete-user" test="delete-user" v-on="click: deleteUser">Delete Account</button>
       </li>
     </ul>
   </article>
-  <footer class="modal_footer">
-    <button class="btn __danger __M" v-on="click: logout">Logout</button>
-    <button class="btn __M __pull-right" v-on="click: close">Close</button>
-  </footer>
 </article>

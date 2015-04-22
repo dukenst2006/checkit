@@ -1,6 +1,8 @@
 .header {
+  user-select: none;
   margin-bottom: 32px !important;
   padding: 8px;
+  line-height: 38px;
   background: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.12);
   border-bottom: 1px solid color(clouds);
@@ -14,7 +16,6 @@
     color: #a7adba;
     font-size: 28px;
     line-height: 16px;
-    vertical-align: text-bottom;
 
     &:hover {
       color: #2980B9;

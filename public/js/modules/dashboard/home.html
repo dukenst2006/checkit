@@ -49,7 +49,7 @@
   </center>
 </section>
 
-<footer class="check-something" v-if="testsLoaded">
+<footer class="check-something" v-if="tests.length && testsLoaded">
   <a class="btn __primary" v-on="click: loadEditor($event)">
     <i class="icon-plus"></i>
     check something
