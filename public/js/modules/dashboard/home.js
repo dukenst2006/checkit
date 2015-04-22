@@ -104,12 +104,11 @@ define([
 
         placeholder.classList.add('placeholder')
 
+        var coords = this.itemCoords(item)
+
         placeholder.style.transform = placeholder.style.WebkitTransform = (
-          'translate3d(' + item.offsetLeft + 'px, ' + item.offsetTop + 'px, 0px)' +
-          'scale3d(' +
-            item.offsetWidth / (gridItemsContainer.offsetWidth - 20) + ',' +
-            item.offsetHeight / (viewPortY() - 70) +
-          ',1)'
+          'translate3d(' + coords.left + 'px, ' + coords.top + 'px, 0px) ' +
+          'scale3d(' + coords.width + ',' + coords.height + ',1)'
         );
 
         this.$data.test = test || {
@@ -126,7 +125,9 @@ define([
 
         onTransitionEnd(placeholder, function() {
           requestAnimationFrame(function() {
-            placeholder.style.WebkitTransform = placeholder.style.transform = 'translate3d(0px, 0px, 0px)';
+            placeholder.style.WebkitTransform =
+              placeholder.style.transform =
+              'translate3d(0px, 0px, 0px)';
           })
 
           onTransitionEnd(placeholder, function() {
@@ -154,7 +155,7 @@ define([
 
       hideEditor: function() {
         var placeholder = document.querySelector('.placeholder')
-        var gridItem = document.querySelector('.__current')
+        var item = document.querySelector('.__current')
 
         editor.classList.remove('__show');
         closeCtrl.classList.remove('__show');
@@ -164,18 +165,32 @@ define([
         onTransitionEnd(placeholder, function() {
           //editor.parentNode.scrollTop = 0
           placeholder.parentNode.removeChild(placeholder)
-          gridItem.classList.remove('__current')
+          item.classList.remove('__current')
         })
+
+        var coords = this.itemCoords(item)
 
         requestAnimationFrame(function() {
           placeholder.style.WebkitTransform = placeholder.style.transform = (
-            'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) ' +
-            'scale3d(' +
-              gridItem.offsetWidth / (gridItemsContainer.offsetWidth - 20) + ',' +
-              gridItem.offsetHeight / (viewPortY() - 70) +
-            ',1)'
+            'translate3d(' + coords.left + 'px, ' + coords.top + 'px, 0px) ' +
+            'scale3d(' + coords.width + ',' + coords.height + ',1)'
           )
         })
+      },
+
+      itemCoords: function(gridItem) {
+        var isNew = ! gridItem.classList.contains('item')
+
+        return {
+          left: isNew ? gridItem.offsetLeft - 5 : gridItem.offsetLeft,
+          top: isNew ? gridItem.offsetTop - 5 :  gridItem.offsetTop,
+          width: isNew
+            ? (gridItem.offsetWidth + 10) / gridItemsContainer.offsetWidth
+            : gridItem.offsetWidth / (gridItemsContainer.offsetWidth - 20),
+          height: isNew
+            ? (gridItem.offsetHeight + 10) / (viewPortY() - 70)
+            : gridItem.offsetHeight / (viewPortY() - 70)
+        }
       }
     }
   })
