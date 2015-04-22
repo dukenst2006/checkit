@@ -7,7 +7,7 @@ do
 done
 
 npm install -g bower
-npm install -g karma
+npm install -g karma-cli
 npm install -g autoprefixer
 npm install -g chokidar-cli
 npm update
