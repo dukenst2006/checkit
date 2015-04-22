@@ -1,6 +1,8 @@
 console.time('bootstrap')
 console.time('started')
 
+console.log = console.log.bind(console)
+
 require.config({
 
   paths: {

@@ -20,16 +20,12 @@ define([
       var callbackCalled = false, self = this
 
       firebase.onAuth(function(authData) {
-        if (!callbackCalled) {
-          callbackCalled = true
-          callback()
-        }
-
         // athenticated, fetch profile
         if (authData) {
+          self.user.uid = authData.uid
+
           firebase.child('users/' + authData.uid).on('value', function(snap) {
             if (snap.val() !== null) {
-              self.user.uid = authData.uid
               self.user.email = snap.val().email
               self.user.provider = snap.val().provider
             }
@@ -39,6 +35,11 @@ define([
         // logout, clean user
         else {
           for (var k in self.user) self.user[k] = null
+        }
+
+        if (!callbackCalled) {
+          callbackCalled = true
+          callback()
         }
       })
     }

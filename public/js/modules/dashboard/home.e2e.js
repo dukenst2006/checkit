@@ -6,7 +6,6 @@ define([
 
   describe('dashboard.home', function() {
     var authUser = {};
-    var tests = firebase.collection(firebase.child('tests'));
     var $tests, $newTest;
 
     beforeEach(function(done) {
@@ -24,15 +23,16 @@ define([
     });
 
     beforeEach(function(done) {
-      firebase.child('tests').remove(done);
+      firebase.child('tests').child(authUser.uid).remove(done);
     });
 
     afterEach(function(done) {
-      firebase.child('tests').remove(done);
+      firebase.child('tests').child(authUser.uid).remove(done);
     });
 
     describe('home()', function() {
       it('should show message if no test', function() {
+        var tests = firebase.collection(firebase.child('tests').child(authUser.uid));
         expect(tests.length).toBe(0);
         expect($newTest).not.toBeNull();
       });
@@ -41,8 +41,8 @@ define([
         Utils.triggerEvent('click', $newTest);
 
         Utils.waitForElementVisible('.editor', function() {
-          Utils.value(document.querySelector('.editor input'), 'test name');
-          Utils.value(document.querySelector('.editor textarea'), 'test code');
+          Utils.value(document.querySelector('.editor [test=test-name]'), 'test name');
+          Utils.value(document.querySelector('.editor [test=test-code]'), 'test code');
           Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'));
 
           Utils.waitForElementVisible('.item.__saved', function() {

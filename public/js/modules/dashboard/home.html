@@ -7,7 +7,7 @@
     </a>
 
     <div class="editor-window" v-editor>
-      <textarea class="editor-textarea" v-model="test.code" tabindex="2"></textarea>
+      <textarea class="editor-textarea" v-model="test.code" tabindex="2" test="test-code"></textarea>
       <pre class="editor-pre"><code class="editor-code" data-language="javascript" v-colorize="test.code"></code></pre>
 
       <div class="editor-message __{{ test.status }}" v-if="test.status" v-el="editorMessage">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="editor-bar">
-      <input v-model="test.name" tabindex="1">
+      <input v-model="test.name" tabindex="1" test="test-name">
       <button type="button" class="btn __M" v-on="click: submit" test="run-button">Run</button>
       <button type="button" class="btn __M" v-on="click: submit" test="save-button">Save</button>
     </div>

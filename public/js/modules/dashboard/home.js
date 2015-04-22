@@ -1,10 +1,11 @@
 define([
   'vue',
+  'services/auth',
   'services/firebase',
   'text!./home.html',
   'directives/editor',
   'directives/colorize'
-], function(Vue, firebase, template) {
+], function(Vue, Auth, firebase, template) {
 
   function scrollY() {
     return window.pageYOffset || window.document.documentElement.scrollTop;
@@ -65,13 +66,13 @@ define([
       return {
         testsLoaded: false,
         test: { name: null, code: '' },
-        tests: firebase.collection(firebase.child('tests'))
+        tests: firebase.collection(firebase.child('tests').child(Auth.user.uid))
       }
     },
 
 
     compiled: function() {
-      firebase.child('tests').on('value', function() {
+      firebase.child('tests').child(Auth.user.uid).on('value', function() {
         this.$data.testsLoaded = true
       }.bind(this))
     },
@@ -86,11 +87,12 @@ define([
 
       submit: function(event) {
         event.preventDefault()
+        var ref = firebase.child('tests').child(Auth.user.uid)
 
         if (this.$data.test.id) {
-          firebase.child('tests').child(this.$data.test.id).set(this.$data.test)
+          ref.child(this.$data.test.id).set(this.$data.test)
         } else {
-          firebase.child('tests').push(this.$data.test)
+          ref.push(this.$data.test)
         }
 
         this.hideEditor()
@@ -124,9 +126,7 @@ define([
 
         onTransitionEnd(placeholder, function() {
           requestAnimationFrame(function() {
-            placeholder.style.WebkitTransform =
-            placeholder.style.transform =
-              'translate3d(0px, 0px, 0px)';
+            placeholder.style.WebkitTransform = placeholder.style.transform = 'translate3d(0px, 0px, 0px)';
           })
 
           onTransitionEnd(placeholder, function() {
