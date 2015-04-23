@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install && make css"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
   "devDependencies": {
     "firebase": "latest",
     "jasmine-core": "^2.2.0",
@@ -9,5 +15,11 @@
     "karma-jasmine": "^0.3.5",
     "karma-mocha-reporter": "^1.0.2",
     "karma-requirejs": "latest"
+  },
+  "dependencies": {
+    "autoprefixer": "^5.1.1",
+    "bower": "^1.4.1",
+    "express": "^4.12.3",
+    "node-sass": "^2.1.1"
   }
 }

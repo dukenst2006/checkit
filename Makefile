@@ -1,5 +1,6 @@
 css:
-	sass public/css/main.scss | autoprefixer > public/var/styles.css
+	node-sass public/css/main.scss public/var/styles.css
+	autoprefixer -o public/var/styles.css public/var/styles.css
 
 watch:
 	chokidar 'public/js/**/*.scss' 'public/css/**/*.scss' -c 'make css'
