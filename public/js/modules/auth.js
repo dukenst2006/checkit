@@ -1,11 +1,9 @@
 define([
   'vue',
-  'mixins/modal',
   'services/firebase',
-  'services/router',
   'services/auth',
   'text!./auth.html'
-], function(Vue, ModalMixin, firebase, Router, Auth, template) {
+], function(Vue, firebase, Auth, template) {
 
   function formatFirebaseError(err) {
     return (err && err.message)
@@ -21,8 +19,6 @@ define([
 
     template: template,
 
-    mixins: [ModalMixin],
-
     data: function() {
       return {
         user: {},
@@ -31,21 +27,7 @@ define([
       }
     },
 
-    created: function() {
-      this.$on('open', this.onOpen.bind(this))
-    },
-
     methods: {
-
-      onOpen: function(formName) {
-        if (Auth.isAuthenticated()) {
-          return Router.navigateTo('dashboard_home')
-        }
-
-        if (formName && typeof formName === 'string') {
-          this.$data.formName = formName
-        }
-      },
 
       getFormClass: function(formName) {
         if (formIndex(this.$data.formName) > formIndex(formName)) return 'slide-left'
@@ -62,8 +44,6 @@ define([
             this.$data.message = formatFirebaseError(err)
             return
           }
-
-          Router.navigateTo('dashboard_home')
         }.bind(this))
       },
 
@@ -84,16 +64,10 @@ define([
               firebase.child('users/' + authData.uid).set({
                 name: authData[provider].displayName,
                 provider: provider
-              }, onSuccess)
-            } else {
-              onSuccess()
+              })
             }
           })
         }.bind(this))
-
-        function onSuccess() {
-          Router.navigateTo('dashboard_home')
-        }
       },
 
       signUp: function(event) {
@@ -106,16 +80,15 @@ define([
             return
           }
 
+          this.$data.message = 'Your account has been created.'
+
           // finally, login
           firebase.authWithPassword(this.$data.user, function(err, authData) {
             delete this.$data.user.password
             this.$data.user.provider = 'password'
 
             // save new user's profile
-            firebase.child('users/' + authData.uid).set(this.$data.user, function() {
-              this.$data.message = 'Your account has been created.'
-              Router.navigateTo('dashboard_home')
-            }.bind(this))
+            firebase.child('users/' + authData.uid).set(this.$data.user)
           }.bind(this))
         }.bind(this))
       },

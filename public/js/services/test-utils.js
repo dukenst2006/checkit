@@ -1,8 +1,7 @@
 define([
   'services/auth',
-  'services/firebase',
-  'services/router',
-], function(Auth, firebase, Router) {
+  'services/firebase'
+], function(Auth, firebase) {
 
   return {
 
@@ -23,7 +22,8 @@ define([
     createAuthenticatedUser: function(user, cb) {
       this.createUser(user, function() {
         this.login(user, function() {
-          Auth.listen(cb)
+          Auth.start()
+          firebase.onAuth(cb)
         })
       }.bind(this))
     },
@@ -38,12 +38,6 @@ define([
 
     deleteUser: function(user, cb) {
       firebase.removeUser(user, cb)
-    },
-
-    waitForRoute: function(routeName, cb, timeout) {
-      this.waitFor(function() {
-        return Router.routeName === routeName
-      }, cb, timeout)
     },
 
     waitForElementExists: function(selector, cb, timeout) {

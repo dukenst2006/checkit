@@ -2,15 +2,10 @@
   "name": "fb-seed",
   "dependencies": {
     "vue": "0.11.5",
-    "js-md5": "latest",
     "firebase": "latest",
     "requirejs": "latest",
     "requirejs-text": "latest",
-    "es5-shim": "latest",
     "es6-shim": "latest",
-    "backbone": "latest",
-    "zepto": "latest",
-    "lodash": "latest",
     "dom4": "latest",
     "behave": "git@github.com:jakiestfu/Behave.js.git",
     "rainbow": "latest"

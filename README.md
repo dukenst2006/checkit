@@ -22,3 +22,4 @@
 # TODO
 
 - test.output max length
+- move js/directives/editor to mixin

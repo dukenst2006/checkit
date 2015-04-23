@@ -1,20 +1,19 @@
 define([
   'services/test-utils',
-  'services/router',
   'services/firebase'
-], function(Utils, Router, firebase) {
+], function(Utils, firebase) {
 
   describe('dashboard.home', function() {
     var authUser = {};
     var $tests, $newTest;
 
+
     beforeEach(function(done) {
+      Utils.logout()
       Utils.createAuthenticatedUser(authUser, done);
     });
 
     beforeEach(function(done) {
-      Router.navigateTo('dashboard_home');
-
       Utils.waitForElementExists('.item', function() {
         $tests = document.querySelectorAll('.item.__saved');
         $newTest = document.querySelector('.item.__new');

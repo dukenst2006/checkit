@@ -26,14 +26,6 @@ require(['bootstrap'], function() {
       return /(spec|e2e)\.js$/.test(file)
     })
 
-    // force vue data refresh
-    require(['services/router'], function(Router) {
-      beforeEach(function(done) {
-        Router.navigateTo('home')
-        done()
-      })
-    })
-
     require(tests, karma.start)
   }, 1800)
 })

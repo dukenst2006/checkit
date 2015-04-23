@@ -16,8 +16,8 @@ define([
     /**
      * Listen to authentication state change
      */
-    listen: function(callback) {
-      var callbackCalled = false, self = this
+    start: function() {
+      var self = this
 
       firebase.onAuth(function(authData) {
         // athenticated, fetch profile
@@ -35,11 +35,6 @@ define([
         // logout, clean user
         else {
           for (var k in self.user) self.user[k] = null
-        }
-
-        if (!callbackCalled) {
-          callbackCalled = true
-          callback()
         }
       })
     }

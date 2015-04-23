@@ -1,12 +1,11 @@
 define([
   'services/firebase',
   'services/auth',
-  'services/router',
   'services/test-utils'
-], function(firebase, Auth, Router, Utils) {
+], function(firebase, Auth, Utils) {
 
   describe('components/auth', function() {
-    var $modal, $notif, existingUser = {}
+    var $auth, $notif, existingUser = {}
 
     beforeEach(function(done) {
       Utils.logout()
@@ -14,16 +13,11 @@ define([
     })
 
     beforeEach(function(done) {
-      Router.navigateTo('home')
-      Utils.waitForElementExists('.modal', function() {
-        $modal = document.querySelector('.modal')
-        $notif = $modal.querySelector('.notif')
-
-        // open modal
-        Utils.triggerEvent('click', document.querySelector('[test=create-account]'))
+      Utils.waitForElementExists('.auth', function() {
+        $auth = document.querySelector('.auth')
+        $notif = $auth.querySelector('.notif')
+        done()
       })
-
-      Utils.waitForElementExists('.modal.open', done)
     })
 
     afterEach(function(done) {
@@ -35,9 +29,9 @@ define([
 
       beforeEach(function(done) {
         Utils.waitForElementVisible('form[name=signIn]', function() {
-          $email =    $modal.querySelector('form[name=signIn] [type=email]')
-          $password = $modal.querySelector('form[name=signIn] [type=password]')
-          $submit =   $modal.querySelector('form[name=signIn] [type=submit]')
+          $email =    $auth.querySelector('form[name=signIn] [type=email]')
+          $password = $auth.querySelector('form[name=signIn] [type=password]')
+          $submit =   $auth.querySelector('form[name=signIn] [type=submit]')
           done()
         })
       })
@@ -47,7 +41,7 @@ define([
         Utils.value($password, 'wrong password')
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForElementVisible('.modal .notif', function() {
+        Utils.waitForElementVisible('.auth .notif', function() {
           expect($notif.textContent).toEqual('The specified user does not exist.')
           done()
         })
@@ -58,7 +52,7 @@ define([
         Utils.value($password, 'wrong password')
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForElementVisible('.modal .notif', function() {
+        Utils.waitForElementVisible('.auth .notif', function() {
           expect($notif.textContent).toEqual('The specified password is incorrect.')
           done()
         })
@@ -69,14 +63,12 @@ define([
         Utils.value($password, '****')
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForRoute('dashboard_home', function() {
-          Utils.waitFor(function() {
-            return Auth.user.email
-          }, function() {
-            expect(Auth.user.email).toEqual(existingUser.email)
-            expect(Auth.user.uid).toBeDefined()
-            done()
-          })
+        Utils.waitFor(function() {
+          return Auth.user.email
+        }, function() {
+          expect(Auth.user.email).toEqual(existingUser.email)
+          expect(Auth.user.uid).toBeDefined()
+          done()
         })
       })
     })
@@ -86,13 +78,13 @@ define([
 
       beforeEach(function(done) {
         // open resetPass form
-        Utils.triggerEvent('click', $modal.querySelector('.sign-up'))
+        Utils.triggerEvent('click', $auth.querySelector('.sign-up'))
 
         Utils
           .waitForElementVisible('form[name=signUp]', function() {
-            $email =    $modal.querySelector('form[name=signUp] [type=email]')
-            $password = $modal.querySelector('form[name=signUp] [type=password]')
-            $submit =   $modal.querySelector('form[name=signUp] [type=submit]')
+            $email =    $auth.querySelector('form[name=signUp] [type=email]')
+            $password = $auth.querySelector('form[name=signUp] [type=password]')
+            $submit =   $auth.querySelector('form[name=signUp] [type=submit]')
             done()
           })
       })
@@ -102,7 +94,7 @@ define([
         Utils.value($password, '****')
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForElementVisible('.modal .notif', function() {
+        Utils.waitForElementVisible('.auth .notif', function() {
           expect($notif.textContent).toEqual('The specified email address is already in use.')
           done()
         })
@@ -116,7 +108,9 @@ define([
         Utils.value($password, '****')
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForRoute('dashboard_home', function() {
+        Utils.waitFor(function() {
+          return Auth.isAuthenticated()
+        }, function() {
           expect(Auth.user.email).toEqual(email)
           expect(Auth.user.uid).toBeDefined()
           done()
@@ -129,12 +123,12 @@ define([
 
       beforeEach(function(done) {
         // open resetPass form
-        Utils.triggerEvent('click', $modal.querySelector('.reset-pass'))
+        Utils.triggerEvent('click', $auth.querySelector('.reset-pass'))
 
         Utils
           .waitForElementVisible('form[name=resetPass]', function() {
-            $email =  $modal.querySelector('form[name=resetPass] [type=email]')
-            $submit = $modal.querySelector('form[name=resetPass] [type=submit]')
+            $email = $auth.querySelector('form[name=resetPass] [type=email]')
+            $submit = $auth.querySelector('form[name=resetPass] [type=submit]')
             done()
           })
       })
@@ -143,7 +137,7 @@ define([
         Utils.value($email, 'unknown@example.com')
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForElementVisible('.modal .notif', function() {
+        Utils.waitForElementVisible('.auth .notif', function() {
           expect($notif.textContent).toEqual('The specified user does not exist.')
           done()
         })
@@ -153,7 +147,7 @@ define([
         Utils.value($email, existingUser.email)
         Utils.triggerEvent('click', $submit)
 
-        Utils.waitForElementVisible('.modal .notif', function() {
+        Utils.waitForElementVisible('.auth .notif', function() {
           expect($notif.textContent).toEqual('An email has been sent with a temporary password.')
           done()
         })

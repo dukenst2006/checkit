@@ -54,22 +54,21 @@ define([
 
   var gridItemsContainer, editor, closeCtrl
 
-  return Vue.component('dashboard_home', {
-
-    layout: 'dashboard',
+  return Vue.component('dashboard', {
 
     inherit: true,
 
     template: template,
 
     data: function() {
+      if (!Auth.user.uid) return
+
       return {
         testsLoaded: false,
         test: { name: null, code: '' },
         tests: firebase.collection(firebase.child('tests').child(Auth.user.uid))
       }
     },
-
 
     compiled: function() {
       firebase.child('tests').child(Auth.user.uid).on('value', function() {

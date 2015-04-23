@@ -1,0 +1,180 @@
+.auth {
+  position: relative;
+  border-radius: 2px;
+  background: #fff;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+.auth_content {
+  .notif {
+    background: lighten(color(sun-flower), 40%);
+    padding: 14px;
+    margin: 14px 0 0 0;
+  }
+
+  form {
+    padding: 20px;
+
+    .btn {
+      margin-top: 12px;
+      display: inline-block;
+    }
+
+    .form-label {
+      display: inline-block;
+      margin-top: 16px;
+      margin-left: 8px;
+    }
+
+    .reset-pass {
+      max-height: none;
+      margin: -32px 0 0 0;
+      display: block;
+      position: absolute;
+      right: 30px;
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+      border-radius: 50%;
+      text-indent: -999px;
+      background: color(silver);
+
+      b {
+        color: #FFF;
+        position: absolute;
+        top: 4px;
+        left: 2px;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        text-indent: 0;
+        line-height: 18px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.auth_footer {
+  text-align: center;
+  padding: 0 68px;
+  margin-bottom: 20px;
+
+  .auth_subtitle {
+    padding: 8px 0 12px 0;
+    margin: 0;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: rgba(0,0,0,.85);
+    user-select: none;
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    text-align: center;
+
+    &::before, &::after {
+      position: absolute;
+      content: '';
+      z-index: 3;
+      width: 50%;
+      top: 50%;
+      height: 0;
+      border-top: 1px solid rgba(0,0,0,.1);
+      border-bottom: 1px solid rgba(255,255,255,.2);
+    }
+
+    &::before {
+      margin-left: calc(-50% - 1em);
+    }
+
+    &::after {
+      margin-left: 1em;
+    }
+  }
+
+  .social {
+    border: 0;
+    width: 50px;
+    height: 44px;
+    padding: 0;
+    margin: 0 4px;
+    color: transparent;
+
+    transform: translate(0, 0);
+    transition: all .2s ease;
+
+    &:active {
+      transform: translate(0, 3px);
+    }
+
+    &.__twitter {
+      box-shadow: 0px 6px 0px #2695BC;
+      background: #2CA9E1 url('/img/social/twitter.png') no-repeat center center;
+      &:active {
+        box-shadow: 0px 2px 0px #2695BC;
+      }
+    }
+
+    &.__facebook {
+      box-shadow: 0px 6px 0px #293F63;
+      background: #3B5997 url('/img/social/facebook.png') no-repeat center center;
+      &:active {
+        box-shadow: 0px 2px 0px #293F63;
+      }
+    }
+
+    &.__google {
+      box-shadow: 0px 6px 0px #B1331F;
+      background: #E04A32 url('/img/social/google.png') no-repeat center center;
+      &:active {
+        box-shadow: 0px 2px 0px #E04A32;
+      }
+    }
+
+    &.__github {
+      box-shadow: 0px 6px 0px #141412;
+      background: #353631 url('/img/social/github.png') no-repeat center center;
+      &:active {
+        box-shadow: 0px 2px 0px #141412;
+      }
+    }
+  }
+}
+
+.auth_slider {
+  @extend %clearfix;
+  height: 175px;
+  transition: height 0.3s;
+
+  .auth_title {
+    margin: 12px 0;
+  }
+
+  &.__top {
+    height: 40px;
+    text-align: center;
+  }
+
+  > * {
+    width: 100%;
+    position: absolute;
+    box-sizing: border-box;
+
+    transition: all ease-out 0.3s, opacity ease-in 0.4s;
+    left: 0;
+    opacity: 1;
+
+    &.slide-left {
+      left: -100%;
+      opacity: 0;
+    }
+
+    &.slide-right {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+}

@@ -1,8 +1,7 @@
 define([
   'services/auth',
-  'services/router',
   'services/test-utils'
-], function(Auth, Router, Utils) {
+], function(Auth, Utils) {
 
   describe('dashboard.settings', function() {
     var authUser = {}
@@ -12,10 +11,8 @@ define([
     })
 
     beforeEach(function(done) {
-      Router.navigateTo('dashboard_home')
-
-      Utils.waitForElementExists('.header .settings', function() {
-        Utils.triggerEvent('click', document.querySelector('.header .settings'));
+      Utils.waitForElementExists('.header .header_settings', function() {
+        Utils.triggerEvent('click', document.querySelector('.header .header_settings'));
         done()
       });
     })
@@ -76,7 +73,9 @@ define([
 
         Utils.triggerEvent('click', document.querySelector('[test=delete-user]'))
 
-        Utils.waitForRoute('home', function() {
+        Utils.waitFor(function() {
+          return ! Auth.isAuthenticated()
+        }, function() {
           expect(Auth.isAuthenticated()).toEqual(false)
           done()
         })

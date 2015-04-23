@@ -1,1 +1,19 @@
-<div class="root" v-component="{{ layoutView }}"></div>
+<header class="header page">
+  <div class="8 |_">&nbsp;</div>
+
+  <div class="8 _|_">
+    <h1 class="header_title">
+      <a class="__active" href="/">Check & Notify</a>
+    </h1>
+  </div>
+
+  <div class="8 _| relative">
+    <a class="header_settings" title="Settings" v-on="click: openSettingsModal" v-if="authUser.uid">
+      <i class="icon-cog"></i>
+    </a>
+  </div>
+</header>
+
+<div class="main page" v-component="{{ component }}"></div>
+
+<div class="overlay __settings" v-component="settings" v-ref="settingsModal"></div>

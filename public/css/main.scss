@@ -11,44 +11,18 @@
 @import 'base/_helpers.scss';
 @import 'base/_icons.scss';
 @import 'base/_modal.scss';
-@import 'base/_notif.scss';
 @import 'base/_panel.scss';
 @import 'base/_text.scss';
 
 @import '../js/directives/editor.scss';
-@import '../js/modules/dashboard/layout.scss';
-@import '../js/modules/dashboard/home.scss';
-@import '../js/modules/dashboard/settings.scss';
-@import '../js/modules/public/home.scss';
-@import '../js/modules/public/auth.scss';
+@import '../js/modules/layout.scss';
+@import '../js/modules/home.scss';
+@import '../js/modules/settings.scss';
+@import '../js/modules/auth.scss';
 
 @import url(http://fonts.googleapis.com/css?family=Exo+2:100,200,400,600);
 
 @font-face {
   font-family: 'monaco-invisible';
   src: url('/fonts/monaco-invisible.ttf');
-}
-
-body {
-  font-family: 'Exo 2', sans-serif;
-  font-size: 14px;
-  font-weight: 200;
-  color: color(wet-asphalt);
-  background: color(clouds);
-
-  a {
-    color: color(belize-hole);
-  }
-}
-
-.root {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.page {
-  @extend .clearfix;
-  width: 940px;
-  margin: 0 auto;
 }

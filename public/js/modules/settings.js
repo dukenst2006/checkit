@@ -3,9 +3,8 @@ define([
   'mixins/modal',
   'services/auth',
   'services/firebase',
-  'services/router',
   'text!./settings.html'
-], function(Vue, ModalMixin, Auth, firebase, Router, template) {
+], function(Vue, ModalMixin, Auth, firebase, template) {
 
   return Vue.component('settings', {
 
@@ -58,7 +57,6 @@ define([
           if (err) {
             alert('Error: ' + err.message)
           } else {
-            Router.navigateTo('home')
             firebase.unauth()
           }
         })
@@ -66,7 +64,7 @@ define([
 
       logout: function() {
         firebase.unauth()
-        Router.navigateTo('home')
+        this.close()
       }
     }
   })

@@ -1,0 +1,65 @@
+body {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  color: color(wet-asphalt);
+  background: color(clouds);
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  @extend .clearfix;
+  width: 940px;
+  margin: 0 auto;
+}
+
+a {
+  color: color(belize-hole);
+}
+
+.header {
+  user-select: none;
+  margin-bottom: 32px !important;
+  padding: 8px;
+  line-height: 28px;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.12);
+  border-bottom: 1px solid color(clouds);
+
+  button, .btn {
+    @extend .__S;
+    @extend .__green;
+  }
+}
+
+.header_title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.header_settings {
+  color: #a7adba;
+  font-size: 28px;
+  line-height: 16px;
+
+  &:hover {
+    color: #2980B9;
+  }
+}
+
+.main {
+  position: relative;
+  height: 100%;
+  display :flex;
+  flex-direction: column;
+
+  // sticky
+  .wrap {
+    flex: 1 0 auto;
+    box-flex: 1;
+  }
+}
