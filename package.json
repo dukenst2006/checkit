@@ -3,11 +3,10 @@
     "postinstall": "./node_modules/bower/bin/bower install && make css"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.x"
   },
   "devDependencies": {
     "chai": "^2.3.0",
-    "firebase": "latest",
     "jasmine-core": "^2.2.0",
     "karma": "latest",
     "karma-chrome-launcher": "latest",

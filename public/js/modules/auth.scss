@@ -4,6 +4,16 @@
   background: #fff;
   overflow: hidden;
   padding: 0 20px;
+  margin-bottom: 20px !important;
+
+  @include tablet {
+    margin: 0 auto;
+    width: 75%;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .auth_content {
