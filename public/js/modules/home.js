@@ -84,7 +84,7 @@ define([
 
     methods: {
 
-      submit: function(event) {
+      saveTest: function(event) {
         event.preventDefault()
         var ref = firebase.child('tests').child(Auth.user.uid)
 

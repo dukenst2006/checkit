@@ -1,5 +1,8 @@
-start:
-	nodemon server/api.js
+start_web:
+	nodemon web.js
+
+start_worker:
+	nodemon worker.js
 
 css:
 	node-sass public/css/main.scss public/var/styles.css
@@ -8,8 +11,8 @@ css:
 watch:
 	chokidar 'public/js/**/*.scss' 'public/css/**/*.scss' -c 'make css'
 
-test_server:
-	env isTesting=true mocha server/*.test.js --timeout 5000
+test_worker:
+	env isTesting=true mocha worker/*.test.js --timeout 5000
 
 test_chrome:
 	karma start config/karma.conf.js --single-run --browsers Chrome

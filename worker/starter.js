@@ -2,14 +2,14 @@ var cluster = require('./cluster')();
 
 function runTest(testSnap) {
   var test = testSnap.val()
-  if (!test.code) return false
+  if (!test || !test.code) return false
 
-  cluster.run(test.code, function(pass, result, output) {
+  cluster.run(test.code, function(pass, output, error) {
     testSnap.ref().update({
+      lastUpdated: +(new Date()),
       status: pass ? 'success' : 'fail',
-      result: result || 'foo',
-      output: output || 'baz',
-      lastUpdated: +(new Date())
+      output: output || null,
+      error: error || null
     }, function(err) {
       if (err) throw err;
     });
@@ -23,7 +23,7 @@ var firebase = require('./firebase')
 // ------
 
 function startLoop() {
-  setInterval(loopTests, config.POLL_INTERVAL)
+  setInterval(runLoop, config.POLL_INTERVAL)
 }
 
 function runLoop() {
@@ -41,8 +41,8 @@ function runLoop() {
 var queue = firebase.child('queue')
 
 queue.on('child_added', function(snap) {
-  var parts = snap.val().split(' ')
-  var userId = parts[0], testId = parts[1]
+  var userId = snap.val()[0]
+  var testId = snap.val()[1]
   var testRef = firebase.child('tests').child(userId).child(testId)
 
   snap.ref().remove(function() {

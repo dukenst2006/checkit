@@ -1,10 +1,10 @@
 var config = require('./../config/server.js')
-var worker = require('./worker');
+var starter = require('./starter');
 var firebase = require('./firebase');
 
 var expect = require('chai').expect;
 
-describe('worker', function() {
+describe('starter', function() {
   var testId
   var testUserRef = firebase.child('tests').child('test_user')
 
@@ -15,16 +15,12 @@ describe('worker', function() {
   beforeEach(function(done) {
     testUserRef.push({
       name: 'foo',
-      code: 'done(true)'
+      code: 'done()'
     })
     testUserRef.once('child_added', function(snap) {
       testId = snap.key()
       done()
     });
-  });
-
-  afterEach(function(done) {
-    firebase.child('queue').remove(done)
   });
 
   afterEach(function(done) {
@@ -38,7 +34,7 @@ describe('worker', function() {
         expect(test.status).to.equal('success')
         done()
       })
-      worker.runLoop()
+      starter.runLoop()
     })
   })
 
@@ -53,7 +49,7 @@ describe('worker', function() {
         })
       })
 
-      firebase.child('queue').push('test_user ' + testId)
+      firebase.child('queue').push(['test_user ', testId])
     })
   })
 

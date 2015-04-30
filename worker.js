@@ -1,2 +1,2 @@
-var worker = require('./server/worker')
-worker.start()
+var starter = require('./worker/starter')
+starter.startLoop()

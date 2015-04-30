@@ -8,10 +8,11 @@ function run(code, callback) {
     console: {
       log: console.log
     },
+    assert: require('assert'),
     setTimeout: setTimeout,
-    done: function(pass, result) {
+    done: function() {
       resetStdout();
-      callback(!!pass, result, output);
+      callback(true, output);
     }
   };
 
@@ -29,9 +30,9 @@ function run(code, callback) {
 
   try {
     vm.runInNewContext(code, context, 'Line');
-  } catch (e) {
+  } catch (err) {
     resetStdout();
-    callback(false, new Error(e.message), output);
+    callback(false, output, err);
   }
 }
 
