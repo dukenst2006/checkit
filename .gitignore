@@ -3,4 +3,5 @@ public/var/
 
 config/karma.conf.js
 config/nginx.conf
+config/server.js
 config/security-rules.json

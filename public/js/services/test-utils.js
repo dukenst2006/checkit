@@ -7,7 +7,6 @@ define([
 
     createUser: function(user, cb) {
       var rand = this.random()
-      user.name = 'foo-' + rand
       user.email = 'foo-' + rand + '@bar.com'
       user.provider = user.provider || 'password'
       user.password = '****'
