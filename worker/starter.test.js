@@ -49,7 +49,10 @@ describe('starter', function() {
         })
       })
 
-      firebase.child('queue').push(['test_user ', testId])
+      firebase.child('queue').once('value', function(snap) {
+        expect(snap.val()).to.equal(null)
+        firebase.child('queue').push(['test_user ', testId])
+      })
     })
   })
 
