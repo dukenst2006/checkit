@@ -1,4 +1,4 @@
 module.exports = {
-  port: 8080,
-  firebase_secret: 'UDAlDy3U4pNlr6IPmCKHK1p146Avppg7HErXtwlp'
+  POLL_INTERVAL: 20 * 1000,
+  FIREBASE_SECRET: 'UDAlDy3U4pNlr6IPmCKHK1p146Avppg7HErXtwlp'
 }
