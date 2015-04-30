@@ -15,6 +15,7 @@
     "karma-jasmine": "^0.3.5",
     "karma-mocha-reporter": "^1.0.2",
     "karma-requirejs": "latest",
+    "mocha": "^2.2.4",
     "requirejs": "latest"
   },
   "dependencies": {
