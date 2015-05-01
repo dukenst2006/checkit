@@ -28,10 +28,13 @@ function run(code, callback) {
   };
 
   try {
-    vm.runInNewContext(code, context, 'Line');
+    vm.runInNewContext(code, context, 'line');
   } catch (err) {
     resetStdout();
-    callback(false, output, err);
+    callback(false, output, {
+      name: err.name,
+      message: err.message
+    });
   }
 }
 

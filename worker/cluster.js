@@ -2,7 +2,7 @@ var workerFarm = require('worker-farm');
 
 var workers = workerFarm({
   maxCallsPerWorker: 100,
-  maxCallTime: 10 *  1000
+  maxCallTime: 10 * 1000
 }, require.resolve('./runner'), ['run']);
 
 module.exports = function(options) {

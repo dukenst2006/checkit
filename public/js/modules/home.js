@@ -88,8 +88,12 @@ define([
         var ref = firebase.child('tests').child(Auth.user.uid)
         var test = this.$data.test
 
+        // reset test
         test.status = 'pending'
         test.output = test.error = ''
+
+        // fix test.code not always updated
+        test.code = this.$el.querySelector('textarea').value
 
         if (test.id) {
           ref.child(test.id).set({

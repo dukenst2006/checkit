@@ -16,8 +16,8 @@
           <span v-if="test.status != 'pending'"> {{ test.status }}</span>
           <span v-if="test.status == 'pending'" class="dotter"> running ...</span>
         </a>
-        <pre v-if="test.error">{{ test.error }}</pre>
         <pre v-if="test.output">{{ test.output }}</pre>
+        <pre v-if="test.error">{{ test.error }}</pre>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
 
   </form>
 
-  <a class="item __saved" v-repeat="test: tests | orderBy 'id' -1" v-on="click: loadEditor($event, test)">
+  <a class="item __saved" v-repeat="test: tests" v-on="click: loadEditor($event, test)">
     <h1>{{ test.name }}</h1>
     <hr>
     <p>

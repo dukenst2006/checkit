@@ -6,7 +6,7 @@ define([
   return Vue.directive('colorize', {
 
     update: function (code) {
-      code && Rainbow.color(code, 'javascript', function(colorized) {
+      Rainbow.color(code || '', 'javascript', function(colorized) {
         this.el.innerHTML = colorized
       }.bind(this))
     }
