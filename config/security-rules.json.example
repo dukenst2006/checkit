@@ -1,10 +1,24 @@
 {
   "rules": {
     "users": {
-      "$user": {
-        ".read": "$user == auth.id",
-        ".write": "!data.exists() || $user == auth.id"
+      "$user_id": {
+        ".write": "!data.exists() || (auth !== null && $user_id === auth.uid)",
+        ".read": "auth !== null && $user_id === auth.uid"
       }
+    },
+    "tests": {
+      "$user_id": {
+        ".write": "auth.uid === $user_id",
+        ".read": "auth.uid === $user_id",
+        "$test_id": {
+          ".write": true,
+          ".read": true
+        }
+      }
+    },
+    "queue": {
+      ".write": "auth !== null && !data.exists()",
+      ".read": false
     }
   }
 }

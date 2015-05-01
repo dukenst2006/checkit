@@ -4,7 +4,6 @@ var cluster = require('./cluster')({ timeout: 200 });
 describe('cluster', function() {
 
   describe('run()', function() {
-
     it('sends and receive messages', function(done) {
       cluster.run('done(true, "pass")', function(pass, result, output) {
         expect(pass).to.equal(true);
@@ -20,6 +19,5 @@ describe('cluster', function() {
         done();
       });
     });
-
   });
 });

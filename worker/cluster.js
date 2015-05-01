@@ -2,20 +2,21 @@ var workerFarm = require('worker-farm');
 
 var workers = workerFarm({
   maxCallsPerWorker: 100,
-  maxCallTime: 100 *  1000
+  maxCallTime: 10 *  1000
 }, require.resolve('./runner'), ['run']);
 
 module.exports = function(options) {
-
   return {
-
     run: function(code, callback) {
-      var timer = setTimeout(function() {
-        callback(false, new Error('Timeout'));
-      }, (options && options.timeout) || 1000);
+      var timeout = (options && options.timeout) || 1000
 
-      workers.run(code, function() {
+      var timer = setTimeout(function() {
+        callback(false, '', new Error('done() never called in ' + timeout + 'ms'));
+      }, timeout);
+
+      workers.run(code, function(err) {
         clearTimeout(timer);
+        if (err && err.type === 'TimeoutError') return
         callback.apply(callback, arguments);
       });
     }

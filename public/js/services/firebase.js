@@ -32,6 +32,16 @@ define([
       coll.push(child)
     })
 
+    ref.on('child_changed', function(snap) {
+      var newChild = snap.val()
+      var child = coll.find(function(c) {
+        return c.id === snap.key()
+      })
+      for (var key in newChild) {
+        child[key] = newChild[key]
+      }
+    })
+
     ref.on('child_removed', function(snap) {
       var index = coll.findIndex(function(item) {
         return item.id === snap.key()

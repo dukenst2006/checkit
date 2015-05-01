@@ -157,11 +157,6 @@
           right: 0;
           background: #FEE798;
           height: 20px;
-
-          @keyframes dotter {
-            from { width: 12px; }
-            to { width: 0px; }
-          }
         }
       }
     }
@@ -331,4 +326,9 @@
   &.__trans-out {
     opacity: 1;
   }
+}
+
+@keyframes dotter {
+  from { width: 12px; }
+  to { width: 0px; }
 }

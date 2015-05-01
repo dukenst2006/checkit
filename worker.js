@@ -1,2 +1,6 @@
 var starter = require('./worker/starter')
-starter.startLoop()
+
+starter.start(function() {
+  starter.startQueue()
+  starter.startLoop()
+})

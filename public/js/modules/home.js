@@ -65,7 +65,7 @@ define([
 
       return {
         testsLoaded: false,
-        test: { name: null, code: '' },
+        test: { name: null, code: null, status: null, output: null, error: null },
         tests: firebase.collection(firebase.child('tests').child(Auth.user.uid))
       }
     },
@@ -84,17 +84,32 @@ define([
 
     methods: {
 
-      saveTest: function(event) {
-        event.preventDefault()
+      saveTest: function(andClose) {
         var ref = firebase.child('tests').child(Auth.user.uid)
+        var test = this.$data.test
 
-        if (this.$data.test.id) {
-          ref.child(this.$data.test.id).set(this.$data.test)
-        } else {
-          ref.push(this.$data.test)
+        test.status = 'pending'
+        test.output = test.error = ''
+
+        if (test.id) {
+          ref.child(test.id).set({
+            name: test.name,
+            code: test.code
+          }, this.pushQueue.bind(this))
         }
 
-        this.hideEditor()
+        else {
+          ref.push(test).once('value', function() {
+            this.$data.test = this.$data.tests[this.$data.tests.length - 1]
+            this.pushQueue()
+          }.bind(this))
+        }
+
+        if (andClose) this.hideEditor()
+      },
+
+      pushQueue: function() {
+        firebase.child('queue').push([Auth.user.uid, this.$data.test.id])
       },
 
       loadEditor: function(event, test) {
@@ -111,8 +126,11 @@ define([
         );
 
         this.$data.test = test || {
+          name: 'Please explain HERE what your test do',
           code: '',
-          name: 'Please explain HERE what your test do'
+          error: '',
+          output: '',
+          status: ''
         }
 
         item.classList.add('__current')

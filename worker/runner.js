@@ -2,8 +2,7 @@ var vm = require('vm');
 var util = require('util');
 
 function run(code, callback) {
-  var output = '';
-
+  var output = ''
   var context = {
     console: {
       log: console.log

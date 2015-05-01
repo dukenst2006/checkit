@@ -6,23 +6,34 @@ describe('runner', function() {
   describe('run()', function() {
 
     it('pass synchronously', function(done) {
-      runner.run('assert.ok(true, "pass"); done()', function(pass, output, err) {
+      runner.run('done()', function(pass, output, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('');
+        expect(err).to.equal(undefined);
         done();
       });
     });
 
     it('pass asynchronously', function(done) {
-      runner.run('setTimeout(function() { assert.ok(true, "pass"); done() }, 20)', function(pass, output) {
+      runner.run('setTimeout(done, 20)', function(pass, output, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('');
+        expect(err).to.equal(undefined);
+        done();
+      });
+    });
+
+    it('passes', function(done) {
+      runner.run('assert.ok(true, "success"); done()', function(pass, output, err) {
+        expect(pass).to.equal(true);
+        expect(output).to.equal('');
+        expect(err).to.equal(undefined)
         done();
       });
     });
 
     it('fails', function(done) {
-      runner.run('assert.ok(false, "error"); done()', function(pass, output, err) {
+      runner.run('assert.ok(false, "error")', function(pass, output, err) {
         expect(pass).to.equal(false);
         expect(output).to.equal('');
         expect(err.name).to.equal('AssertionError')
@@ -31,20 +42,21 @@ describe('runner', function() {
     });
 
     it('handles javascript error', function(done) {
-      runner.run('console.log("foo"); unknowMethod(); done()', function(pass, output) {
+      runner.run('unknowMethod()', function(pass, output, err) {
         expect(pass).to.equal(false);
-        expect(output).to.equal('foo');
+        expect(output).to.equal('');
+        expect(err.name).to.equal('ReferenceError');
         done();
       });
     });
 
     it('allows console.log()', function(done) {
-      runner.run('console.log("foo"); console.log("bar"); assert.ok(true, "pass"); done()', function(pass, output) {
+      runner.run('console.log("foo"); console.log("bar"); done()', function(pass, output, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('foo\nbar');
+        expect(err).to.equal(undefined)
         done();
       });
     });
-
   });
 });

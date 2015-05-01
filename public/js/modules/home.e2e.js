@@ -42,11 +42,14 @@ define([
         Utils.waitForElementVisible('.editor', function() {
           Utils.value(document.querySelector('.editor [test=test-name]'), 'test name');
           Utils.value(document.querySelector('.editor [test=test-code]'), 'test code');
-          Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'));
+          Utils.triggerEvent('click', document.querySelector('.editor [test=test-button]'));
 
           Utils.waitForElementVisible('.item.__saved', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined;
-            done();
+
+            Utils.waitForElementExists('.editor .editor-message.__fail', function() {
+              done();
+            })
           });
         });
       });
