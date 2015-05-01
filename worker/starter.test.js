@@ -32,7 +32,7 @@ describe('starter', function() {
 
         testUserRef.once('child_changed', function(testSnap) {
           var test = testSnap.val()
-          expect(test.status).to.equal('success')
+          expect(test.status).to.equal('pass')
           done()
         })
       })
@@ -46,7 +46,7 @@ describe('starter', function() {
         expect(snap.val().status).to.equal('pending')
 
         testUserRef.once('child_changed', function(snap) {
-          expect(snap.val().status).to.equal('success')
+          expect(snap.val().status).to.equal('pass')
 
           firebase.child('queue').once('value', function(snap) {
             expect(snap.val()).to.equal(null)
