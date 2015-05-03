@@ -17,8 +17,8 @@
       }
     },
     "queue": {
-      ".write": "auth !== null && !data.exists()",
-      ".read": false
+      ".write": true,
+      ".read": true
     }
   }
 }

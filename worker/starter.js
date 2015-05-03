@@ -25,7 +25,6 @@ function runTest(testSnap) {
   })
 }
 
-var config = require('./../config/server.js')
 var firebase = require('./firebase')
 
 
@@ -33,7 +32,7 @@ var firebase = require('./firebase')
 // ------------
 
 function start(done) {
-  firebase.authWithCustomToken(config.FIREBASE_SECRET, done)
+  firebase.authWithCustomToken(process.env.CHECKIT_FIREBASE_SECRET, done)
 }
 
 
@@ -41,7 +40,7 @@ function start(done) {
 // ------
 
 function startLoop() {
-  setInterval(runLoop, config.POLL_INTERVAL)
+  setInterval(runLoop, process.env.CHECKIT_POLL_INTERVAL)
 }
 
 function runLoop() {

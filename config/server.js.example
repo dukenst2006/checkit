@@ -1,4 +1,0 @@
-module.exports = {
-  POLL_INTERVAL: 20 * 1000,
-  FIREBASE_SECRET: 'UDAlDy3U4pNlr6IPmCKHK1p146Avppg7HErXtwlp'
-}

@@ -1,4 +1,5 @@
-var config = require('requirejs')(__dirname + '/../public/js/config.js')
-var firebase = new (require('firebase'))(config.FIREBASE)
+const firebase_url = process.env.CHECKIT_IS_TESTING
+  ? process.env.CHECKIT_FIREBASE_URL_TEST
+  : process.env.CHECKIT_FIREBASE_URL
 
-module.exports = firebase
+module.exports = new (require('firebase'))(firebase_url)

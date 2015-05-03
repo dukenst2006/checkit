@@ -1,7 +1,7 @@
-start_web:
+web:
 	nodemon web.js
 
-start_worker:
+worker:
 	nodemon worker.js
 
 css:
@@ -12,10 +12,16 @@ watch:
 	chokidar 'public/js/**/*.scss' 'public/css/**/*.scss' -c 'make css'
 
 test_worker:
-	env isTesting=true mocha worker/*.test.js --timeout 5000
+	env CHECKIT_IS_TESTING=true mocha worker/*.test.js --require worker.js --timeout 5000
 
 test_chrome:
-	karma start config/karma.conf.js --single-run --browsers Chrome
+	env CHECKIT_IS_TESTING=true nodemon worker.js & \
+		PID=$$! && \
+	karma start config/karma.conf.js --single-run --browsers Chrome && \
+		kill $$PID
 
 test_ff:
-	karma start config/karma.conf.js --single-run --browsers Firefox
+	env CHECKIT_IS_TESTING=true nodemon worker.js & \
+		PID=$$! && \
+	karma start config/karma.conf.js --single-run --browsers Firefox && \
+		kill $$PID

@@ -1,7 +1,5 @@
-var config = require('./../config/server.js')
 var starter = require('./starter');
 var firebase = require('./firebase');
-
 var expect = require('chai').expect;
 
 describe('starter', function() {
