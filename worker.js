@@ -1,4 +1,5 @@
 require('dotenv').config({ path: 'config/env' })
+require('dotenv').load()
 
 var util = require('util')
 var starter = require('./worker/starter')
