@@ -15,7 +15,10 @@ describe('starter', function() {
     testUserRef.push({
       name: 'foo',
       code: 'done()'
-    }, done)
+    }, function(err) {
+      if (err) throw err
+      done()
+    })
   });
 
   afterEach(function(done) {
