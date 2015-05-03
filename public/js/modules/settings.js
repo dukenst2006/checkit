@@ -50,15 +50,21 @@ define([
 
         if (!password) return
 
-        firebase.removeUser({
-          email: this.$data.user.email,
-          password: password
-        }, function(err) {
-          if (err) {
-            alert('Error: ' + err.message)
-          } else {
-            firebase.unauth()
-          }
+        var user = this.$data.user
+
+        firebase.child('users/' + user.uid).remove(function(err) {
+          if (err) throw err
+
+          firebase.removeUser({
+            email: user.email,
+            password: password
+          }, function(err) {
+            if (err) {
+              alert('Error: ' + err.message)
+            } else {
+              firebase.unauth()
+            }
+          })
         })
       },
 

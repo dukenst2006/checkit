@@ -11,7 +11,7 @@
     "karma": "latest",
     "karma-chrome-launcher": "latest",
     "karma-firefox-launcher": "latest",
-    "karma-jasmine": "^0.3.5",
+    "karma-jasmine": "latest",
     "karma-mocha-reporter": "^1.0.2",
     "karma-requirejs": "latest",
     "mocha": "^2.2.4",

@@ -21,7 +21,15 @@ define([
     })
 
     afterEach(function(done) {
-      Utils.deleteUser(existingUser, done)
+      if (!Auth.user.uid) {
+        Utils.login(existingUser, function() {
+          Utils.deleteUser(existingUser, done)
+        })
+      }
+
+      else {
+        Utils.deleteUser(existingUser, done)
+      }
     })
 
     describe('signIn()', function() {
@@ -113,7 +121,8 @@ define([
         }, function() {
           expect(Auth.user.email).toEqual(email)
           expect(Auth.user.uid).toBeDefined()
-          done()
+          Auth.user.password = '****'
+          Utils.deleteUser(Auth.user, done)
         })
       })
     })

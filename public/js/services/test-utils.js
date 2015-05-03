@@ -36,7 +36,13 @@ define([
     },
 
     deleteUser: function(user, cb) {
-      firebase.removeUser(user, cb)
+      if (!Auth.user.uid) return cb()
+      if (Auth.user.uid !== user.uid) user.uid = Auth.user.uid
+
+      firebase.child('users/' + user.uid).remove(function(err) {
+        if (err) throw err
+        firebase.removeUser(user, cb)
+      })
     },
 
     waitForElementExists: function(selector, cb, timeout) {

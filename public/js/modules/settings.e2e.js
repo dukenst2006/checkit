@@ -18,7 +18,6 @@ define([
     })
 
     afterEach(function(done) {
-      Utils.logout()
       Utils.deleteUser(authUser, done)
     })
 
@@ -53,7 +52,9 @@ define([
 
     describe('deleteUser()', function() {
       beforeEach(function(done) {
-        Utils.waitForElementVisible('[test=delete-user]', done)
+        Utils.waitForElementVisible('[test=delete-user]', function() {
+          done()
+        })
       })
 
       it('shows an error for invalid password', function(done) {

@@ -14,9 +14,18 @@ define([
     afterEach(function(done) {
       firebase.child('users').off()
       firebase.child('users').child(authUser.uid).remove(done);
+    })
+
+    afterEach(function(done) {
+      Utils.deleteUser(authUser, function() {
+        Utils.login(authUser2, function() {
+          Utils.deleteUser(authUser2, done)
+        })
+      })
     });
 
     describe('users', function() {
+
       it('can NOT read other users', function(done) {
         function fetchUsers() {
           firebase.child('users').once('value', function(snap) {
@@ -26,6 +35,7 @@ define([
         expect(fetchUsers).not.toThrow()
         setTimeout(done, 800)
       });
+
       it('can NOT read other user', function(done) {
         function fetchUser() {
           firebase.child('users').child(authUser2.uid).once('value', function(snap) {
@@ -35,19 +45,40 @@ define([
         expect(fetchUser).not.toThrow()
         setTimeout(done, 800)
       });
+
       it('can read himself', function(done) {
         firebase.child('users').child(authUser.uid).once('value', function(snap) {
           expect(typeof snap.val()).toEqual('object')
           done()
         })
       });
-      it('can NOT update other user', function() {
+
+      it('can NOT update other user', function(done) {
         firebase.child('users').child(authUser2.uid).set({ prop: 'value' }, function(err) {
           expect(err.code).toEqual('PERMISSION_DENIED')
+          done()
         })
       });
-      it('can update himself', function() {
-        firebase.child('users').child(authUser.uid).set({ prop: 'value'})
+
+      it('can update himself', function(done) {
+        firebase.child('users').child(authUser.uid).set({ prop: 'value'}, function(err) {
+          expect(err).toBe(null)
+          done()
+        })
+      });
+
+      it('can NOT delete other user', function(done) {
+        firebase.child('users').child(authUser2.uid).remove(function(err) {
+          expect(err.code).toEqual('PERMISSION_DENIED')
+          done()
+        })
+      });
+
+      it('can delete himself', function(done) {
+        firebase.child('users').child(authUser.uid).remove(function(err) {
+          expect(err).toBe(null)
+          done()
+        })
       });
     });
 
