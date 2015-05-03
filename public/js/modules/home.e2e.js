@@ -32,8 +32,11 @@ define([
     describe('home()', function() {
       it('should show message if no test', function() {
         var tests = firebase.collection(firebase.child('tests').child(authUser.uid));
+        console.log('ok')
         expect(tests.length).toBe(0);
+        console.log('ok--')
         expect($newTest).not.toBeNull();
+        console.log('ok----')
       });
 
       it('should create a new test', function(done) {
