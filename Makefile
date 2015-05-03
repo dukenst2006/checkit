@@ -18,6 +18,7 @@ test_chrome:
 	env CHECKIT_IS_TESTING=true node worker.js &
 	karma start config/karma.conf.js --single-run --browsers Chrome
 	pkill -f "node worker.js"
+	exit 0
 
 test_ff:
 	env CHECKIT_IS_TESTING=true node worker.js &
