@@ -48,7 +48,7 @@ define([
           Utils.triggerEvent('click', document.querySelector('.editor [test=test-button]'));
 
           Utils.waitForElementVisible('.item.__saved', function() {
-            expect(document.querySelector('.item.__saved')).toBeDefined;
+            expect(document.querySelector('.item.__saved')).toBeDefined();
 
             Utils.waitForElementExists('.editor .editor-message.__fail', function() {
               done();
