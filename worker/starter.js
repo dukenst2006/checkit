@@ -3,7 +3,8 @@ var cluster = require('./cluster')()
 
 function runTest(testSnap) {
   var test = testSnap.val()
-  //if (!test || !test.code) return false
+
+  if (!test || !test.code) return false
 
   testSnap.ref().update({
     error: '',

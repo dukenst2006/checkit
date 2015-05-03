@@ -1,5 +1,4 @@
-require('dotenv').config({ path: 'config/env' })
-require('dotenv').load()
+require('dotenv').load({ path: 'config/env' })
 
 var starter = require('./worker/starter')
 

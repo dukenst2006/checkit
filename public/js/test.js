@@ -26,7 +26,7 @@ require(['bootstrap'], function() {
       return /(spec|e2e)\.js$/.test(file)
     })
 
-    //tests = ['base/public/js/security.e2e.js']
+    tests = ['base/public/js/security.e2e.js']
 
     require(tests, karma.start)
   }, 1800)
