@@ -33,11 +33,7 @@ var firebase = require('./firebase')
 // ------------
 
 function start(done) {
-  const firebase_secret = process.env.CHECKIT_IS_TESTING
-    ? process.env.CHECKIT_FIREBASE_SECRET_TEST
-    : process.env.CHECKIT_FIREBASE_SECRET
-
-  firebase.authWithCustomToken(firebase_secret, done)
+  firebase.authWithCustomToken(process.env.CHECKIT_FIREBASE_SECRET, done)
 }
 
 
