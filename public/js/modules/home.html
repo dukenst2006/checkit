@@ -31,14 +31,14 @@
   </form>
 
   <a class="item __saved" v-repeat="test: tests" v-on="click: loadEditor($event, test)">
-    <h1>{{ test.name }}</h1>
+    <h1 class="item__title">{{ test.name }}</h1>
     <hr>
     <p>
       <i class="icon-{{ test.status}}"></i> ~ 2min ago
     </p>
   </a>
 
-  <a class="item __new" v-on="click: loadEditor($event)" v-if="!tests.length && testsLoaded">
+  <a class="item __new" v-on="click: loadEditor($event)" v-show="!tests.length && testsLoaded">
     <div class="expandable-trigger">
       <h1>Hey</h1>
       <p>Let check for something.</p>
@@ -51,7 +51,7 @@
   </center>
 </section>
 
-<footer class="check-something" v-if="tests.length && testsLoaded">
+<footer class="check-something">
   <a class="btn __primary" v-on="click: loadEditor($event)">
     <i class="icon-plus"></i>
     check something

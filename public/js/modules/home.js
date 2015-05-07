@@ -99,17 +99,19 @@ define([
           ref.child(test.id).set({
             name: test.name,
             code: test.code
-          }, this.pushQueue.bind(this))
+          }, function() {
+            this.pushQueue()
+            andClose && this.hideEditor()
+          }.bind(this))
         }
 
         else {
           ref.push(test).once('value', function() {
             this.$data.test = this.$data.tests[this.$data.tests.length - 1]
             this.pushQueue()
+            andClose && this.hideEditor()
           }.bind(this))
         }
-
-        if (andClose) this.hideEditor()
       },
 
       pushQueue: function() {
@@ -181,15 +183,15 @@ define([
         editor.classList.remove('__show');
         closeCtrl.classList.remove('__show');
 
-        this.$data.test = {}
+        //this.$data.test = {}
+
+        var coords = this.itemCoords(item)
 
         onTransitionEnd(placeholder, function() {
           //editor.parentNode.scrollTop = 0
           placeholder.parentNode.removeChild(placeholder)
           item.classList.remove('__current')
         })
-
-        var coords = this.itemCoords(item)
 
         requestAnimationFrame(function() {
           placeholder.style.WebkitTransform = placeholder.style.transform = (

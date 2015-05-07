@@ -27,6 +27,7 @@ require(['bootstrap'], function() {
     })
 
     //tests = ['base/public/js/security.e2e.js']
+    //tests = ['base/public/js/modules/home.e2e.js']
 
     require(tests, karma.start)
   }, 1800)
