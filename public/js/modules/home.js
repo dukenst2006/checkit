@@ -71,7 +71,9 @@ define([
     },
 
     compiled: function() {
-      firebase.child('tests').child(Auth.user.uid).on('value', function() {
+      this.ref = firebase.child('tests').child(Auth.user.uid)
+
+      this.ref.on('value', function() {
         this.$data.testsLoaded = true
       }.bind(this))
     },
@@ -85,7 +87,6 @@ define([
     methods: {
 
       saveTest: function(andClose) {
-        var ref = firebase.child('tests').child(Auth.user.uid)
         var test = this.$data.test
 
         // reset test
@@ -96,7 +97,7 @@ define([
         test.code = this.$el.querySelector('textarea').value
 
         if (test.id) {
-          ref.child(test.id).set({
+          this.ref.child(test.id).set({
             name: test.name,
             code: test.code
           }, function() {
@@ -106,12 +107,19 @@ define([
         }
 
         else {
-          ref.push(test).once('value', function() {
+          this.ref.push(test).once('value', function() {
             this.$data.test = this.$data.tests[this.$data.tests.length - 1]
             this.pushQueue()
             andClose && this.hideEditor()
           }.bind(this))
         }
+      },
+
+      deleteTest: function() {
+        if (!confirm('Are you sure you want to delete it?')) return false
+
+        this.hideEditor()
+        this.ref.child(this.$data.test.id).remove()
       },
 
       pushQueue: function() {

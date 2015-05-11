@@ -23,6 +23,9 @@
 
     <div class="editor-bar">
       <input v-model="test.name" tabindex="1" test="test-name">
+      <button type="button" class="btn __M __delete" v-on="click: deleteTest()" v-if="test.id" test="delete-button">
+        <i class="icon-trash"></i>
+      </button>
       <button type="button" class="btn __M" v-on="click: saveTest(false)" v-if="test.id" test="run-button">Run</button>
       <button type="button" class="btn __M" v-on="click: saveTest(true)" v-if="test.id" test="save-button">Save</button>
       <button type="button" class="btn __M" v-on="click: saveTest(false)" v-if="!test.id" test="test-button">Test</button>

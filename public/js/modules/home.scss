@@ -197,6 +197,16 @@
         color: #363E46;
         background: #8FB4B4;
       }
+
+      &.__delete {
+        padding: 0;
+        width: 80px;
+
+        &:hover {
+          color: #8FB4B4;
+          background: #E74C3C;
+        }
+      }
     }
   }
 }
