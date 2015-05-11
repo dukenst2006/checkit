@@ -7,10 +7,6 @@ define([
   'directives/colorize'
 ], function(Vue, Auth, firebase, template) {
 
-  function scrollY() {
-    return window.pageYOffset || window.document.documentElement.scrollTop;
-  }
-
   function viewPortY() {
     var client = window.document.documentElement.clientHeight;
     var inner = window.innerHeight;
@@ -110,6 +106,7 @@ define([
           this.ref.push(test).once('value', function() {
             this.$data.test = this.$data.tests[this.$data.tests.length - 1]
             this.pushQueue()
+            document.querySelector('.__current').classList.remove('__current')
             andClose && this.hideEditor()
           }.bind(this))
         }
@@ -138,6 +135,10 @@ define([
           'translate3d(' + coords.left + 'px, ' + coords.top + 'px, 0px) ' +
           'scale3d(' + coords.width + ',' + coords.height + ',1)'
         );
+
+        this.scrollTop = document.body.scrollTop
+        document.body.scrollTop = 0
+        document.body.classList.add('no-scroll')
 
         this.$data.test = test || {
           name: 'Please explain HERE what your test do',
@@ -188,6 +189,12 @@ define([
         var placeholder = document.querySelector('.placeholder')
         var item = document.querySelector('.__current')
 
+        // new test, pick last one
+        if (!item) {
+          var items = document.querySelectorAll('.item.__saved')
+          item = items[items.length - 1]
+        }
+
         editor.classList.remove('__show');
         closeCtrl.classList.remove('__show');
 
@@ -195,8 +202,10 @@ define([
 
         var coords = this.itemCoords(item)
 
+        document.body.scrollTop = this.scrollTop
+        document.body.classList.remove('no-scroll')
+
         onTransitionEnd(placeholder, function() {
-          //editor.parentNode.scrollTop = 0
           placeholder.parentNode.removeChild(placeholder)
           item.classList.remove('__current')
         })

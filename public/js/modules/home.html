@@ -1,4 +1,4 @@
-<section class="items wrap">
+<section class="home wrap">
 
   <form class="editor" v-if="test">
 
@@ -33,21 +33,23 @@
 
   </form>
 
-  <a class="item __saved" v-repeat="test: tests" v-on="click: loadEditor($event, test)">
-    <h1 class="item__title">{{ test.name }}</h1>
-    <hr>
-    <p>
-      <i class="icon-{{ test.status}}"></i> ~ 2min ago
-    </p>
-  </a>
+  <div class="items">
+    <a class="item __saved" v-repeat="test: tests" v-on="click: loadEditor($event, test)">
+      <h1 class="item__title">{{ test.name }}</h1>
+      <hr>
+      <p>
+        <i class="icon-{{ test.status}}"></i> ~ 2min ago
+      </p>
+    </a>
 
-  <a class="item __new" v-on="click: loadEditor($event)" v-show="!tests.length && testsLoaded">
-    <div class="expandable-trigger">
-      <h1>Hey</h1>
-      <p>Let check for something.</p>
-      <button class="btn __M" test="new-btn">Create a Check</button>
-    </div>
-  </a>
+    <a class="item __new" v-on="click: loadEditor($event)" v-show="!tests.length && testsLoaded">
+      <div class="expandable-trigger">
+        <h1>Hey</h1>
+        <p>Let check for something.</p>
+        <button class="btn __M" test="new-btn">Create a Check</button>
+      </div>
+    </a>
+  </div>
 
   <center v-if="!testsLoaded">
     <p><i class="icon-spin1 animate-spin"></i> loading</p>
