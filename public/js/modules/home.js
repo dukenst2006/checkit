@@ -59,25 +59,23 @@ define([
     data: function() {
       if (!Auth.user.uid) return
 
+      this.ref = firebase.child('tests').child(Auth.user.uid)
+
       return {
         testsLoaded: false,
         test: { name: null, code: null, status: null, output: null, error: null },
-        tests: firebase.collection(firebase.child('tests').child(Auth.user.uid))
+        tests: firebase.collection(this.ref)
       }
-    },
-
-    compiled: function() {
-      this.ref = firebase.child('tests').child(Auth.user.uid)
-
-      this.ref.on('value', function() {
-        this.$data.testsLoaded = true
-      }.bind(this))
     },
 
     ready: function() {
       gridItemsContainer = document.querySelector('.items')
       editor = document.querySelector('.editor')
       closeCtrl = editor.querySelector('.editor-close')
+
+      this.ref.on('value', function() {
+        this.$data.testsLoaded = true
+      }.bind(this))
     },
 
     methods: {
