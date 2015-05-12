@@ -5,12 +5,7 @@ define([
 ], function(firebase, Auth, Utils) {
 
   describe('components/auth', function() {
-    var $auth, $notif, existingUser = {}
-
-    beforeEach(function(done) {
-      Utils.logout()
-      Utils.createUser(existingUser, done)
-    })
+    var $auth, $notif
 
     beforeEach(function(done) {
       Utils.waitForElementExists('.auth', function() {
@@ -20,17 +15,7 @@ define([
       })
     })
 
-    afterEach(function(done) {
-      if (!Auth.user.uid) {
-        Utils.login(existingUser, function() {
-          Utils.deleteUser(existingUser, done)
-        })
-      }
-
-      else {
-        Utils.deleteUser(existingUser, done)
-      }
-    })
+    afterEach(Utils.logout)
 
     describe('signIn()', function() {
       var $email, $password, $submit
@@ -56,7 +41,7 @@ define([
       })
 
       it('show error for invalid pass', function(done) {
-        Utils.value($email, existingUser.email)
+        Utils.value($email, authUser.email)
         Utils.value($password, 'wrong password')
         Utils.triggerEvent('click', $submit)
 
@@ -67,14 +52,14 @@ define([
       })
 
       it('shows a confirmation if successful', function(done) {
-        Utils.value($email, existingUser.email)
+        Utils.value($email, authUser.email)
         Utils.value($password, '****')
         Utils.triggerEvent('click', $submit)
 
         Utils.waitFor(function() {
           return Auth.user.email
         }, function() {
-          expect(Auth.user.email).toEqual(existingUser.email)
+          expect(Auth.user.email).toEqual(authUser.email)
           expect(Auth.user.uid).toBeDefined()
           done()
         })
@@ -98,7 +83,7 @@ define([
       })
 
       it('show error for an already existing email', function(done) {
-        Utils.value($email, existingUser.email)
+        Utils.value($email, authUser.email)
         Utils.value($password, '****')
         Utils.triggerEvent('click', $submit)
 
@@ -153,7 +138,7 @@ define([
       })
 
       it('show a success message if user exists', function(done) {
-        Utils.value($email, existingUser.email)
+        Utils.value($email, authUser.email)
         Utils.triggerEvent('click', $submit)
 
         Utils.waitForElementVisible('.auth .notif', function() {

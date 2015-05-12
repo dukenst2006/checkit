@@ -20,17 +20,37 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000
 // start app and run tests
 require(['bootstrap'], function() {
   // wait for application to start
-  setTimeout(function() {
-    // get all test files
-    var tests = Object.keys(karma.files).filter(function(file) {
-      return /(spec|e2e)\.js$/.test(file)
+  // get all test files
+  var tests = Object.keys(karma.files).filter(function(file) {
+    return /(spec|e2e)\.js$/.test(file)
+  })
+
+  //tests = ['base/public/js/security.e2e.js']
+  //tests = ['base/public/js/modules/settings.e2e.js']
+
+  require(['services/test-utils'], function(Utils) {
+    window.authUser = {}
+
+    Utils.createUser(authUser, function() {
+      require(tests, karma.start)
     })
 
-    //tests = ['base/public/js/security.e2e.js']
-    //tests = ['base/public/js/modules/home.e2e.js']
+    function onKarmaComplete(cb) {
+      Utils.login(authUser, function() {
+        Utils.deleteUser(authUser, function() {
+          Utils.logout()
+          cb()
+        })
+      })
+    }
 
-    require(tests, karma.start)
-  }, 1800)
+    var karmaComplete = karma.complete
+    karma.complete = function(result) {
+      onKarmaComplete(function() {
+        karmaComplete(result)
+      })
+    }
+  })
 })
 
 // include styles

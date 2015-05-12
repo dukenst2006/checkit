@@ -4,10 +4,8 @@ define([
 ], function(Auth, Utils) {
 
   describe('dashboard.settings', function() {
-    var authUser = {}
-
     beforeEach(function(done) {
-      Utils.createAuthenticatedUser(authUser, done)
+      Utils.login(authUser, done)
     })
 
     beforeEach(function(done) {
@@ -17,9 +15,7 @@ define([
       });
     })
 
-    afterEach(function(done) {
-      Utils.deleteUser(authUser, done)
-    })
+    afterEach(Utils.logout)
 
     describe('changePassword()', function() {
       beforeEach(function(done) {
@@ -52,9 +48,7 @@ define([
 
     describe('deleteUser()', function() {
       beforeEach(function(done) {
-        Utils.waitForElementVisible('[test=delete-user]', function() {
-          done()
-        })
+        Utils.waitForElementVisible('[test=delete-user]', done)
       })
 
       it('shows an error for invalid password', function(done) {
@@ -69,7 +63,7 @@ define([
         })
       })
 
-      it('successfully delete account', function(done) {
+      xit('successfully delete account', function(done) {
         spyOn(window, 'prompt').and.returnValue('****')
 
         Utils.triggerEvent('click', document.querySelector('[test=delete-user]'))

@@ -4,29 +4,26 @@ define([
 ], function(Utils, firebase) {
 
   describe('dashboard.home', function() {
-    var authUser = {};
     var $tests, $newTest;
 
     beforeEach(function(done) {
-      Utils.logout()
-      Utils.createAuthenticatedUser(authUser, done);
+      Utils.login(authUser, done);
     });
 
     beforeEach(function(done) {
       firebase.child('tests').child(authUser.uid).on('value', function() {
-        $tests = document.querySelectorAll('.item.__saved');
-        $newTest = document.querySelector('.check-something .btn');
-        done();
-      });
-    });
-
-    afterEach(function(done) {
-      Utils.deleteUser(authUser, done)
+        $tests = document.querySelectorAll('.item.__saved')
+        $newTest = document.querySelector('.check-something .btn')
+        done()
+      })
     })
 
     afterEach(function(done) {
-      firebase.child('tests').child(authUser.uid).remove(done);
-    });
+      firebase.child('tests').child(authUser.uid).remove(function() {
+        Utils.logout()
+        done()
+      })
+    })
 
     describe('home()', function() {
       it('should show message if no test', function() {
