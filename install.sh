@@ -7,6 +7,7 @@ do
 done
 
 ls -alh
+ls -alh public/js
 echo '--------'
 sh env.sh
 echo '--------'
