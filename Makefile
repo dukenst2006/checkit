@@ -1,5 +1,9 @@
 env:
-	sed -i '' -e 's#^.*\(FIREBASE*:*\).*$$#\1"'$$CHECKIT_FIREBASE_URL'"#' public/js/config.js
+	node -e " \
+		var fs = require('fs'); \
+		var conf = 'define({\"FIREBASE\": \"$$CHECKIT_FIREBASE_URL\"})'; \
+		fs.writeFileSync('public/js/config.js', conf); \
+	"
 
 web:
 	nodemon web.js

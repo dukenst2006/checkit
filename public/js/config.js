@@ -1,3 +1,1 @@
-define({
-  FIREBASE:"https://checkit-dev.firebaseio.com"
-})
+define({"FIREBASE": "https://<NAME>.firebaseio.com"})

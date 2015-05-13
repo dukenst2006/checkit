@@ -16,4 +16,5 @@ npm update
 bower prune
 bower update
 
+make env
 make css
