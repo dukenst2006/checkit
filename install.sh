@@ -6,6 +6,7 @@ do
   [ -f ${exFile/\.example/} ] || cp "$exFile" "${exFile/\.example/}"
 done
 
+ls -alh
 sh env.sh
 
 npm install -g bower
