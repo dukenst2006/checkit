@@ -1,3 +1,3 @@
 define({
-FIREBASE:"https://checkit-dev.firebaseio.com"
+FIREBASE:"https://<NAME>.firebaseio.com"
 })
