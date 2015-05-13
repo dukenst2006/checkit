@@ -1,6 +1,5 @@
 config/env
 config/nginx.conf
 
-public/js/config.js
 public/libs/
 public/var/

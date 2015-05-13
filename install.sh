@@ -6,15 +6,6 @@ do
   [ -f ${exFile/\.example/} ] || cp "$exFile" "${exFile/\.example/}"
 done
 
-ls -alh
-ls -alh public/js
-echo '--------'
-sh env.sh
-echo '--------'
-
-# set value to env variable CHECKIT_FIREBASE_URL
-sed -i '' -e 's#^.*\(FIREBASE*:*\).*$#\1"'$CHECKIT_FIREBASE_URL'"#' public/js/config.js
-
 npm install -g bower
 npm install -g karma-cli
 npm install -g node-sass@v2.1.1
