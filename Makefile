@@ -1,3 +1,6 @@
+env:
+	sed -i '' -e 's#^.*\(FIREBASE*:*\).*$#\1"'$CHECKIT_FIREBASE_URL'"#' public/js/config.js
+
 web:
 	nodemon web.js
 
