@@ -4,6 +4,19 @@ define([
   'behave'
 ], function(Vue, Rainbow, Behave) {
 
+  // https://github.com/ccampbell/rainbow/issues/177
+  var codeToFix
+
+  function fixCode(code) {
+    var startsWithNewLine = /^(\r\n|\n|\r)/gm
+    codeToFix = startsWithNewLine.test(code)
+    return code.replace(startsWithNewLine, '')
+  }
+
+  function revertFixCode(code) {
+    return codeToFix ? '\r\n' + code : code
+  }
+
   return Vue.directive('editor', {
 
     bind: function() {
@@ -28,8 +41,8 @@ define([
     },
 
     colorize: function() {
-      Rainbow.color(this.textareaEl.value, 'javascript', function(colorized) {
-        this.codeEl.innerHTML = colorized
+      Rainbow.color(fixCode(this.textareaEl.value), 'javascript', function(colorized) {
+        this.codeEl.innerHTML = revertFixCode(colorized)
       }.bind(this))
     }
   })
