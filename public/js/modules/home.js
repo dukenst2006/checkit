@@ -81,7 +81,7 @@ define([
         var updated = snap.val()
         if (updated) {
           this.$data.test.status = updated.status
-          this.$data.test.ouput = updated.output
+          this.$data.test.output = updated.output
           this.$data.test.error = updated.error
         }
       }.bind(this)
@@ -95,12 +95,23 @@ define([
 
     methods: {
 
-      saveTest: function(andClose) {
+      onEditorKeypress: function(event) {
+        if (event.keyCode === 13 && event.metaKey) {
+          this.saveTest()
+        }
+      },
+
+      saveTest: function() {
         var test = this.$data.test
 
-        // reset test
-        test.status = 'pending'
-        test.output = test.error = ''
+        requestAnimationFrame(function() {
+          test.status = 'pending'
+
+          // reset test
+          if (test.status === 'fail') {
+            test.output = test.error = ''
+          }
+        })
 
         // fix test.code not always updated
         test.code = this.$el.querySelector('textarea').value
@@ -111,7 +122,6 @@ define([
             code: test.code
           }, function() {
             this.pushQueue()
-            andClose && this.hideEditor()
           }.bind(this))
         }
 
@@ -121,7 +131,6 @@ define([
             this.ref.child(this.$data.test.id).on('value', this.testListener)
             this.pushQueue()
             document.querySelector('.__current').classList.remove('__current')
-            andClose && this.hideEditor()
           }.bind(this))
         }
       },

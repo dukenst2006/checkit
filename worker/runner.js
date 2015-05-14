@@ -1,5 +1,6 @@
 var vm = require('vm');
 var util = require('util');
+var request = require('request');
 
 function run(code, callback) {
   var output = ''
@@ -7,6 +8,7 @@ function run(code, callback) {
     console: {
       log: console.log
     },
+    request: request,
     assert: require('assert'),
     setTimeout: setTimeout,
     done: function() {

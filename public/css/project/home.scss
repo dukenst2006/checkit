@@ -201,6 +201,9 @@
       &:hover {
         color: #363E46;
         background: #8FB4B4;
+        &::before {
+          color: #363E46;
+        }
       }
 
       &.__delete {
@@ -211,6 +214,33 @@
           color: #8FB4B4;
           background: #E74C3C;
         }
+      }
+    }
+
+    [data-tooltip] {
+      &::after {
+        margin-left: -80px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 2px;
+        z-index: 1000;
+        padding: 8px;
+        width: auto;
+        background-color: #1C1F26;
+        color: #fff;
+        content: attr(data-tooltip);
+        font-size: 14px;
+        line-height: 1.2;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+        transform: translateY(42px);
+        opacity: 0;
+      }
+
+      &:hover:after {
+        opacity: 1;
+        transform: translateY(-42px);
       }
     }
   }

@@ -7,8 +7,10 @@
     </a>
 
     <div class="editor-window" v-editor>
-      <textarea class="editor-textarea" v-model="test.code" tabindex="2" test="test-code"></textarea>
-      <pre class="editor-pre"><code class="editor-code" data-language="javascript" v-colorize="test.code"></code></pre>
+      <textarea class="editor-textarea" v-model="test.code" v-on="keydown: onEditorKeypress" tabindex="2" test="test-code"></textarea>
+      <pre class="editor-pre">
+        <code class="editor-code" data-language="javascript" v-colorize="test.code"></code>
+      </pre>
 
       <div class="editor-message __{{ test.status }} __expand" v-if="test.status" v-el="editorMessage">
         <a v-on="click: this.$$.editorMessage.classList.toggle('__expand')">
@@ -24,8 +26,11 @@
     <div class="editor-bar">
       <input v-model="test.name" tabindex="1" test="test-name">
       <button type="button" class="btn __delete icon-trash" v-on="click: deleteTest()" v-if="test.id" test="delete-button"></button>
-      <button type="button" class="btn" v-on="click: saveTest(false)" v-if="test.id" test="save-button">Save</button>
-      <button type="button" class="btn" v-on="click: saveTest(false)" v-if="!test.id" test="test-button">Test</button>
+      <button type="button" class="btn tt-trigger" test="save-button"
+        data-tooltip="Or press Cmd/Meta key + ENTER"
+        v-on="click: saveTest"
+        v-if="test.id"
+      >Save</button>
     </div>
 
   </form>
