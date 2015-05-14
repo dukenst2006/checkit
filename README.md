@@ -22,8 +22,6 @@
 # TODO
 
 - test.output max length
+- trim code, name
 - move js/directives/editor to mixin
-- move public/js/security.e2e.js to backend
-  - tests for queue
-- fix editor blank, press ENTER first char first line (https://github.com/ccampbell/rainbow/issues/177)
-- loading buttons
+- add security tests for queue
