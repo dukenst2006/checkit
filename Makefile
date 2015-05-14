@@ -1,3 +1,5 @@
+.PHONY: env web worker
+
 env:
 	node -e " \
 		var fs = require('fs'); \

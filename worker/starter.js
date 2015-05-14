@@ -41,7 +41,10 @@ function start(done) {
 // ------
 
 function startLoop() {
-  setInterval(runLoop, process.env.CHECKIT_POLL_INTERVAL)
+  setInterval(function() {
+    util.log('loop')
+    runLoop()
+  }, process.env.CHECKIT_POLL_INTERVAL)
 }
 
 function runLoop() {

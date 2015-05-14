@@ -63,6 +63,7 @@ define([
 
       return {
         testsLoaded: false,
+        newName: null,
         test: { name: null, code: null, status: null, output: null, error: null },
         tests: firebase.collection(this.ref)
       }
@@ -78,6 +79,17 @@ define([
       }.bind(this))
     },
 
+    computed: {
+      newName: {
+        get: function() {
+          return this.$data.test.name
+        },
+        set: function(name) {
+          this.$data.newName = name
+        }
+      }
+    },
+
     methods: {
 
       saveTest: function(andClose) {
@@ -89,6 +101,10 @@ define([
 
         // fix test.code not always updated
         test.code = this.$el.querySelector('textarea').value
+
+        // when backend loop is running this field keeps being updated,
+        // we create a virtual property to let user being able to edit it.
+        test.name = this.$data.newName
 
         if (test.id) {
           this.ref.child(test.id).set({
