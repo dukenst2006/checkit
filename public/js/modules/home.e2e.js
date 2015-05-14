@@ -41,7 +41,7 @@ define([
 
           expect(document.querySelector('.__current')).not.toBeNull()
 
-          Utils.triggerEvent('click', document.querySelector('.editor [test=test-button]'));
+          Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'));
           Utils.waitForElementExists('.editor .editor-message.__pass', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined();
 

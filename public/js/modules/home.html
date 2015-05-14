@@ -26,10 +26,8 @@
     <div class="editor-bar">
       <input v-model="test.name" tabindex="1" test="test-name">
       <button type="button" class="btn __delete icon-trash" v-on="click: deleteTest()" v-if="test.id" test="delete-button"></button>
-      <button type="button" class="btn tt-trigger" test="save-button"
+      <button type="button" class="btn tt-trigger" test="save-button" v-on="click: saveTest"
         data-tooltip="Or press Cmd/Meta key + ENTER"
-        v-on="click: saveTest"
-        v-if="test.id"
       >Save</button>
     </div>
 
