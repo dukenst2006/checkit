@@ -7,20 +7,17 @@
 @import 'mixins/_media';
 
 @import 'base/_btn.scss';
-@import 'base/_expandable.scss';
-@import 'base/_form.scss';
 @import 'base/_grid.scss';
 @import 'base/_helpers.scss';
 @import 'base/_icons.scss';
 @import 'base/_modal.scss';
-@import 'base/_panel.scss';
 @import 'base/_text.scss';
 
-@import '../js/directives/editor.scss';
-@import '../js/modules/layout.scss';
-@import '../js/modules/home.scss';
-@import '../js/modules/settings.scss';
-@import '../js/modules/auth.scss';
+@import 'project/editor.scss';
+@import 'project/layout.scss';
+@import 'project/home.scss';
+@import 'project/settings.scss';
+@import 'project/auth.scss';
 
 @import url(https://fonts.googleapis.com/css?family=Exo+2:100,200,400,600);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900);

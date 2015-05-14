@@ -21,8 +21,12 @@ define([
 
     data: function() {
       return {
-        user: {},
+        user: {
+          email: '',
+          password: ''
+        },
         message: null,
+        loading: false,
         formName: 'signIn'
       }
     },
@@ -38,8 +42,11 @@ define([
       signIn: function(event) {
         event.preventDefault()
         this.$data.message = ''
+        this.$data.loading = true
 
         firebase.authWithPassword(this.$data.user, function(err, authData) {
+          this.$data.loading = false
+
           if (err) {
             this.$data.message = formatFirebaseError(err)
             return
@@ -49,8 +56,11 @@ define([
 
       signInWithProvider: function(provider) {
         this.$data.message = ''
+        this.$data.loading = true
 
         firebase.authWithOAuthPopup(provider, function(err, authData) {
+          this.$data.loading = false
+
           if (err) {
             this.$data.message = formatFirebaseError(err)
             return
@@ -73,8 +83,11 @@ define([
       signUp: function(event) {
         event.preventDefault()
         this.$data.message = ''
+        this.$data.loading = true
 
         firebase.createUser(this.$data.user, function(err) {
+          this.$data.loading = false
+
           if (err) {
             this.$data.message = formatFirebaseError(err)
             return

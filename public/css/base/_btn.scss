@@ -8,9 +8,18 @@
   position: relative;
   text-align: center;
   text-decoration: none;
+  text-shadow: none;
   transition: all 0.3s;
   vertical-align: middle;
   white-space: nowrap;
+  box-shadow: 0 0 0 0 rgba(39,41,43,.15)inset;
+  color: #fff;
+  margin: 0 .25em 0 0;
+  padding: .60em 1.5em;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 9px 22px;
 
   &:focus {
     outline: 0;
@@ -21,90 +30,77 @@
     opacity: 0.3;
   }
 
+  i {
+    opacity: .8;
+    margin: 0 .4em 0 -.2em;
+  }
+
   // ========================================================================
   // Colors
   // ========================================================================
 
-  @mixin btn-color($background, $border: #d9d9d9, $color: #333, $defaultBg: #fff) {
-    background: $defaultBg;
-    border: 1px solid #d9d9d9;
-    color: #333;
+  &.__default {
+    background: #e0e0e0;
+    color: rgba(0,0,0,.6);
 
     &:hover {
-      color: $color;
-      background: $background;
-      border-color: $border;
+      color: rgba(0,0,0,.8);
+      background: #e8e8e8;
+    }
+    &:active {
+      color: rgba(0,0,0,.8);
+      background: #ccc;
     }
   }
 
-  &.__default { @include btn-color(#fafafa, #d9d9d9); }
-  &.__grey    { @include btn-color(#fafafa, #d9d9d9, #333, color(clouds)); }
-  &.__info    { @include btn-color(color(peter-river)); }
-  &.__danger  { @include btn-color(#fa6569, #f93338, #fff); }
-  &.__success { @include btn-color(#95D7A6, #73C984, #fff); }
+  &.__basic {
+    background: transparent;
+    color: rgba(0,0,0,.6);
+    box-shadow: 0 0 0 1px rgba(39,41,43,.15)inset;
 
-
-  // ========================================================================
-  // Sizes
-  // ========================================================================
-
-  &.__S {
-    line-height: 12px;
-    font-size: 12px;
-    padding: 6px 12px;
+    &:hover {
+      color: rgba(0,0,0,.8);
+      background: #fafafa;
+    }
+    &:active {
+      color: rgba(0,0,0,.8);
+      background: #f8f8f8;
+      box-shadow: 0 0 0 1px transparent inset,0 1px 4px 0 rgba(39,41,43,.15)inset;
+    }
   }
 
-  &.__M {
-    line-height: 16px;
-    font-size: 16px;
-    padding: 6px 16px;
+  &.__primary {
+    background: #3b83c0;
+    color: #fff;
+
+    &:hover { background: #458ac6; }
+    &:active { background: #3370a5; }
   }
 
-  &.__L {
-    line-height: 24px;
-    font-size: 24px;
-    padding: 10px 20px;
+  &.__danger {
+    background: #d95c5c;
+    color: #fff;
+
+    &:hover { background: #dc6868; }
+    &:active { background: #d23f3f; }
   }
+
 
   // ========================================================================
   // Misc.
   // ========================================================================
 
-  &.__empty {
-    background: none;
-    border: none;
-
-    &:hover {
-      background: none;
+  &.__loading {
+    &::before {
+      content: '\e805';
+      font-family: "fontello";
+      animation: spin 2s infinite linear;
+      margin-right: 8px;
     }
-  }
-
-  &.__primary {
-    color: #fff;
-    border-color: #2980B9;
-    background: #2980B9;
-  }
-
-  &.__block {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
   }
 
   &.__pull-right {
     float: right;
-  }
-
-  &.__square {
-    border-radius: 0;
-  }
-
-  &.__static {
-    cursor: default;
-  }
-
-  &.__link {
-    background: none;
-    border: none;
+    margin-right: 0 !important;
   }
 }

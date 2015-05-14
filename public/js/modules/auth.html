@@ -1,34 +1,40 @@
 <section class="auth 12 ++6">
   <header class="auth_slider __top">
     <h2 class="auth_title" v-class="getFormClass('resetPass')">Reset Password</h2>
-    <h2 class="auth_title" v-class="getFormClass('signIn')">Sign In</h2>
-    <h2 class="auth_title" v-class="getFormClass('signUp')">Sign Up</h2>
+    <h2 class="auth_title" v-class="getFormClass('signIn')">Login</h2>
+    <h2 class="auth_title" v-class="getFormClass('signUp')">Register</h2>
   </header>
   <article class="auth_content">
     <p class="notif" v-show="message">{{ message }}</p>
     <div class="auth_slider">
 
-      <form class="form" name="resetPass" v-on="submit:resetPassword" v-class="getFormClass('resetPass')" novalidate>
+      <form class="auth_form" name="resetPass" v-on="submit:resetPassword" v-class="getFormClass('resetPass')" novalidate>
         <input type="email" placeholder="Email to send a new password" v-model="user.email">
         <a class="form-label" v-on="click: formName = 'signIn'">Back to Sign In</a>
-        <button type="submit" class="btn __M __primary __pull-right">Submit</button>
+        <button type="submit" class="btn __primary  __pull-right">
+          <i class="icon-spin1 animate-spin" v-show="loading"></i> Submit
+        </button>
       </form>
 
-      <form class="form" name="signIn" v-on="submit:signIn" v-class="getFormClass('signIn')" novalidate>
+      <form class="auth_form" name="signIn" v-on="submit:signIn" v-class="getFormClass('signIn')" novalidate>
         <input type="email"     placeholder="Email"     v-model="user.email">
         <input type="password"  placeholder="Password"  v-model="user.password">
 
         <a class="reset-pass" tabindex="-1" v-on="click: formName = 'resetPass'">Forgot your password <b>?</b></a>
         <a class="sign-up form-label" v-on="click: formName = 'signUp'">Don't have an account yet?</a>
-        <button type="submit" class="btn __M __primary  __pull-right">Submit</button>
+        <button type="submit" class="btn __primary  __pull-right">
+          <i class="icon-spin1 animate-spin" v-show="loading"></i>  Submit
+        </button>
       </form>
 
-      <form class="form" name="signUp" v-on="submit:signUp" v-class="getFormClass('signUp')" novalidate>
+      <form class="auth_form" name="signUp" v-on="submit:signUp" v-class="getFormClass('signUp')" novalidate>
         <input type="email"     placeholder="Email"     v-model="user.email">
         <input type="password"  placeholder="Password"  v-model="user.password">
 
         <a class="form-label" v-on="click: formName = 'signIn'">Already have an account?</a>
-        <button type="submit" class="btn __M __primary __pull-right">Submit</button>
+        <button type="submit" class="btn __primary  __pull-right">
+          <i class="icon-spin1 animate-spin" v-show="loading"></i>  Submit
+        </button>
       </form>
 
     </div>

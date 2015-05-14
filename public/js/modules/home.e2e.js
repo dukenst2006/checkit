@@ -47,15 +47,9 @@ define([
 
             document.querySelector('.editor textarea').value = 'assert.ok(false); done()'
 
-            Utils.triggerEvent('click', document.querySelector('.editor [test=run-button]'));
+            Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'));
             Utils.waitForElementExists('.editor .editor-message.__fail', function() {
-
-              document.querySelector('.editor textarea').value = 'assert.ok(true); done()'
-
-              Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'));
-              Utils.waitForElementExists('.editor .editor-message.__pass', function() {
-                done();
-              })
+              done();
             })
           })
         });

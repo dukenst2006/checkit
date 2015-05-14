@@ -16,7 +16,7 @@ css:
 	autoprefixer -o public/var/styles.css public/var/styles.css
 
 watch:
-	chokidar 'public/js/**/*.scss' 'public/css/**/*.scss' -c 'make css'
+	chokidar 'public/css/**/*.scss' -c 'make css'
 
 test_worker:
 	mocha worker/*.test.js --require worker.js --timeout 5000

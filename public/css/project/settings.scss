@@ -62,10 +62,12 @@
 
     .__left, &.__left {
       float: left;
+      line-height: 28px;
     }
 
     .__right, &.__right {
       float: right;
+      line-height: 28px;
       text-align: right;
       min-width: 60%;
 
