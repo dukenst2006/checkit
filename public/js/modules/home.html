@@ -22,7 +22,7 @@
     </div>
 
     <div class="editor-bar">
-      <input v-model="newName" tabindex="1" test="test-name">
+      <input v-model="test.name" tabindex="1" test="test-name">
       <button type="button" class="btn __delete icon-trash" v-on="click: deleteTest()" v-if="test.id" test="delete-button"></button>
       <button type="button" class="btn" v-on="click: saveTest(false)" v-if="test.id" test="save-button">Save</button>
       <button type="button" class="btn" v-on="click: saveTest(false)" v-if="!test.id" test="test-button">Test</button>

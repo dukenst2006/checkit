@@ -57,13 +57,12 @@ define([
     template: template,
 
     data: function() {
-      if (!Auth.user.uid) return
+      if (!Auth.user.uid) throw new Error('must be logged')
 
       this.ref = firebase.child('tests').child(Auth.user.uid)
 
       return {
         testsLoaded: false,
-        newName: null,
         test: { name: null, code: null, status: null, output: null, error: null },
         tests: firebase.collection(this.ref)
       }
@@ -74,19 +73,23 @@ define([
       editor = document.querySelector('.editor')
       closeCtrl = editor.querySelector('.editor-close')
 
-      this.ref.on('value', function() {
+      this.ref.once('value', function() {
         this.$data.testsLoaded = true
       }.bind(this))
+
+      this.testListener = function(snap) {
+        var updated = snap.val()
+        if (updated) {
+          this.$data.test.status = updated.status
+          this.$data.test.ouput = updated.output
+          this.$data.test.error = updated.error
+        }
+      }.bind(this)
     },
 
-    computed: {
-      newName: {
-        get: function() {
-          return this.$data.test.name
-        },
-        set: function(name) {
-          this.$data.newName = name
-        }
+    beforeDestroy: function() {
+      if (this.$data.test && this.$data.test.id) {
+        this.ref.child(this.$data.test.id).off('value', this.testListener)
       }
     },
 
@@ -102,10 +105,6 @@ define([
         // fix test.code not always updated
         test.code = this.$el.querySelector('textarea').value
 
-        // when backend loop is running this field keeps being updated,
-        // we create a virtual property to let user being able to edit it.
-        test.name = this.$data.newName
-
         if (test.id) {
           this.ref.child(test.id).set({
             name: test.name,
@@ -118,7 +117,8 @@ define([
 
         else {
           this.ref.push(test).once('value', function() {
-            this.$data.test = this.$data.tests[this.$data.tests.length - 1]
+            this.$data.test = Object.assign({}, this.$data.tests[this.$data.tests.length - 1])
+            this.ref.child(this.$data.test.id).on('value', this.testListener)
             this.pushQueue()
             document.querySelector('.__current').classList.remove('__current')
             andClose && this.hideEditor()
@@ -154,7 +154,11 @@ define([
         document.body.scrollTop = 0
         document.body.classList.add('no-scroll')
 
-        this.$data.test = test || {
+        if (test) {
+          this.ref.child(test.id).on('value', this.testListener)
+        }
+
+        this.$data.test = test ? Object.assign({}, test) : {
           name: 'Please explain HERE what your test do',
           code: '',
           error: '',
@@ -207,6 +211,10 @@ define([
         if (!item) {
           var items = document.querySelectorAll('.item.__saved')
           item = items[items.length - 1]
+        }
+
+        if (this.testListener) {
+          this.ref.child(this.$data.test.id).off('value', this.testListener)
         }
 
         editor.classList.remove('__show');
