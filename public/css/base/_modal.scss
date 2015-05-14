@@ -38,6 +38,14 @@
     left: 50%;
     overflow-x: hidden;
 
+    @include mobile {
+      width: 96%;
+      margin: 0;
+      left: 0;
+      margin-left: 2%;
+      top: 2%;
+    }
+
     animation-name: hideModal;
     animation-duration: 300ms;
     animation-timing-function: ease;
