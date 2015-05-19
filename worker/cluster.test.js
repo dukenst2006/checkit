@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var cluster = require('./cluster')({ timeout: 400 });
+var cluster = require('./cluster')({ timeout: 2000 });
 
 describe('cluster', function() {
 
@@ -22,5 +22,20 @@ describe('cluster', function() {
         done();
       });
     });
+
+    it('handle async errors', function(done) {
+      var code = (
+        'request("https://example.com", function(error, response, body) {' +
+          'console.log("log");' +
+          'assert.ok(false); done()' +
+        '});'
+      )
+      cluster.run(code, function(pass, out, err) {
+        expect(pass).to.equal(false)
+        expect(out).to.equal('log')
+        expect(err.name).to.equal('AssertionError')
+        done()
+      })
+    })
   });
 });

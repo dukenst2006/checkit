@@ -4,7 +4,7 @@ var cluster = require('./cluster')()
 function runTest(testSnap) {
   var test = testSnap.val()
 
-  if (!test || !test.code) return false
+  if (!test || !test.code || test.disabled) return false
 
   testSnap.ref().update({
     error: '',
@@ -13,14 +13,14 @@ function runTest(testSnap) {
   }, function() {
 
     cluster.run(test.code, function(pass, output, err) {
-      util.log('run', testSnap.key(), pass)
+      util.log('run', testSnap.key(), pass, output)
       testSnap.ref().update({
         lastUpdated: +(new Date()),
         status: pass ? 'pass' : 'fail',
         output: output || null,
         error: err ? (err.name + ': ' + err.message) : null
-      }, function(err) {
-        if (err) throw err
+      }, function(error) {
+        if (error) throw error
       })
     })
   })

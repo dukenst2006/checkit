@@ -1,8 +1,9 @@
 var vm = require('vm');
 var util = require('util');
+var domain = require('domain');
 var request = require('request');
 
-function run(code, callback) {
+module.exports.run = function(code, callback) {
   var output = ''
   var context = {
     console: {
@@ -29,17 +30,25 @@ function run(code, callback) {
     output += str;
   };
 
-  try {
-    vm.runInNewContext(code, context, 'line');
-  } catch (err) {
+  var vmDomain = domain.create();
+
+  vmDomain.on('error', function(err) {
     resetStdout();
     callback(false, output, {
       name: err.name,
       message: err.message
     });
-  }
-}
+  })
 
-module.exports = {
-  run: run
-};
+  vmDomain.run(function() {
+    try {
+      vm.runInNewContext(code, context, 'line');
+    } catch(err) {
+      resetStdout();
+      callback(false, output, {
+        name: err.name,
+        message: err.message
+      });
+    }
+  })
+}

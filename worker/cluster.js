@@ -2,6 +2,7 @@ var workerFarm = require('worker-farm');
 
 var workers = workerFarm({
   maxCallsPerWorker: 100,
+  //maxRetries: 1,
   maxCallTime: 10 * 1000
 }, require.resolve('./runner'), ['run']);
 
