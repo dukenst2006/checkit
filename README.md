@@ -14,6 +14,12 @@
 
 - When new StackOverflow question
 
+# Install
+
+```
+# export env file (should run this manually after editting config/env file)
+export $(cat config/env | xargs)
+```
 
 # IDEAS
 
