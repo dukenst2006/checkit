@@ -7,6 +7,7 @@ do
 done
 
 npm install -g bower
+npm install -g nodemon
 npm install -g karma-cli
 npm install -g node-sass
 npm install -g autoprefixer-cli
