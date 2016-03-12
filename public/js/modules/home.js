@@ -169,8 +169,17 @@ define([
         }
 
         this.$data.test = test ? Object.assign({}, test) : {
-          name: 'Please explain HERE what your test do',
-          code: '',
+          name: 'Checking something ..',
+          code: [
+            "// exemple of an assertion, documentation here : https://nodejs.org/api/assert.html",
+            "assert.ok(true, 'this assertion pass');",
+            "",
+            "// console.log() is useful to print/debug any value",
+            "console.log('this will be printed in the output window');",
+            "",
+            "// always call done() to complete what you're checking for",
+            "done()"
+          ].join('\n'),
           error: '',
           output: '',
           status: ''

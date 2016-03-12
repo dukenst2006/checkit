@@ -28,6 +28,7 @@ export $(cat config/env | xargs)
 # TODO
 
 - test.output max length
+- when test open and editing, duplicate it (but don't run it)
 - trim code, name
 - move js/directives/editor to mixin
 - add security tests for queue
