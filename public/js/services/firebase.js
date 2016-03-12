@@ -7,7 +7,7 @@ define([
 
   var firebase = new Firebase(FIREBASE_URL)
 
-  firebase.collection = function(ref) {
+  firebase.__proto__.collection = function(ref) {
     var coll = []
 
     ref.on('value', function() {
