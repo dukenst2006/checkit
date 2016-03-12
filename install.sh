@@ -11,6 +11,7 @@ npm install -g karma-cli
 npm install -g node-sass
 npm install -g autoprefixer-cli
 npm install -g chokidar-cli
+npm install -g mocha
 npm update
 
 bower prune
