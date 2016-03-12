@@ -8,13 +8,13 @@ define([
 ], function(Vue, Auth, firebase, template) {
 
   function viewPortY() {
-    var client = window.document.documentElement.clientHeight;
-    var inner = window.innerHeight;
-    return client < inner ? inner : client;
+    var client = window.document.documentElement.clientHeight
+    var inner = window.innerHeight
+    return client < inner ? inner : client
   }
 
   function whichTransitionEvent(){
-    var el = document.createElement('fakeelement');
+    var el = document.createElement('fakeelement')
     var transitions = {
       'transition':'transitionend',
       'OTransition':'oTransitionEnd',
@@ -24,7 +24,7 @@ define([
 
     for (var t in transitions) {
       if (el.style[t] !== undefined) {
-        return transitions[t];
+        return transitions[t]
       }
     }
   }
@@ -46,7 +46,7 @@ define([
     window.requestAnimationFrame       ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame    ||
-    function (callback) { window.setTimeout(callback, 1000 / 60); }
+    function (callback) { window.setTimeout(callback, 1000 / 60) }
 
   var gridItemsContainer, editor, closeCtrl
 
@@ -157,7 +157,7 @@ define([
         placeholder.style.transform = placeholder.style.WebkitTransform = (
           'translate3d(' + coords.left + 'px, ' + coords.top + 'px, 0px) ' +
           'scale3d(' + coords.width + ',' + coords.height + ',1)'
-        );
+        )
 
         this.scrollTop = document.body.scrollTop
         document.body.scrollTop = 0
@@ -176,7 +176,7 @@ define([
         }
 
         item.classList.add('__current')
-        item.parentNode.appendChild(placeholder);
+        item.parentNode.appendChild(placeholder)
 
         setTimeout(function() {
           placeholder.classList.add('__trans-in')
@@ -186,15 +186,15 @@ define([
           requestAnimationFrame(function() {
             placeholder.style.WebkitTransform =
               placeholder.style.transform =
-              'translate3d(0px, 0px, 0px)';
+              'translate3d(0px, 0px, 0px)'
           })
 
           onTransitionEnd(placeholder, function() {
-            placeholder.classList.remove('__trans-in');
-            placeholder.classList.add('__trans-out');
+            placeholder.classList.remove('__trans-in')
+            placeholder.classList.add('__trans-out')
 
-            editor.classList.add('__show');
-            closeCtrl.classList.add('__show');
+            editor.classList.add('__show')
+            closeCtrl.classList.add('__show')
 
             if (!test) {
               editor.querySelector('input').select()
@@ -226,8 +226,8 @@ define([
           this.ref.child(this.$data.test.id).off('value', this.testListener)
         }
 
-        editor.classList.remove('__show');
-        closeCtrl.classList.remove('__show');
+        editor.classList.remove('__show')
+        closeCtrl.classList.remove('__show')
 
         //this.$data.test = {}
 
