@@ -3,6 +3,7 @@ define([
   'rainbow'
 ], function(Vue, Rainbow) {
 
+
   return Vue.directive('colorize', {
 
     update: function (code) {
