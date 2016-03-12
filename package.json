@@ -18,7 +18,7 @@
     "requirejs": "latest"
   },
   "dependencies": {
-    "autoprefixer": "^5.1.1",
+    "autoprefixer-cli": "latest",
     "bower": "^1.4.1",
     "dotenv": "^1.1.0",
     "express": "^4.12.3",
