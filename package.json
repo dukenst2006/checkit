@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install && npm install -g node-sass && make css && make env"
+    "postinstall": "./node_modules/bower/bin/bower install && make css && make env"
   },
   "engines": {
     "node": "5.8.x"
