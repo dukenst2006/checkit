@@ -232,7 +232,7 @@ define([
           item = items[items.length - 1]
         }
 
-        if (this.testListener) {
+        if (this.testListener && this.$data.test.id) {
           this.ref.child(this.$data.test.id).off('value', this.testListener)
         }
 

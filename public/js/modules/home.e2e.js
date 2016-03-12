@@ -54,6 +54,18 @@ define([
           })
         });
       });
+
+      it('should close a new test without saving', function(done) {
+        Utils.triggerEvent('click', $newTest);
+
+        Utils.waitForElementVisible('.editor.__show', function() {
+          Utils.triggerEvent('click', document.querySelector('.editor .editor-close'));
+
+          Utils.waitForElementVisible('.editor:not(.__show)', function() {
+            done();
+          });
+        });
+      });
     });
   });
 });
