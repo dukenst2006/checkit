@@ -7,7 +7,7 @@
     "requirejs-text": "latest",
     "es6-shim": "latest",
     "dom4": "latest",
-    "behave": "https://github.com/jakiestfu/Behave.js.git",
+    "behave": "https://github.com/julesbou/Behave.js.git",
     "rainbow": "latest"
   }
 }

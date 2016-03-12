@@ -97,6 +97,7 @@ define([
 
       onEditorKeypress: function(event) {
         if (event.keyCode === 13 && event.metaKey) {
+          event.preventDefault()
           this.saveTest()
         }
       },
