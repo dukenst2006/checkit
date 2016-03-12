@@ -15,7 +15,7 @@ worker:
 
 css:
 	node-sass public/css/main.scss public/var/styles.css
-	autoprefixer -o public/var/styles.css public/var/styles.css
+	autoprefixer-cli -o public/var/styles.css public/var/styles.css
 
 watch:
 	chokidar 'public/css/**/*.scss' -c 'make css'

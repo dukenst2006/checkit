@@ -8,8 +8,8 @@ done
 
 npm install -g bower
 npm install -g karma-cli
-npm install -g node-sass@v2.1.1
-npm install -g autoprefixer
+npm install -g node-sass
+npm install -g autoprefixer-cli
 npm install -g chokidar-cli
 npm update
 
