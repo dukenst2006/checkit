@@ -26,5 +26,8 @@
     "node-sass": "^2.1.1",
     "request": "^2.55.0",
     "worker-farm": "^1.2.0"
+  },
+  "jshintConfig": {
+    "asi": true
   }
 }
