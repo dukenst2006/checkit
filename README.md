@@ -27,8 +27,13 @@ export $(cat config/env | xargs)
 
 # TODO
 
+- rename worker/starter to worker/worker
+- notify() send mail
+- 'isPending' in a new field
+- remove 'done()' for sync tests
+- when test open and editing, duplicate it (but don't run it) (maybe)
 - test.output max length
-- when test open and editing, duplicate it (but don't run it)
 - trim code, name
 - move js/directives/editor to mixin
 - add security tests for queue
+- fix skipped test in chrome

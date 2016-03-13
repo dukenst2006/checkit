@@ -43,17 +43,24 @@ describe('starter', function() {
 
   describe('queue', function() {
     it('run test when child is added', function(done) {
+
       testUserRef.once('child_changed', function(snap) {
+        expect(snap.val().status).to.equal('pending')
+
         testUserRef.once('child_changed', function(snap) {
-          expect(snap.val().status).to.equal('pass')
+          var test = snap.val()
+          expect(test.status).to.equal('pass')
+          expect(test.lastUpdated).to.be.below(+(new Date()))
+          expect(test.lastUpdated).to.be.above(+(new Date()) - 1000)
+          expect(test.output).to.equal(undefined)
+          expect(test.notifs).to.equal(undefined)
+          expect(test.err).to.equal(undefined)
 
           firebase.child('queue').once('value', function(snap) {
             expect(snap.val()).to.equal(null)
             done()
           })
         })
-
-        expect(snap.val().status).to.equal('pending')
       })
 
       firebase.child('queue').once('value', function(snap) {

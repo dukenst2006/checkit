@@ -12,14 +12,24 @@
         <code class="editor-code" data-language="javascript" v-colorize="test.code"></code>
       </pre>
 
-      <div class="editor-message __{{ test.status }} __expand" v-if="test.status" v-el="editorMessage">
-        <a v-on="click: this.$$.editorMessage.classList.toggle('__expand')">
+      <div class="editor-message __expand __expand-status __{{ test.status }}" v-if="test.status" v-el="editorMessage">
+        <a class="expand-title __status" v-on="click: toggleEditorMessageStatus()">
           <i class="icon-{{ test.status }}"></i>
           <span v-if="test.status != 'pending'"> {{ test.status }}</span>
           <span v-if="test.status == 'pending'" class="dotter"> running ...</span>
         </a>
-        <pre v-if="test.output">{{ test.output }}</pre>
-        <pre v-if="test.error">{{ test.error }}</pre>
+        <a class="expand-title __history" v-on="click: toggleEditorMessageHistory()" v-if="test.notifs && test.notifs.length">
+          <i class="icon-{{ test.status }}"></i>
+          <span v-if="test.status != 'pending'"> see all notifications</span>
+        </a>
+        <div class="expand-content __status">
+          <pre v-if="test.status == 'notif'">{{{ test.notifs.slice(-1)[0] | formatNotif }}}</pre>
+          <pre v-if="test.output">{{ test.output }}</pre>
+          <pre v-if="test.error">{{ test.error }}</pre>
+        </div>
+        <pre class="expand-content __history">
+          <span v-repeat="notif: test.notifs">{{{ notif | formatNotif }}}<br></span>
+        </pre>
       </div>
     </div>
 

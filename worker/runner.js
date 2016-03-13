@@ -4,17 +4,20 @@ var domain = require('domain');
 var request = require('request');
 
 module.exports.run = function(code, callback) {
-  var output = ''
+  var output = '' // TODO set to null
+  var notifMess = null
   var context = {
     console: {
       log: console.log
     },
     request: request,
-    assert: require('assert'),
     setTimeout: setTimeout,
+    notify: function(message) {
+      notifMess = message
+    },
     done: function() {
       resetStdout();
-      callback(true, output);
+      callback(true, output, notifMess);
     }
   };
 
@@ -34,7 +37,7 @@ module.exports.run = function(code, callback) {
 
   vmDomain.on('error', function(err) {
     resetStdout();
-    callback(false, output, {
+    callback(false, output, notifMess, {
       name: err.name,
       message: err.message
     });
@@ -45,7 +48,7 @@ module.exports.run = function(code, callback) {
       vm.runInNewContext(code, context, 'line');
     } catch(err) {
       resetStdout();
-      callback(false, output, {
+      callback(false, output, notifMess, {
         name: err.name,
         message: err.message
       });

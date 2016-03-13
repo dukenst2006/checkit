@@ -56,6 +56,12 @@ define([
 
     template: template,
 
+    filters: {
+      formatNotif: function(notif) {
+        return '<i>[' + new Date(notif[1]).toLocaleString() + ']</i> ' + notif[0]
+      }
+    },
+
     data: function() {
       if (!Auth.user.uid) throw new Error('must be logged')
 
@@ -63,7 +69,7 @@ define([
 
       return {
         testsLoaded: false,
-        test: { name: null, code: null, status: null, output: null, error: null },
+        test: { name: null, code: null, status: null, output: null, error: null, notifs: [] },
         tests: firebase.collection(this.ref)
       }
     },
@@ -118,7 +124,7 @@ define([
         test.code = this.$el.querySelector('textarea').value
 
         if (test.id) {
-          this.ref.child(test.id).set({
+          this.ref.child(test.id).update({
             name: test.name,
             code: test.code
           }, function() {
@@ -145,6 +151,29 @@ define([
 
       pushQueue: function() {
         firebase.child('queue').push([Auth.user.uid, this.$data.test.id])
+      },
+
+      toggleEditorMessageStatus: function() {
+        this._toggleEditorMessage('__expand-status', '__expand-history')
+      },
+
+      toggleEditorMessageHistory: function() {
+        this._toggleEditorMessage('__expand-history', '__expand-status')
+      },
+
+      _toggleEditorMessage: function(paneVisible, paneHidden) {
+        var classList = this.$$.editorMessage.classList
+        classList.remove(paneHidden)
+
+        if (!classList.contains('__expand')) {
+          classList.add('__expand')
+        }
+
+        if (classList.contains(paneVisible)) {
+          classList.remove('__expand')
+        }
+
+        classList.toggle(paneVisible)
       },
 
       loadEditor: function(event, test) {

@@ -12,17 +12,31 @@ function runTest(testSnap) {
     status: 'pending'
   }, function() {
 
-    cluster.run(test.code, function(pass, output, err) {
-      util.log('run', testSnap.key(), pass, output)
-      testSnap.ref().update({
-        lastUpdated: +(new Date()),
-        status: pass ? 'pass' : 'fail',
-        output: output || null,
-        error: err ? (err.name + ': ' + err.message) : null
-      }, function(error) {
-        if (error) throw error
+    // mainly for tests, else it's too fast
+    setTimeout(function() {
+
+      cluster.run(test.code, function(pass, output, notifMess, err) {
+        util.log('update', testSnap.key(), pass, '"' + notifMess + '"', output)
+
+        var notifs = test.notifs || []
+
+        if (notifMess) {
+          notifs.unshift([notifMess, new Date().toUTCString()])
+
+          // TODO notify email
+        }
+
+        testSnap.ref().update({
+          lastUpdated: +(new Date()),
+          status: notifMess ? 'notif' : (pass ? 'pass' : 'fail'),
+          output: output || null,
+          notifs: notifs.slice(0, 20),
+          error: err ? (err.name + ': ' + err.message) : null
+        }, function(error) {
+          if (error) throw error
+        })
       })
-    })
+    }, 100)
   })
 }
 
