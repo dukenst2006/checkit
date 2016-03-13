@@ -28,6 +28,7 @@ export $(cat config/env | xargs)
 # TODO
 
 - rename worker/starter to worker/worker
+- rename test -> check
 - notify() send mail
 - 'isPending' in a new field
 - remove 'done()' for sync tests
