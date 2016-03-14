@@ -41,7 +41,7 @@
 
     <div class="editor-bar">
       <input v-model="check.name" tabindex="1" check="check-name">
-      <button type="button" class="btn __delete icon-trash" v-on="click: deletecheck()" v-if="check.id" check="delete-button"></button>
+      <button type="button" class="btn __delete icon-trash" v-on="click: deleteCheck()" v-if="check.id" check="delete-button"></button>
       <button type="button" class="btn tt-trigger" check="save-button" v-on="click: saveCheck"
         data-tooltip="Or press Cmd/metaKey + ENTER"
       >Save/Run</button>
@@ -59,7 +59,7 @@
       </p>
     </a>
 
-    <p class="_|_" v-if="!checks.length && checksLoaded">Empty</p>
+    <p class="_|_ __empty" v-if="!checks.length && checksLoaded">Empty</p>
   </div>
 
   <center v-if="!checksLoaded">

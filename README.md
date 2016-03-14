@@ -28,9 +28,6 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
-- add test for check removal
-- when check open and editing, duplicate it (but don't run it) (maybe)
-- trim code, name
-- move js/directives/editor to mixin
 - add security checks for queue
 - fix skipped check in chrome
+- when check open and editing, duplicate it (but don't run it) (maybe)
