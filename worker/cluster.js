@@ -17,7 +17,6 @@ module.exports = function(options) {
 
       workers.run(code, function(err) {
         clearTimeout(timer);
-        //if (err && err.type === 'TimeoutError') return
         callback.apply(callback, arguments);
       });
     }

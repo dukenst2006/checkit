@@ -4,7 +4,7 @@ var domain = require('domain');
 var request = require('request');
 
 module.exports.run = function(code, callback) {
-  var output = '' // TODO set to null
+  var output = ''
   var notifMess = null
   var context = {
     console: {
