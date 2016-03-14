@@ -4,7 +4,7 @@ var cluster = require('./cluster')()
 function runCheck(checkSnap) {
   var check = checkSnap.val()
 
-  if (!check || !check.code || check.disabled) return false
+  if (!check || check.code == undefined || check.disabled) return false
 
   checkSnap.ref().update({
     error: '',

@@ -205,10 +205,7 @@ define([
             "assert.ok(true, 'this assertion pass');",
             "",
             "// console.log() is useful to print/debug any value",
-            "console.log('this will be printed in the output window');",
-            "",
-            "// always call done() to complete what you're checking for",
-            "done()"
+            "console.log('this will be printed in the output window');"
           ].join('\n'),
           error: '',
           output: '',

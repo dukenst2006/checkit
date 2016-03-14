@@ -6,7 +6,7 @@ describe('runner', function() {
   describe('run()', function() {
 
     it('pass synchronously', function(done) {
-      runner.run('done()', function(pass, output, notifMess, err) {
+      runner.run('', function(pass, output, notifMess, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('');
         expect(notifMess).to.equal(null);
@@ -26,7 +26,7 @@ describe('runner', function() {
     });
 
     it('notify', function(done) {
-      runner.run('notify("notify message"); done()', function(pass, output, notifMess, err) {
+      runner.run('notify("notify message")', function(pass, output, notifMess, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('');
         expect(notifMess).to.equal('notify message');
@@ -56,7 +56,7 @@ describe('runner', function() {
     });
 
     it('allows console.log()', function(done) {
-      runner.run('console.log("foo"); console.log("bar"); done()', function(pass, output, notifMess, err) {
+      runner.run('console.log("foo"); console.log("bar");', function(pass, output, notifMess, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('foo\nbar');
         expect(notifMess).to.equal(null);

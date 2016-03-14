@@ -37,11 +37,19 @@ module.exports.run = function(code, callback) {
 
   vmDomain.on('error', function(err) {
     resetStdout();
+
+    // happens when done() is called after timeout
+    if (err.message == 'channel closed') return
+
     callback(false, output, notifMess, {
       name: err.name,
       message: err.message
     });
   })
+
+  if (code.search('done()') == -1) {
+    code += ';done();'
+  }
 
   vmDomain.run(function() {
     try {

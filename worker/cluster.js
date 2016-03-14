@@ -12,12 +12,12 @@ module.exports = function(options) {
       var timeout = (options && options.timeout) || 1000
 
       var timer = setTimeout(function() {
-        callback(false, '', null, new Error('done() never called in ' + timeout + 'ms'));
+        callback(false, '', null, new Error('timeout of ' + timeout + 'ms exceeded'));
       }, timeout);
 
       workers.run(code, function(err) {
         clearTimeout(timer);
-        if (err && err.type === 'TimeoutError') return
+        //if (err && err.type === 'TimeoutError') return
         callback.apply(callback, arguments);
       });
     }

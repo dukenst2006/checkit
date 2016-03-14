@@ -37,7 +37,7 @@ define([
 
         Utils.waitForElementVisible('.editor.__show', function() {
           Utils.value(document.querySelector('.editor [check=check-name]'), 'check name');
-          Utils.value(document.querySelector('.editor [check=check-code]'), 'done()');
+          Utils.value(document.querySelector('.editor [check=check-code]'), 'if (false) notify()');
 
           expect(document.querySelector('.__current')).not.toBeNull()
 
@@ -45,7 +45,7 @@ define([
           Utils.waitForElementExists('.editor .editor-message.__pass', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined();
 
-            document.querySelector('.editor textarea').value = 'throw new Error(); done()'
+            document.querySelector('.editor textarea').value = 'throw new Error()'
 
             Utils.triggerEvent('click', document.querySelector('.editor [check=save-button]'));
             Utils.waitForElementExists('.editor .editor-message.__fail', function() {

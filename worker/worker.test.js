@@ -14,7 +14,7 @@ describe('worker', function() {
     });
     checkUserRef.push({
       name: 'foo',
-      code: 'done()'
+      code: ''
     }, function(err) {
       if (err) throw err
       done()

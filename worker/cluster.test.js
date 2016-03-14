@@ -4,23 +4,23 @@ var cluster = require('./cluster')({ timeout: 2000 });
 describe('cluster', function() {
 
   describe('run()', function() {
-    it('sends and receive messages', function(done) {
-      cluster.run('done(true, "pass")', function(pass, output, notifMess, err) {
+    it('works', function(done) {
+      cluster.run('notify("ok")', function(pass, output, notifMess, err) {
         expect(pass).to.equal(true);
         expect(output).to.equal('');
-        expect(notifMess).to.equal(null);
+        expect(notifMess).to.equal('ok');
         expect(err).to.equal(undefined);
         done();
       });
     });
 
     it('timeouts', function(done) {
-      cluster.run('var foo = 1', function(pass, output, notifMess, err) {
+      cluster.run('setTimeout(function() { done() }, 10000)', function(pass, output, notifMess, err) {
         expect(pass).to.equal(false);
         expect(output).to.equal('');
         expect(err.name).to.equal('Error');
         expect(notifMess).to.equal(null);
-        expect(err.message).to.contain('done() never called in');
+        expect(err.message).to.contain('timeout of 2000ms exceeded');
         done();
       });
     });
