@@ -41,3 +41,15 @@ code {
   .#{"color-" + $name} { color: $color; }
   .#{"background-" + $name} { background: $color; }
 }
+
+.dotter {
+  position: relative;
+  &::before {
+    content: '';
+    display: inline-block;
+    animation: dotter .8s ease infinite;
+    position: absolute;
+    right: 0;
+    height: 20px;
+  }
+}

@@ -7,9 +7,7 @@ function runCheck(checkSnap) {
   if (!check || check.code == undefined || check.disabled) return false
 
   checkSnap.ref().update({
-    error: '',
-    output: '',
-    status: 'pending'
+    pending: true
   }, function() {
 
     // mainly for checks, else it's too fast
@@ -29,6 +27,7 @@ function runCheck(checkSnap) {
         checkSnap.ref().update({
           lastUpdated: +(new Date()),
           status: notifMess ? 'notif' : (pass ? 'pass' : 'fail'),
+          pending: false,
           output: output || null,
           notifs: notifs.slice(0, 20),
           error: err ? (err.name + ': ' + err.message) : null

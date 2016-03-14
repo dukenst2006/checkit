@@ -28,9 +28,11 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
+- update statuses (ok, error, notification)
+- add customizable timeout for run test
 - if status=notif and no output, adding console.log() -> not shown
 - add test for check removal
-- 'isPending' in a new field
+- rename check.lastUpdated to check.ago (and implement ago)
 - when check open and editing, duplicate it (but don't run it) (maybe)
 - check.output max length
 - trim code, name

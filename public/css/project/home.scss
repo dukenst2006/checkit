@@ -134,8 +134,17 @@
       transform: translateY(0);
     }
 
-    .expand-title.__history {
-      float: right;
+    .expand-title {
+      &.__history {
+        float: right;
+      }
+
+      &.__running {
+        margin-right: 1px;
+        cursor: default;
+        box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, .5) inset;
+        margin-left: -2px;
+      }
     }
 
     .expand-content {
@@ -167,44 +176,31 @@
     }
 
     &.__pass {
-      a, pre {
+      a, pre, .dotter:before {
         background: color(emerald);
       }
     }
 
     &.__fail {
-      a, pre {
+      a, pre, .dotter:before {
         background: color(alizarin);
       }
     }
 
     &.__notif {
-      a, pre {
+      a, pre, .dotter:before {
         background: color(sun-flower);
       }
     }
 
     &.__pending {
-      a, pre {
+      a, pre, .dotter:before {
         background: #FEE798;
       }
 
       .icon-pending::before {
         vertical-align: text-bottom;
         color: #1C1F26;
-      }
-
-      .dotter {
-        position: relative;
-        &::before {
-          content: '';
-          display: inline-block;
-          animation: dotter .8s ease infinite;
-          position: absolute;
-          right: 0;
-          background: #FEE798;
-          height: 20px;
-        }
       }
     }
   }

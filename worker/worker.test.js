@@ -29,7 +29,7 @@ describe('worker', function() {
     it('run all checks', function(done) {
       checkUserRef.once('child_changed', function(checkSnap) {
         var check = checkSnap.val()
-        expect(check.status).to.equal('pending')
+        expect(check.pending).to.equal(true)
 
         checkUserRef.once('child_changed', function(checkSnap) {
           var check = checkSnap.val()
@@ -45,7 +45,7 @@ describe('worker', function() {
     it('run check when child is added', function(done) {
 
       checkUserRef.once('child_changed', function(snap) {
-        expect(snap.val().status).to.equal('pending')
+        expect(snap.val().pending).to.equal(true)
 
         checkUserRef.once('child_changed', function(snap) {
           var check = snap.val()

@@ -69,7 +69,7 @@ define([
 
       return {
         checksLoaded: false,
-        check: { name: null, code: null, status: null, output: null, error: null, notifs: [] },
+        check: { name: null, code: null, status: null, output: null, pending: null, error: null, notifs: [] },
         checks: firebase.collection(this.ref)
       }
     },
@@ -87,6 +87,7 @@ define([
         var updated = snap.val()
         if (updated) {
           this.$data.check.status = updated.status
+          this.$data.check.pending = updated.pending
           this.$data.check.notifs = updated.notifs
           this.$data.check.output = updated.output
           this.$data.check.error = updated.error
@@ -113,7 +114,7 @@ define([
         var check = this.$data.check
 
         requestAnimationFrame(function() {
-          check.status = 'pending'
+          check.pending = true
 
           // reset check
           if (check.status === 'fail') {

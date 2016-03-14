@@ -12,15 +12,20 @@
         <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
       </pre>
 
-      <div class="editor-message __expand __expand-status __{{ check.status }}" v-if="check.status" v-el="editorMessage">
+      <div class="editor-message __expand __expand-status __{{ check.status }}"
+       v-if="check.status || check.pending"
+       v-el="editorMessage">
         <a class="expand-title __status" v-on="click: toggleEditorMessageStatus()">
           <i class="icon-{{ check.status }}"></i>
-          <span v-if="check.status != 'pending'"> {{ check.status }}</span>
-          <span v-if="check.status == 'pending'" class="dotter"> running ...</span>
+          <span> {{ check.status }}</span>
         </a>
         <a class="expand-title __history" v-on="click: toggleEditorMessageHistory()" v-if="check.notifs && check.notifs.length">
           <i class="icon-{{ check.status }}"></i>
-          <span v-if="check.status != 'pending'"> see all notifications</span>
+          <span> see all notifications</span>
+        </a>
+        <a class="expand-title __running" v-if="check.pending">
+          <i class="icon-pending"></i>
+          <i class="dotter"> running ...</i>
         </a>
         <div class="expand-content __status">
           <pre v-if="check.status == 'notif'">{{{ check.notifs[0] | formatNotif }}}</pre>
@@ -29,6 +34,7 @@
         </div>
         <pre class="expand-content __history">
           <span v-repeat="notif: check.notifs">{{{ notif | formatNotif }}}<br></span>
+          <span><i>(only last 20 notifications are shown)</i></span>
         </pre>
       </div>
     </div>
@@ -48,7 +54,7 @@
       <h1 class="item__title">{{ check.name }}</h1>
       <hr>
       <p>
-        <i class="icon-{{ check.status}}"></i> ~ 2min ago
+        <i class="icon-{{ check.pending ? 'pending' : check.status }}"></i> ~ 2min ago
       </p>
     </a>
 
