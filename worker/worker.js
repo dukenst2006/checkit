@@ -10,7 +10,7 @@ function runCheck(checkSnap) {
     pending: true
   }, function() {
 
-    // mainly for checks, else it's too fast
+    // for tests, should be at least 0
     setTimeout(function() {
 
       cluster.run(check.code, function(output, notifMess, err) {
@@ -35,7 +35,7 @@ function runCheck(checkSnap) {
           if (error) throw error
         })
       })
-    }, 100)
+    }, process.env.CHECKIT_CHECK_TIMEOUT || 0)
   })
 }
 
