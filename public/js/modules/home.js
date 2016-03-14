@@ -70,7 +70,7 @@ define([
 
       return {
         checksLoaded: false,
-        check: { name: null, code: null, status: null, output: null, pending: null, error: null, notifs: [] },
+        check: {},
         checks: firebase.collection(this.ref)
       }
     },
@@ -87,6 +87,7 @@ define([
       this.checkListener = function(snap) {
         var updated = snap.val()
         if (updated) {
+          this.$data.check.ago = updated.ago
           this.$data.check.status = updated.status
           this.$data.check.pending = updated.pending
           this.$data.check.notifs = updated.notifs
@@ -209,6 +210,8 @@ define([
             "// console.log() is useful to print/debug any value",
             "console.log('this will be printed in the output window');"
           ].join('\n'),
+          ago: '',
+          pending: false,
           error: '',
           output: '',
           status: ''
