@@ -1,8 +1,8 @@
 require('dotenv').load({ path: 'config/env' })
 
-var starter = require('./worker/starter')
+var worker = require('./worker/worker')
 
-starter.start(function() {
-  starter.startQueue()
-  starter.startLoop()
+worker.start(function() {
+  worker.startQueue()
+  worker.startLoop()
 })

@@ -1,12 +1,12 @@
-var starter = require('./starter');
+var worker = require('./worker');
 var firebase = require('./firebase');
 var expect = require('chai').expect;
 
-describe('starter', function() {
+describe('worker', function() {
   var testId
   var testUserRef = firebase.child('tests').child('test_user')
 
-  beforeEach(starter.start)
+  beforeEach(worker.start)
 
   beforeEach(function(done) {
     testUserRef.once('child_added', function(snap) {
@@ -37,7 +37,7 @@ describe('starter', function() {
           done()
         })
       })
-      starter.runLoop()
+      worker.runLoop()
     })
   })
 
@@ -68,7 +68,7 @@ describe('starter', function() {
         firebase.child('queue').push(['test_user', testId])
       })
 
-      starter.startQueue()
+      worker.startQueue()
     })
   })
 });
