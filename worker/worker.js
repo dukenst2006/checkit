@@ -26,7 +26,7 @@ function runCheck(checkSnap) {
 
         checkSnap.ref().update({
           lastUpdated: +(new Date()),
-          status: notifMess ? 'notif' : (pass ? 'pass' : 'fail'),
+          status: notifMess ? 'notification' : (pass ? 'ok' : 'error'),
           pending: false,
           output: output || null,
           notifs: notifs.slice(0, 20),

@@ -175,19 +175,19 @@
       }
     }
 
-    &.__pass {
+    &.__ok {
       a, pre, .dotter:before {
         background: color(emerald);
       }
     }
 
-    &.__fail {
+    &.__error {
       a, pre, .dotter:before {
         background: color(alizarin);
       }
     }
 
-    &.__notif {
+    &.__notification {
       a, pre, .dotter:before {
         background: color(sun-flower);
       }
@@ -288,13 +288,13 @@
   margin-right: -10px;
 
   .icon {
-    &-pass {
+    &-ok {
       @extend .icon-ok;
     }
-    &-fail {
+    &-error {
       @extend .icon-attention-alt;
     }
-    &-notif {
+    &-notification {
       @extend .icon-bell;
     }
     &-pending {
@@ -367,12 +367,12 @@
     }
 
     .icon {
-      &-pass::before {
+      &-ok::before {
         background-color: rgba(color(emerald), 0.05);
         border-color: color(emerald);
         color: color(emerald);
       }
-      &-notif::before {
+      &-notification::before {
         background-color: rgba(color(sun-flower), 0.05);
         border-color: color(sun-flower);
         color: color(sun-flower);
@@ -382,7 +382,7 @@
         border-color: color(concrete);
         color: color(concrete);
       }
-      &-fail::before {
+      &-error::before {
         background-color: rgba(color(alizarin), 0.05);
         border-color: color(alizarin);
         color: color(alizarin);

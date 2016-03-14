@@ -33,7 +33,7 @@ describe('worker', function() {
 
         checkUserRef.once('child_changed', function(checkSnap) {
           var check = checkSnap.val()
-          expect(check.status).to.equal('pass')
+          expect(check.status).to.equal('ok')
           done()
         })
       })
@@ -49,7 +49,7 @@ describe('worker', function() {
 
         checkUserRef.once('child_changed', function(snap) {
           var check = snap.val()
-          expect(check.status).to.equal('pass')
+          expect(check.status).to.equal('ok')
           expect(check.lastUpdated).to.be.below(+(new Date()))
           expect(check.lastUpdated).to.be.above(+(new Date()) - 1000)
           expect(check.output).to.equal(undefined)

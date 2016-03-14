@@ -117,7 +117,7 @@ define([
           check.pending = true
 
           // reset check
-          if (check.status === 'fail') {
+          if (check.status === 'error') {
             check.output = check.error = ''
           }
         })
