@@ -3,6 +3,7 @@ define([
   'services/auth',
   'services/firebase',
   'text!./home.html',
+  'directives/ago',
   'directives/editor',
   'directives/colorize'
 ], function(Vue, Auth, firebase, template) {

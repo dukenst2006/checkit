@@ -50,8 +50,8 @@ describe('worker', function() {
         checkUserRef.once('child_changed', function(snap) {
           var check = snap.val()
           expect(check.status).to.equal('ok')
-          expect(check.lastUpdated).to.be.below(+(new Date()))
-          expect(check.lastUpdated).to.be.above(+(new Date()) - 1000)
+          expect(check.ago).to.be.below(+(new Date()))
+          expect(check.ago).to.be.above(+(new Date()) - 1000)
           expect(check.output).to.equal(undefined)
           expect(check.notifs).to.equal(undefined)
           expect(check.err).to.equal(undefined)

@@ -54,7 +54,8 @@
       <h1 class="item__title">{{ check.name }}</h1>
       <hr>
       <p>
-        <i class="icon-{{ check.pending ? 'pending' : check.status }}"></i> ~ 2min ago
+        <i class="icon-{{ check.pending ? 'pending' : check.status }}"></i>
+        <span v-if="check.ago"> ~ <span v-ago="check.ago"></span></span>
       </p>
     </a>
 
