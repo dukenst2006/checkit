@@ -21,12 +21,12 @@
       <li class="settings_password" v-if="user.provider == 'password'">
         <label class="__left">Password</label>
         <div class="__right">
-          <span v-if="passwordSuccess" class="text __success" test="password-success">{{ passwordSuccess }}</span>
-          <button class="btn __grey" v-on="click:changePassword" test="change-password">Change Password</button>
+          <span v-if="passwordSuccess" class="text __success" check="password-success">{{ passwordSuccess }}</span>
+          <button class="btn __grey" v-on="click:changePassword" check="change-password">Change Password</button>
         </div>
       </li>
       <li class="_|" v-if="user.provider == 'password'">
-        <button class="btn text __danger delete-user" test="delete-user" v-on="click: deleteUser">Delete Account</button>
+        <button class="btn text __danger delete-user" check="delete-user" v-on="click: deleteUser">Delete Account</button>
       </li>
     </ul>
   </article>

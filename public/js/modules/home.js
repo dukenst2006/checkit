@@ -65,12 +65,12 @@ define([
     data: function() {
       if (!Auth.user.uid) throw new Error('must be logged')
 
-      this.ref = firebase.child('tests').child(Auth.user.uid)
+      this.ref = firebase.child('checks').child(Auth.user.uid)
 
       return {
-        testsLoaded: false,
-        test: { name: null, code: null, status: null, output: null, error: null, notifs: [] },
-        tests: firebase.collection(this.ref)
+        checksLoaded: false,
+        check: { name: null, code: null, status: null, output: null, error: null, notifs: [] },
+        checks: firebase.collection(this.ref)
       }
     },
 
@@ -80,22 +80,22 @@ define([
       closeCtrl = editor.querySelector('.editor-close')
 
       this.ref.once('value', function() {
-        this.$data.testsLoaded = true
+        this.$data.checksLoaded = true
       }.bind(this))
 
-      this.testListener = function(snap) {
+      this.checkListener = function(snap) {
         var updated = snap.val()
         if (updated) {
-          this.$data.test.status = updated.status
-          this.$data.test.output = updated.output
-          this.$data.test.error = updated.error
+          this.$data.check.status = updated.status
+          this.$data.check.output = updated.output
+          this.$data.check.error = updated.error
         }
       }.bind(this)
     },
 
     beforeDestroy: function() {
-      if (this.$data.test && this.$data.test.id) {
-        this.ref.child(this.$data.test.id).off('value', this.testListener)
+      if (this.$data.check && this.$data.check.id) {
+        this.ref.child(this.$data.check.id).off('value', this.checkListener)
       }
     },
 
@@ -104,53 +104,53 @@ define([
       onEditorKeypress: function(event) {
         if (event.keyCode === 13 && event.metaKey) {
           event.preventDefault()
-          this.saveTest()
+          this.saveCheck()
         }
       },
 
-      saveTest: function() {
-        var test = this.$data.test
+      saveCheck: function() {
+        var check = this.$data.check
 
         requestAnimationFrame(function() {
-          test.status = 'pending'
+          check.status = 'pending'
 
-          // reset test
-          if (test.status === 'fail') {
-            test.output = test.error = ''
+          // reset check
+          if (check.status === 'fail') {
+            check.output = check.error = ''
           }
         })
 
-        // fix test.code not always updated
-        test.code = this.$el.querySelector('textarea').value
+        // fix check.code not always updated
+        check.code = this.$el.querySelector('textarea').value
 
-        if (test.id) {
-          this.ref.child(test.id).update({
-            name: test.name,
-            code: test.code
+        if (check.id) {
+          this.ref.child(check.id).update({
+            name: check.name,
+            code: check.code
           }, function() {
             this.pushQueue()
           }.bind(this))
         }
 
         else {
-          this.ref.push(test).once('value', function() {
-            this.$data.test = Object.assign({}, this.$data.tests[this.$data.tests.length - 1])
-            this.ref.child(this.$data.test.id).on('value', this.testListener)
+          this.ref.push(check).once('value', function() {
+            this.$data.check = Object.assign({}, this.$data.checks[this.$data.checks.length - 1])
+            this.ref.child(this.$data.check.id).on('value', this.checkListener)
             this.pushQueue()
             document.querySelector('.__current').classList.remove('__current')
           }.bind(this))
         }
       },
 
-      deleteTest: function() {
+      deleteCheck: function() {
         if (!confirm('Are you sure you want to delete it?')) return false
 
         this.hideEditor()
-        this.ref.child(this.$data.test.id).remove()
+        this.ref.child(this.$data.check.id).remove()
       },
 
       pushQueue: function() {
-        firebase.child('queue').push([Auth.user.uid, this.$data.test.id])
+        firebase.child('queue').push([Auth.user.uid, this.$data.check.id])
       },
 
       toggleEditorMessageStatus: function() {
@@ -176,7 +176,7 @@ define([
         classList.toggle(paneVisible)
       },
 
-      loadEditor: function(event, test) {
+      loadEditor: function(event, check) {
         var item = event.target.closest('.item') || event.target
         var placeholder = document.createElement('div')
 
@@ -193,11 +193,11 @@ define([
         document.body.scrollTop = 0
         document.body.classList.add('no-scroll')
 
-        if (test) {
-          this.ref.child(test.id).on('value', this.testListener)
+        if (check) {
+          this.ref.child(check.id).on('value', this.checkListener)
         }
 
-        this.$data.test = test ? Object.assign({}, test) : {
+        this.$data.check = check ? Object.assign({}, check) : {
           name: 'Checking something ..',
           code: [
             "// exemple of an assertion, documentation here : https://nodejs.org/api/assert.html",
@@ -235,7 +235,7 @@ define([
             editor.classList.add('__show')
             closeCtrl.classList.add('__show')
 
-            if (!test) {
+            if (!check) {
               editor.querySelector('input').select()
             }
 
@@ -255,20 +255,20 @@ define([
         var placeholder = document.querySelector('.placeholder')
         var item = document.querySelector('.__current')
 
-        // new test, pick last one
+        // new check, pick last one
         if (!item) {
           var items = document.querySelectorAll('.item.__saved')
           item = items[items.length - 1]
         }
 
-        if (this.testListener && this.$data.test.id) {
-          this.ref.child(this.$data.test.id).off('value', this.testListener)
+        if (this.checkListener && this.$data.check.id) {
+          this.ref.child(this.$data.check.id).off('value', this.checkListener)
         }
 
         editor.classList.remove('__show')
         closeCtrl.classList.remove('__show')
 
-        //this.$data.test = {}
+        //this.$data.check = {}
 
         var coords = this.itemCoords(item)
 

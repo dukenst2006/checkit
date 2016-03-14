@@ -6,11 +6,11 @@
         ".read": "auth !== null && $user_id === auth.uid"
       }
     },
-    "tests": {
+    "checks": {
       "$user_id": {
         ".write": "auth.uid === $user_id",
         ".read": "auth.uid === $user_id",
-        "$test_id": {
+        "$check_id": {
           ".write": true,
           ".read": true
         }

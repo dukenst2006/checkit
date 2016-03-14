@@ -1,24 +1,24 @@
 var util = require('util')
 var cluster = require('./cluster')()
 
-function runTest(testSnap) {
-  var test = testSnap.val()
+function runCheck(checkSnap) {
+  var check = checkSnap.val()
 
-  if (!test || !test.code || test.disabled) return false
+  if (!check || !check.code || check.disabled) return false
 
-  testSnap.ref().update({
+  checkSnap.ref().update({
     error: '',
     output: '',
     status: 'pending'
   }, function() {
 
-    // mainly for tests, else it's too fast
+    // mainly for checks, else it's too fast
     setTimeout(function() {
 
-      cluster.run(test.code, function(pass, output, notifMess, err) {
-        util.log('update', testSnap.key(), pass, '"' + notifMess + '"', output)
+      cluster.run(check.code, function(pass, output, notifMess, err) {
+        util.log('update', checkSnap.key(), pass, '"' + notifMess + '"', output)
 
-        var notifs = test.notifs || []
+        var notifs = check.notifs || []
 
         if (notifMess) {
           notifs.unshift([notifMess, new Date().toUTCString()])
@@ -26,7 +26,7 @@ function runTest(testSnap) {
           // TODO notify email
         }
 
-        testSnap.ref().update({
+        checkSnap.ref().update({
           lastUpdated: +(new Date()),
           status: notifMess ? 'notif' : (pass ? 'pass' : 'fail'),
           output: output || null,
@@ -62,9 +62,9 @@ function startLoop() {
 }
 
 function runLoop() {
-  firebase.child('tests').once('value', function(snap) {
+  firebase.child('checks').once('value', function(snap) {
     snap.forEach(function(userSnap) {
-      userSnap.forEach(runTest)
+      userSnap.forEach(runCheck)
     })
   })
 }
@@ -79,11 +79,11 @@ function startQueue() {
   queue.on('child_added', function(snap) {
     util.log('queue', snap.val())
     var userId = snap.val()[0]
-    var testId = snap.val()[1]
-    var testRef = firebase.child('tests').child(userId).child(testId)
+    var checkId = snap.val()[1]
+    var checkRef = firebase.child('checks').child(userId).child(checkId)
 
     snap.ref().remove(function() {
-      testRef.once('value', runTest)
+      checkRef.once('value', runCheck)
     })
   })
 }

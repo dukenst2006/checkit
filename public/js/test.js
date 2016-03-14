@@ -33,7 +33,7 @@ require(['bootstrap'], function() {
 
     Utils.createUser(authUser, function() {
       require(tests, karma.start)
-    })
+   })
 
     function onKarmaComplete(cb) {
       Utils.login(authUser, function() {

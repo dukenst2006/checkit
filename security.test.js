@@ -110,59 +110,59 @@ describe('security', function() {
     });
   });
 
-  describe('tests', function() {
+  describe('checks', function() {
     beforeEach(function(done) {
-      firebase.child('tests').child(authUser.uid).push({
-        name: 'test',
+      firebase.child('checks').child(authUser.uid).push({
+        name: 'check',
         code: 'xxx'
       }, done)
     })
 
     afterEach(function(done) {
-      firebase.child('tests').off()
-      firebase.child('tests').child(authUser.uid).remove(done);
+      firebase.child('checks').off()
+      firebase.child('checks').child(authUser.uid).remove(done);
     });
 
-    it('can NOT read other tests', function(done) {
-      function fetchTests() {
-        firebase.child('tests').once('value', function(snap) {
+    it('can NOT read other checks', function(done) {
+      function fetchChecks() {
+        firebase.child('checks').once('value', function(snap) {
           throw new Error('should not fetch')
         })
       }
-      expect(fetchTests).not.to.throw()
+      expect(fetchChecks).not.to.throw()
       setTimeout(done, 800)
     })
 
-    it('can read own tests', function(done) {
-      firebase.child('tests').child(authUser.uid).once('value', function(snap) {
+    it('can read own checks', function(done) {
+      firebase.child('checks').child(authUser.uid).once('value', function(snap) {
         expect(Object.keys(snap.val()).length).to.equal(1)
         done()
       })
     })
 
-    it('can NOT create other tests', function(done) {
-      firebase.child('tests').child(authUser2.uid).set({ name: 'test', code: 'code' }, function(err) {
+    it('can NOT create other checks', function(done) {
+      firebase.child('checks').child(authUser2.uid).set({ name: 'test', code: 'code' }, function(err) {
         expect(err.code).to.equal('PERMISSION_DENIED')
         done()
       })
     })
 
-    it('can NOT update other tests', function(done) {
-      firebase.child('tests').set({ prop: 'value' }, function(err) {
+    it('can NOT update other checks', function(done) {
+      firebase.child('checks').set({ prop: 'value' }, function(err) {
         expect(err.code).to.equal('PERMISSION_DENIED')
         done()
       })
     })
 
-    it('can create own tests', function(done) {
-      firebase.child('tests').child(authUser.uid).push({ name: 'test', code: 'code' }, function(err) {
+    it('can create own checks', function(done) {
+      firebase.child('checks').child(authUser.uid).push({ name: 'test', code: 'code' }, function(err) {
         expect(err).to.equal(null)
         done()
       })
     })
 
-    it('can update own tests', function(done) {
-      firebase.child('tests').child(authUser.uid).set({ prop: 'value' }, function(err) {
+    it('can update own checks', function(done) {
+      firebase.child('checks').child(authUser.uid).set({ prop: 'value' }, function(err) {
         expect(err).to.equal(null)
         done()
       })
