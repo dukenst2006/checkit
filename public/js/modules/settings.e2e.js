@@ -63,7 +63,7 @@ define([
         })
       })
 
-      xit('successfully delete account', function(done) {
+      it('successfully delete account', function(done) {
         spyOn(window, 'prompt').and.returnValue('****')
 
         Utils.triggerEvent('click', document.querySelector('[check=delete-user]'))

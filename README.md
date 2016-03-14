@@ -29,5 +29,5 @@ export $(cat config/env | xargs)
 
 - notify() send mail
 - add security checks for queue
-- fix skipped check in chrome
+- fix 'running' not shown for new test
 - when check open and editing, duplicate it (but don't run it) (maybe)

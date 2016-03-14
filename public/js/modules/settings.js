@@ -52,20 +52,18 @@ define([
 
         var user = this.$data.user
 
-        firebase.child('users/' + user.uid).remove(function(err) {
-          if (err) throw err
+        firebase.removeUser({ email: user.email, password: password }, function(err) {
+          if (err) alert('Error: ' + err.code)
 
-          firebase.removeUser({
-            email: user.email,
-            password: password
-          }, function(err) {
+          firebase.child('users/' + user.uid + 'j').remove(function(err) {
             if (err) {
               alert('Error: ' + err.message)
             } else {
               firebase.unauth()
+              this.close()
             }
-          })
-        })
+          }.bind(this))
+        }.bind(this))
       },
 
       logout: function() {
