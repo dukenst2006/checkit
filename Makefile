@@ -7,11 +7,6 @@ env:
 		fs.writeFileSync('public/js/config.js', conf); \
 	"
 
-web:
-	nodemon web.js
-
-worker:
-	nodemon worker.js
 
 css:
 	node-sass public/css/main.scss public/var/styles.css
@@ -19,6 +14,12 @@ css:
 
 watch:
 	chokidar 'public/css/**/*.scss' -c 'make css'
+
+start_web:
+	nodemon web.js
+
+start_worker:
+	nodemon worker.js
 
 test_worker:
 	mocha worker/*.test.js --require worker.js --timeout 5000
