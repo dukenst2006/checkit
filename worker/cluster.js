@@ -12,7 +12,7 @@ module.exports = function(options) {
       var timeout = (options && options.timeout) || 1000
 
       var timer = setTimeout(function() {
-        callback(false, '', null, new Error('timeout of ' + timeout + 'ms exceeded'));
+        callback('', null, new Error('timeout of ' + timeout + 'ms exceeded'));
       }, timeout);
 
       workers.run(code, function(err) {

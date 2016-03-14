@@ -28,7 +28,7 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
-- remove callback() first arg (pass)
+- set output null instead of ''
 - add customizable timeout for run test
 - if status=notif and no output, adding console.log() -> not shown
 - add test for check removal

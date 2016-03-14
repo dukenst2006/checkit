@@ -5,8 +5,7 @@ describe('cluster', function() {
 
   describe('run()', function() {
     it('works', function(done) {
-      cluster.run('notify("ok")', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(true);
+      cluster.run('notify("ok")', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(notifMess).to.equal('ok');
         expect(err).to.equal(undefined);
@@ -15,8 +14,7 @@ describe('cluster', function() {
     });
 
     it('timeouts', function(done) {
-      cluster.run('setTimeout(function() { done() }, 10000)', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(false);
+      cluster.run('setTimeout(function() { done() }, 10000)', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(err.name).to.equal('Error');
         expect(notifMess).to.equal(null);
@@ -33,8 +31,7 @@ describe('cluster', function() {
           'done()' +
         '});'
       )
-      cluster.run(code, function(pass, output, notifMess, err) {
-        expect(pass).to.equal(false)
+      cluster.run(code, function(output, notifMess, err) {
         expect(output).to.equal('log')
         expect(notifMess).to.equal(null);
         expect(err.name).to.equal('Error')

@@ -13,8 +13,8 @@ function runCheck(checkSnap) {
     // mainly for checks, else it's too fast
     setTimeout(function() {
 
-      cluster.run(check.code, function(pass, output, notifMess, err) {
-        util.log('update', checkSnap.key(), pass, '"' + notifMess + '"', output)
+      cluster.run(check.code, function(output, notifMess, err) {
+        util.log('update', checkSnap.key(), '"' + notifMess + '"', output)
 
         var notifs = check.notifs || []
 
@@ -26,7 +26,7 @@ function runCheck(checkSnap) {
 
         checkSnap.ref().update({
           lastUpdated: +(new Date()),
-          status: notifMess ? 'notification' : (pass ? 'ok' : 'error'),
+          status: notifMess ? 'notification' : (err ? 'error' : 'ok'),
           pending: false,
           output: output || null,
           notifs: notifs.slice(0, 20),

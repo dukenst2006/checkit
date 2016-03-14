@@ -6,8 +6,7 @@ describe('runner', function() {
   describe('run()', function() {
 
     it('pass synchronously', function(done) {
-      runner.run('', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(true);
+      runner.run('', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(notifMess).to.equal(null);
         expect(err).to.equal(undefined);
@@ -16,8 +15,7 @@ describe('runner', function() {
     });
 
     it('pass asynchronously', function(done) {
-      runner.run('setTimeout(done, 20)', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(true);
+      runner.run('setTimeout(done, 20)', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(notifMess).to.equal(null);
         expect(err).to.equal(undefined);
@@ -26,8 +24,7 @@ describe('runner', function() {
     });
 
     it('notify', function(done) {
-      runner.run('notify("notify message")', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(true);
+      runner.run('notify("notify message")', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(notifMess).to.equal('notify message');
         expect(err).to.equal(undefined)
@@ -36,8 +33,7 @@ describe('runner', function() {
     });
 
     it('fails', function(done) {
-      runner.run('throw new Error()', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(false);
+      runner.run('throw new Error()', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(notifMess).to.equal(null);
         expect(err.name).to.equal('Error')
@@ -46,8 +42,7 @@ describe('runner', function() {
     });
 
     it('handles javascript error', function(done) {
-      runner.run('unknowMethod()', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(false);
+      runner.run('unknowMethod()', function(output, notifMess, err) {
         expect(output).to.equal('');
         expect(notifMess).to.equal(null);
         expect(err.name).to.equal('ReferenceError');
@@ -56,8 +51,7 @@ describe('runner', function() {
     });
 
     it('allows console.log()', function(done) {
-      runner.run('console.log("foo"); console.log("bar");', function(pass, output, notifMess, err) {
-        expect(pass).to.equal(true);
+      runner.run('console.log("foo"); console.log("bar");', function(output, notifMess, err) {
         expect(output).to.equal('foo\nbar');
         expect(notifMess).to.equal(null);
         expect(err).to.equal(undefined)

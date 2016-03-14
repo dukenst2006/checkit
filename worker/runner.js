@@ -17,7 +17,7 @@ module.exports.run = function(code, callback) {
     },
     done: function() {
       resetStdout();
-      callback(true, output, notifMess);
+      callback(output, notifMess);
     }
   };
 
@@ -41,7 +41,7 @@ module.exports.run = function(code, callback) {
     // happens when done() is called after timeout
     if (err.message == 'channel closed') return
 
-    callback(false, output, notifMess, {
+    callback(output, notifMess, {
       name: err.name,
       message: err.message
     });
@@ -56,7 +56,7 @@ module.exports.run = function(code, callback) {
       vm.runInNewContext(code, context, 'line');
     } catch(err) {
       resetStdout();
-      callback(false, output, notifMess, {
+      callback(output, notifMess, {
         name: err.name,
         message: err.message
       });
