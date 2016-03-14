@@ -28,10 +28,8 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
-- if status=notif and no output, adding console.log() -> not shown
 - add test for check removal
 - when check open and editing, duplicate it (but don't run it) (maybe)
-- check.output max length
 - trim code, name
 - move js/directives/editor to mixin
 - add security checks for queue

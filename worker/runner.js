@@ -30,7 +30,10 @@ module.exports.run = function(code, callback) {
   }
 
   process.stdout.write = function(str) {
-    output += str;
+    if (output.length > 1000) return
+    if (str.length > 1000) str = str.slice(0, 999)
+
+    output += str
   };
 
   var vmDomain = domain.create();

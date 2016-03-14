@@ -58,5 +58,14 @@ describe('runner', function() {
         done();
       });
     });
+
+    it('limits output to 1000 chars', function(done) {
+      runner.run('console.log(new Array(1000).join("abcdef"))', function(output, notifMess, err) {
+        expect(output.length).to.be.below(1000);
+        expect(notifMess).to.equal(null);
+        expect(err).to.equal(undefined)
+        done();
+      });
+    })
   });
 });
