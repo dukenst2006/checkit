@@ -23,7 +23,7 @@
           <span v-if="check.status != 'pending'"> see all notifications</span>
         </a>
         <div class="expand-content __status">
-          <pre v-if="check.status == 'notif'">{{{ check.notifs.slice(-1)[0] | formatNotif }}}</pre>
+          <pre v-if="check.status == 'notif'">{{{ check.notifs[0] | formatNotif }}}</pre>
           <pre v-if="check.output">{{ check.output }}</pre>
           <pre v-if="check.error">{{ check.error }}</pre>
         </div>

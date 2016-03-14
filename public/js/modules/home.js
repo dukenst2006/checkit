@@ -87,6 +87,7 @@ define([
         var updated = snap.val()
         if (updated) {
           this.$data.check.status = updated.status
+          this.$data.check.notifs = updated.notifs
           this.$data.check.output = updated.output
           this.$data.check.error = updated.error
         }

@@ -45,7 +45,7 @@ define([
           Utils.waitForElementExists('.editor .editor-message.__pass', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined();
 
-            document.querySelector('.editor textarea').value = 'assert.ok(false); done()'
+            document.querySelector('.editor textarea').value = 'throw new Error(); done()'
 
             Utils.triggerEvent('click', document.querySelector('.editor [check=save-button]'));
             Utils.waitForElementExists('.editor .editor-message.__fail', function() {

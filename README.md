@@ -28,6 +28,8 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
+- if status=notif and no output, adding console.log() -> not shown
+- add test for check removal
 - 'isPending' in a new field
 - remove 'done()' for sync checks
 - when check open and editing, duplicate it (but don't run it) (maybe)
