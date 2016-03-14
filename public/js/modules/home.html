@@ -12,10 +12,10 @@
         <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
       </pre>
 
-      <div class="editor-message __expand __expand-status __{{ check.status }}"
+      <div class="editor-message __expand __expand-status __{{ check.pending ? 'pending' : check.status }}"
        v-if="check.status || check.pending"
        v-el="editorMessage">
-        <a class="expand-title __status" v-on="click: toggleEditorMessageStatus()">
+        <a class="expand-title __status" v-if="check.status" v-on="click: toggleEditorMessageStatus()">
           <i class="icon-{{ check.status }}"></i>
           <span> {{ check.status }}</span>
         </a>

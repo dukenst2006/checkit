@@ -28,6 +28,4 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
-- add security checks for queue
-- fix 'running' not shown for new test
 - when check open and editing, duplicate it (but don't run it) (maybe)
