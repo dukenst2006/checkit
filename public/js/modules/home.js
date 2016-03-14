@@ -204,11 +204,17 @@ define([
         this.$data.check = check ? Object.assign({}, check) : {
           name: 'Checking something ..',
           code: [
-            "// exemple of an assertion, documentation here : https://nodejs.org/api/assert.html",
-            "assert.ok(true, 'this assertion pass');",
+            "// here's an example of what we call a \"check\"",
+            "// you can check whatever you want in JavaScript",
             "",
             "// console.log() is useful to print/debug any value",
-            "console.log('this will be printed in the output window');"
+            "console.log('this will be printed in the output window');",
+            "",
+            "// dumb example, check when Math.random() is superior than 0.8",
+            "if (Math.random() > 0.8) {",
+            "  // use notfiy(mess) when the condition is met",
+            "  notify('Math.random() is superior to 0.8');",
+            "}"
           ].join('\n'),
           ago: '',
           pending: false,
