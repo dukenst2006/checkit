@@ -51,7 +51,7 @@
 
   <div class="items">
     <a class="item __saved" v-repeat="check: checks" v-on="click: loadEditor($event, check)">
-      <h1 class="item__title">{{ check.name }}</h1>
+      <h1 class="item__title">{{{ check.name | formatName }}}</h1>
       <hr>
       <p>
         <i class="icon-{{ check.pending ? 'pending' : check.status }}"></i>

@@ -58,6 +58,9 @@ define([
     template: template,
 
     filters: {
+      formatName: function(name) {
+        return name ? name.replace(/`([^`]+)`/g, '<code>$1</code>') : ''
+      },
       formatNotif: function(notif) {
         return '<i>[' + new Date(notif[1]).toLocaleString() + ']</i> ' + notif[0]
       }
