@@ -26,6 +26,6 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
-- restrict check write to name|code
+- add notifyOnce()
 - Cmd+Enter not working if focus is on check.name
 - when check open and editing, duplicate it (but don't run it) (maybe)

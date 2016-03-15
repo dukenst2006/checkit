@@ -167,5 +167,12 @@ describe('security', function() {
         done()
       })
     })
+
+    it('can remove own checks', function(done) {
+      firebase.child('checks').child(authUser.uid).remove(function(err) {
+        expect(err).to.equal(null)
+        done()
+      })
+    })
   })
 })
