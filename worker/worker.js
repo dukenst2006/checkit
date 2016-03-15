@@ -35,7 +35,7 @@ function runCheck(checkSnap) {
           if (error) throw error
         })
       })
-    }, process.env.CHECKIT_CHECK_SLEEP || 0)
+    }, (process.env.CHECKIT_CHECK_SLEEP || 0) + 100) // at least 100ms for tests
   })
 }
 

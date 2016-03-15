@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var cluster = require('./cluster')({ timeout: 2000 });
+var cluster = require('./cluster')({ timeout: 1000 });
 
 describe('cluster', function() {
 
@@ -14,12 +14,19 @@ describe('cluster', function() {
     });
 
     it('timeouts', function(done) {
-      cluster.run('setTimeout(function() { done() }, 10000)', function(output, notifMess, err) {
+      var run = 0
+
+      cluster.run('setTimeout(function() { done() }, 1200)', function(output, notifMess, err) {
+        run++
         expect(output).to.equal('');
         expect(err.name).to.equal('Error');
         expect(notifMess).to.equal(null);
-        expect(err.message).to.contain('timeout of 2000ms exceeded');
-        done();
+        expect(err.message).to.contain('timeout of 1000ms exceeded');
+
+        setTimeout(function() {
+          expect(run).to.equal(1)
+          done();
+        }, 1500)
       });
     });
 
