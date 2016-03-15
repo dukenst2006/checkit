@@ -121,7 +121,7 @@ define([
 
           // reset check
           if (check.status === 'error') {
-            check.output = check.error = ''
+            //check.output = check.error = ''
           }
         })
 
@@ -202,7 +202,11 @@ define([
           this.ref.child(check.id).on('value', this.checkListener)
         }
 
-        this.$data.check = check ? Object.assign({}, check) : {
+        this.$data.check = check ? Object.assign({
+          error: '',
+          output: '',
+          notifs: []
+        }, check) : {
           name: 'Checking something ..',
           code: [
             "// here's an example of what we call a \"check\"",

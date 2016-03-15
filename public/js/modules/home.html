@@ -28,9 +28,9 @@
           <i class="dotter"> running ...</i>
         </a>
         <div class="expand-content __status __{{ check.status }}">
-          <pre v-if="check.status == 'notification'">{{{ check.notifs[0] | formatNotif }}}</pre>
-          <pre v-if="check.output">{{ check.output }}</pre>
-          <pre v-if="check.error">{{ check.error }}</pre>
+          <pre v-if="check.status == 'notification'"><b><i>notification:</i></b><br>{{{ check.notifs[0] | formatNotif }}}</pre>
+          <pre v-if="check.error"><b><i>error:</i></b><br>{{ check.error }}</pre>
+          <pre v-if="check.output"><b><i>output:</i></b><br>{{ check.output }}</pre>
         </div>
         <pre class="expand-content __history">
           <span v-repeat="notif: check.notifs">{{{ notif | formatNotif }}}<br></span>
