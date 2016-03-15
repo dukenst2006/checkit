@@ -132,6 +132,30 @@
 
     &.__expand {
       transform: translateY(0);
+
+      &.__expand-status {
+        .expand-title.__history {
+          box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, .5) inset;
+        }
+
+        .expand-content.__status {
+          display: block;
+        }
+      }
+
+      &.__expand-history {
+        .expand-title.__status {
+          box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, .5) inset;
+        }
+
+        .expand-content.__history {
+          display: block;
+        }
+
+        pre {
+          white-space: pre-line;
+        }
+      }
     }
 
     .expand-title {
@@ -139,7 +163,7 @@
         float: right;
       }
 
-      &.__running {
+      &.__pending {
         margin-right: 1px;
         cursor: default;
         box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, .5) inset;
@@ -151,50 +175,26 @@
       display: none;
     }
 
-    &.__expand-status {
-      .expand-title.__history {
-        box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, .5) inset;
-      }
-
-      .expand-content.__status {
-        display: block;
-      }
-    }
-
-    &.__expand-history {
-      .expand-title.__status {
-        box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, .5) inset;
-      }
-
-      .expand-content.__history {
-        display: block;
-      }
-
-      pre {
-        white-space: pre-line;
-      }
-    }
-
-    &.__ok {
-      a, pre, .dotter:before {
+    .__ok {
+      ,a, pre, .dotter:before {
         background: color(emerald);
       }
     }
 
-    &.__error {
-      a, pre, .dotter:before {
+    .__error {
+      ,a, pre, .dotter:before {
         background: color(alizarin);
       }
     }
 
-    &.__notification {
-      a, pre, .dotter:before {
+    .__notification, .__history {
+      ,a, pre, .dotter:before {
         background: color(sun-flower);
       }
     }
 
-    &.__pending {
-      a, pre, .dotter:before {
+    .__pending {
+      ,a, pre, .dotter:before {
         background: #FEE798;
       }
 

@@ -42,13 +42,13 @@ define([
           expect(document.querySelector('.__current')).not.toBeNull()
 
           Utils.triggerEvent('click', document.querySelector('.editor [check=save-button]'))
-          Utils.waitForElementExists('.editor .editor-message.__ok', function() {
+          Utils.waitForElementExists('.editor .editor-message .__status.__ok', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined()
 
             document.querySelector('.editor textarea').value = 'throw new Error()'
 
             Utils.triggerEvent('click', document.querySelector('.editor [check=save-button]'))
-            Utils.waitForElementExists('.editor .editor-message.__error', function() {
+            Utils.waitForElementExists('.editor .editor-message .__status.__error', function() {
 
               window.confirm = function() { return true }
               Utils.triggerEvent('click', document.querySelector('.editor .btn.__delete'))

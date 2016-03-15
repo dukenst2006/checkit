@@ -3,10 +3,10 @@
 - Check if a (twitter|github|...) username is free
 - Check when a website goes down
 
-- Check when a retweet is RT more than x times
+- Check when a tweet is RT more than x times
 - Check when a tweet have a reply, ...
 
-- Check when a website become free
+- Check when a domain become free
 - Check when torvalds publish a new post on g+ (to be the first to comment)
 
 - When there's full moon

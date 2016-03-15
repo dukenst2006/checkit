@@ -12,10 +12,10 @@
         <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
       </pre>
 
-      <div class="editor-message __expand __expand-status __{{ check.pending ? 'pending' : check.status }}"
+      <div class="editor-message __expand __expand-status"
        v-if="check.status || check.pending"
        v-el="editorMessage">
-        <a class="expand-title __status" v-if="check.status" v-on="click: toggleEditorMessageStatus()">
+        <a class="expand-title __status __{{ check.status }}" v-if="check.status" v-on="click: toggleEditorMessageStatus()">
           <i class="icon-{{ check.status }}"></i>
           <span> {{ check.status }}</span>
         </a>
@@ -23,11 +23,11 @@
           <i class="icon-{{ check.status }}"></i>
           <span> see all notifications</span>
         </a>
-        <a class="expand-title __running" v-if="check.pending">
+        <a class="expand-title __pending" v-if="check.pending">
           <i class="icon-pending"></i>
           <i class="dotter"> running ...</i>
         </a>
-        <div class="expand-content __status">
+        <div class="expand-content __status __{{ check.status }}">
           <pre v-if="check.status == 'notification'">{{{ check.notifs[0] | formatNotif }}}</pre>
           <pre v-if="check.output">{{ check.output }}</pre>
           <pre v-if="check.error">{{ check.error }}</pre>
