@@ -9,7 +9,7 @@ var workers = workerFarm({
 module.exports = function(options) {
   return {
     run: function(code, callback) {
-      var timeout = (options && options.timeout) || 1000
+      var timeout = (options && options.timeout) || process.env.CHECKIT_CHECK_TIMEOUT
 
       var timer = setTimeout(function() {
         callback('', null, new Error('timeout of ' + timeout + 'ms exceeded'));
@@ -17,6 +17,7 @@ module.exports = function(options) {
 
       workers.run(code, function(err) {
         clearTimeout(timer);
+        //if (err && err.type === 'TimeoutError') return
         callback.apply(callback, arguments);
       });
     }
