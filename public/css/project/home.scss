@@ -93,12 +93,18 @@
       margin-bottom: 20px;
 
       .editor-code {
-        padding: 0;
+        padding: 10px;
         margin: 0;
         background: none;
         height: 100%;
         float: left;
         line-height: 17px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: pre-wrap;
+        width: 100%;
+        box-sizing: border-box;
       }
     }
   }

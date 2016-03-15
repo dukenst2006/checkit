@@ -27,5 +27,7 @@ export $(cat config/env | xargs)
 
 - notify() send mail
 - add notifyOnce()
+ -demistify firebase resumeSession (auth token expired)
 - Cmd+Enter not working if focus is on check.name
+- dont make editor full height when in full screen
 - when check open and editing, duplicate it (but don't run it) (maybe)
