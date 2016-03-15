@@ -71,6 +71,7 @@ define([
       return {
         checksLoaded: false,
         check: {},
+        //check: { name: null, code: null, status: null, output: null, pending: null, error: null, notifs: [] },
         checks: firebase.collection(this.ref)
       }
     },
@@ -90,9 +91,9 @@ define([
           this.$data.check.ago = updated.ago
           this.$data.check.status = updated.status
           this.$data.check.pending = updated.pending
-          this.$data.check.notifs = updated.notifs
           this.$data.check.output = updated.output
           this.$data.check.error = updated.error
+          this.$data.check.notifs = updated.notifs
         }
       }.bind(this)
     },
@@ -138,7 +139,7 @@ define([
 
         else {
           this.ref.push(check).once('value', function() {
-            this.$data.check = Object.assign({}, this.$data.checks[this.$data.checks.length - 1])
+            this.$data.check = Object.assign({}, this.$data.check, this.$data.checks[this.$data.checks.length - 1])
             this.ref.child(this.$data.check.id).on('value', this.checkListener)
             this.pushQueue()
             document.querySelector('.__current').classList.remove('__current')
@@ -218,6 +219,7 @@ define([
           ].join('\n'),
           ago: '',
           pending: false,
+          notifs: [],
           error: '',
           output: '',
           status: ''
