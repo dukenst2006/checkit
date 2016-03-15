@@ -3,6 +3,7 @@
 # copy config files
 for exFile in config/*.example
 do
+  echo "cp $exFile ${exFile/\.example/}"
   [ -f ${exFile/\.example/} ] || cp "$exFile" "${exFile/\.example/}"
 done
 
