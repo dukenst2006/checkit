@@ -14,7 +14,7 @@ function runCheck(checkSnap) {
     setTimeout(function() {
 
       cluster.run(check.code, function(output, notifMess, err) {
-        util.log('update', checkSnap.key(), '"' + notifMess + '"', output)
+        util.log('update', checkSnap.key(), '"' + notifMess + '"', output, err)
 
         var notifs = check.notifs || []
 
