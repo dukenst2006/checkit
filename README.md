@@ -12,13 +12,6 @@
 
 - When webiste become famous (trafic +300% for example)
 
-# Install
-
-```
-# export env file (should run this manually after editting config/env file)
-export $(cat config/env | xargs)
-```
-
 # IDEAS
 
 - badge like github
@@ -26,6 +19,7 @@ export $(cat config/env | xargs)
 # TODO
 
 - notify() send mail
+- remove es6-shim
 - add notifyOnce()
  -demistify firebase resumeSession (auth token expired)
 - Cmd+Enter not working if focus is on check.name

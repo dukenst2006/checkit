@@ -1,16 +1,19 @@
 .PHONY: env web worker
 
 env:
+	# export $$(cat config/env | xargs)
 	node -e " \
 		var fs = require('fs'); \
 		var conf = 'define({\"FIREBASE\": \"$$CHECKIT_FIREBASE_URL\"})'; \
 		fs.writeFileSync('public/js/config.js', conf); \
 	"
 
-
 css:
 	node-sass public/css/main.scss public/var/styles.css
 	autoprefixer-cli -o public/var/styles.css public/var/styles.css
+
+build:
+	r.js -o build.js
 
 watch:
 	chokidar 'public/css/**/*.scss' -c 'make css'

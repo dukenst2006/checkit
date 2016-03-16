@@ -1,12 +1,7 @@
 {
   "name": "fb-seed",
   "dependencies": {
-    "vue": "0.11.5",
-    "firebase": "latest",
-    "requirejs": "latest",
     "requirejs-text": "latest",
-    "es6-shim": "latest",
-    "dom4": "latest",
     "behave": "https://github.com/julesbou/Behave.js.git",
     "rainbow": "latest"
   }

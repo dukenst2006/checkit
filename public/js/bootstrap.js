@@ -5,23 +5,24 @@ console.log = console.log.bind(console)
 require.config({
 
   paths: {
-    fb:       '../libs/firebase/firebase-debug',
+    fb: "https://cdn.firebase.com/js/client/2.4.1/firebase",
+    vue: "https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.5/vue.min",
+    es6: "https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min",
+
     text:     '../libs/requirejs-text/text',
-    vue:      '../libs/vue/dist/vue',
-    es6:      '../libs/es6-shim/es6-shim',
     behave:   '../libs/behave/behave',
     rainbow:  '../libs/rainbow/js/rainbow',
-    dom4:     '../libs/dom4/build/dom4'
+    rainbowGeneric: '../libs/rainbow/js/language/generic',
+    rainbowJavascript: '../libs/rainbow/js/language/javascript'
   },
 
-  deps: ['es6', 'vue', 'dom4'],
+  deps: ['es6', 'vue'],
 
   shim: {
+    rainbowGeneric: { deps: ['rainbow'] },
+    rainbowJavascript: { deps: ['rainbow'] },
     rainbow: { init: function() {
-      require([
-        '../libs/rainbow/js/language/generic',
-        '../libs/rainbow/js/language/javascript'
-      ])
+      require(['rainbowGeneric', 'rainbowJavascript'])
 
       Rainbow.extend('javascript', [
         {

@@ -13,11 +13,17 @@ npm install -g karma-cli
 npm install -g node-sass
 npm install -g autoprefixer-cli
 npm install -g chokidar-cli
+npm install -g requirejs
 npm install -g mocha
-npm update
 
-bower prune
+bower install
 bower update
+bower prune
 
-make env
+npm install
+npm update
+npm prune
+
 make css
+make env
+make build

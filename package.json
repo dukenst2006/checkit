@@ -1,29 +1,25 @@
 {
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install && make css && make env"
+    "heroku-postbuild": "./install.sh"
   },
   "engines": {
     "node": "5.8.x"
   },
   "devDependencies": {
     "chai": "^2.3.0",
-    "jasmine-core": "^2.2.0",
     "karma": "latest",
     "karma-chrome-launcher": "latest",
     "karma-firefox-launcher": "latest",
     "karma-jasmine": "latest",
     "karma-mocha-reporter": "^1.0.2",
-    "karma-requirejs": "latest",
     "mocha": "^2.2.4",
+    "karma-requirejs": "latest",
     "requirejs": "latest"
   },
   "dependencies": {
-    "autoprefixer-cli": "latest",
-    "bower": "^1.4.1",
     "dotenv": "^1.1.0",
     "express": "^4.12.3",
     "firebase": "^2.2.4",
-    "node-sass": "latest",
     "request": "^2.55.0",
     "worker-farm": "^1.2.0"
   },
