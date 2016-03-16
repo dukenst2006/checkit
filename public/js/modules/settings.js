@@ -36,8 +36,6 @@ define([
       updateNotificationEnabled: function() {
         this.$data.loaderNotificationEnabled = true
 
-        console.log(this.$data, this.$data.user)
-
         firebase.child('users').child(this.$data.user.uid).update({
           notificationEnabled: this.$data.user.notificationEnabled
         }, function() {
@@ -79,6 +77,14 @@ define([
       },
 
       deleteUser: function() {
+        // for now this is not possible to achieve
+        // if we call removeUser() the user is successfully removed
+        // but then firebase.child('users/' + uid).remove() is not granted anymore
+        // a solution would be to create a special API for this task
+        // or wait to be able to remove a user without password
+        // https://github.com/firebase/angularfire/issues/530
+        return;
+
         var password = prompt(
           'Please enter your password:\n\n' +
           '(It will permanently delete your account data)'
@@ -87,11 +93,14 @@ define([
         if (!password) return
 
         var user = this.$data.user
+        var uid = user.uid
 
         firebase.removeUser({ email: user.email, password: password }, function(err) {
-          if (err) alert('Error: ' + err.code)
+          if (err) {
+            return alert('Error: ' + err.code)
+          }
 
-          firebase.child('users/' + user.uid + 'j').remove(function(err) {
+          firebase.child('users/' + uid).remove(function(err) {
             if (err) {
               alert('Error: ' + err.message)
             } else {

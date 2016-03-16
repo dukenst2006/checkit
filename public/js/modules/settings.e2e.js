@@ -46,6 +46,7 @@ define([
       })
     })
 
+    /*
     describe('deleteUser()', function() {
       beforeEach(function(done) {
         Utils.waitForElementVisible('[check=delete-user]', done)
@@ -76,5 +77,6 @@ define([
         })
       })
     })
+    */
   })
 })
