@@ -19,8 +19,8 @@
 # TODO
 
 - notify() send mail
-- remove es6-shim
 - add notifyOnce()
+- rename [check=] attributes to [test=]
  -demistify firebase resumeSession (auth token expired)
 - Cmd+Enter not working if focus is on check.name
 - dont make editor full height when in full screen

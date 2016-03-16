@@ -14,20 +14,56 @@ define([
 
     mixins: [ModalMixin],
 
+    watch: {
+      'user.notificationEnabled': function(enabled) {
+        if (enabled && !this.$data.user.notificationEmail) {
+          this.$data.user.notificationEmail = this.$data.user.email
+        }
+      }
+    },
+
     data: function() {
       return {
         user: Auth.user,
+        loaderNotificationEnabled: false,
+        loaderNotificationEmail: false,
         passwordSuccess: null
       }
     },
 
     methods: {
 
-      changePassword: function() {
+      updateNotificationEnabled: function() {
+        this.$data.loaderNotificationEnabled = true
+
+        console.log(this.$data, this.$data.user)
+
+        firebase.child('users').child(this.$data.user.uid).update({
+          notificationEnabled: this.$data.user.notificationEnabled
+        }, function() {
+          setTimeout(function() {
+            this.$data.loaderNotificationEnabled = false
+          }.bind(this), 400)
+        }.bind(this))
+      },
+
+      updateNotificationEmail: function() {
+        this.$data.loaderNotificationEmail = true
+
+        firebase.child('users').child(this.$data.user.uid).update({
+          notificationEmail: this.$data.user.notificationEmail
+        }, function() {
+          setTimeout(function() {
+            this.$data.loaderNotificationEmail = false
+          }.bind(this), 400)
+        }.bind(this))
+      },
+
+      updatePassword: function() {
         var oldPassword = prompt('Please enter old password:')
-        if(!oldPassword) return
+        if (!oldPassword) return
         var newPassword = prompt('Please enter new password:')
-        if(!newPassword) return
+        if (!newPassword) return
 
         firebase.changePassword({
           email: this.$data.user.email,

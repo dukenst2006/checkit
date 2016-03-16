@@ -53,7 +53,8 @@
 
   > li {
     @extend .clearfix;
-    padding: 12px;
+    padding: 0 12px;
+    height: 42px;
     border-bottom: 1px solid color(clouds);
 
     &:last-child {
@@ -62,17 +63,30 @@
 
     .__left, &.__left {
       float: left;
-      line-height: 28px;
+      line-height: 42px;
     }
 
     .__right, &.__right {
       float: right;
-      line-height: 28px;
+      line-height: 42px;
       text-align: right;
       min-width: 60%;
 
       input {
+        width: 80%;
         padding: 4px;
+        border: 1px solid #ECF0F1;
+        font-size: 14px;
+        text-align: right;
+        color: #34495E;
+      }
+
+      .switch i {
+        vertical-align: text-top;
+      }
+
+      .btn {
+        margin-right: 0;
       }
 
       p {

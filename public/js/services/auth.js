@@ -6,7 +6,9 @@ define([
     user: {
       uid: null,
       email: null,
-      provider: null
+      provider: null,
+      notificationEnabled: null,
+      notificationEmail: null
     },
 
     isAuthenticated: function() {
@@ -25,9 +27,11 @@ define([
           self.user.uid = authData.uid
 
           firebase.child('users/' + authData.uid).on('value', function(snap) {
-            if (snap.val() !== null) {
-              self.user.email = snap.val().email
-              self.user.provider = snap.val().provider
+            var user = snap.val()
+            if (user !== null) {
+              for (var k in user) {
+                self.user[k] = user[k]
+              }
             }
           })
         }

@@ -53,3 +53,12 @@ code {
     height: 20px;
   }
 }
+
+.icon-loader {
+  @extend .icon-spin1;
+  @extend .animate-spin;
+}
+
+.red {
+  color: color(alizarin);
+}

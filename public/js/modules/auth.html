@@ -12,7 +12,7 @@
         <input type="email" placeholder="Email to send a new password" v-model="user.email">
         <a class="form-label" v-on="click: formName = 'signIn'">Back to Sign In</a>
         <button type="submit" class="btn __primary  __pull-right">
-          <i class="icon-spin1 animate-spin" v-show="loading"></i> Submit
+          <i class="icon-loader" v-show="loading"></i> Submit
         </button>
       </form>
 
@@ -23,7 +23,7 @@
         <a class="reset-pass" tabindex="-1" v-on="click: formName = 'resetPass'">Forgot your password <b>?</b></a>
         <a class="sign-up form-label" v-on="click: formName = 'signUp'">Don't have an account yet?</a>
         <button type="submit" class="btn __primary  __pull-right">
-          <i class="icon-spin1 animate-spin" v-show="loading"></i>  Submit
+          <i class="icon-loader" v-show="loading"></i>  Submit
         </button>
       </form>
 
@@ -33,7 +33,7 @@
 
         <a class="form-label" v-on="click: formName = 'signIn'">Already have an account?</a>
         <button type="submit" class="btn __primary  __pull-right">
-          <i class="icon-spin1 animate-spin" v-show="loading"></i>  Submit
+          <i class="icon-loader" v-show="loading"></i>  Submit
         </button>
       </form>
 

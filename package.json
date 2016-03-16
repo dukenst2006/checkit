@@ -21,6 +21,7 @@
     "express": "^4.12.3",
     "firebase": "^2.2.4",
     "request": "^2.55.0",
+    "sendgrid": "^2.0.0",
     "worker-farm": "^1.2.0"
   },
   "jshintConfig": {

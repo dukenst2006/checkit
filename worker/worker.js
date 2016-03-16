@@ -1,5 +1,7 @@
 var util = require('util')
 var cluster = require('./cluster')()
+var firebase = require('./firebase')
+var sendgrid  = require('sendgrid')(process.env.CHECKIT_SENDGRID_API_KEY)
 
 function runCheck(checkSnap) {
   var check = checkSnap.val()
@@ -19,9 +21,15 @@ function runCheck(checkSnap) {
         var notifs = check.notifs || []
 
         if (notifMess) {
-          notifs.unshift([notifMess, new Date().toUTCString()])
+          var once = false
 
-          // TODO notify email
+          if (notifMess.indexOf('@once ') === 0) {
+            once = true
+            notifMess = notifMess.substr(6)
+          }
+
+          //sendMail(checkSnap, notifMess, once)
+          notifs.unshift([notifMess, new Date().toUTCString()])
         }
 
         checkSnap.ref().update({
@@ -39,7 +47,25 @@ function runCheck(checkSnap) {
   })
 }
 
-var firebase = require('./firebase')
+function sendMail(checkSnap, notifMess, once) {
+  var check = checkSnap.val()
+  var userId = checkSnap.ref().parent().key()
+
+  firebase.child('users').child(userId).once('value', function(userSnap) {
+    if (user.notifications && user.notifications.enabled) {
+      sendgrid.send({
+        to: user.notification.email,
+        from: 'other@example.com', // TODO update me
+        subject: '[notification] ' + check.name,
+        text: 'New notification'
+      }, function(err, json) {
+        if (err) return console.error(err)
+        console.log(json)
+      })
+    }
+  })
+}
+
 
 
 // Authenticate

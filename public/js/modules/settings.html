@@ -4,7 +4,6 @@
     <a class="logout-user" title="Logout" v-on="click: logout"><i class="icon-logout"></i></a>
   </header>
   <article class="modal_content">
-    <pre style="display:none">UID {{ user.uid }}</pre>
     <ul class="settings_table list-unstyled">
       <li v-if="user.uid">
         <label class="__left">UID</label>
@@ -15,18 +14,33 @@
         <div class="__right">{{ user.email }}</div>
       </li>
       <li>
-        <label class="__left">Authentification Type</label>
-        <div class="__right">{{ user.provider }}</div>
+        <label class="__left">Enable Email Notifications</label>
+        <div class="__right">
+          <i class="icon-loader" v-show="loaderNotificationEnabled"></i>
+          <label class="switch">
+            <input type="checkbox" v-model="user.notificationEnabled" v-on="change: updateNotificationEnabled">
+            <i></i>
+          </label>
+        </div>
+      </li>
+      <li v-show="user.notificationEnabled">
+        <label class="__left">Email Notifications Recipient</label>
+        <div class="__right">
+          <i class="icon-loader" v-show="loaderNotificationEmail"></i>
+          <input type="text" v-model="user.notificationEmail" v-on="keyup: updateNotificationEmail" lazy>
+        </div>
       </li>
       <li class="settings_password" v-if="user.provider == 'password'">
         <label class="__left">Password</label>
         <div class="__right">
           <span v-if="passwordSuccess" class="text __success" check="password-success">{{ passwordSuccess }}</span>
-          <button class="btn __grey" v-on="click:changePassword" check="change-password">Change Password</button>
+          <a v-on="click: updatePassword" check="change-password">Change Password</a>
         </div>
       </li>
       <li class="_|" v-if="user.provider == 'password'">
-        <button class="btn text __danger delete-user" check="delete-user" v-on="click: deleteUser">Delete Account</button>
+        <div class="__right">
+          <a class="red" check="delete-user" v-on="click: deleteUser">Delete Account</a>
+        </div>
       </li>
     </ul>
   </article>

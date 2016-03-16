@@ -15,6 +15,9 @@ module.exports.run = function(code, callback) {
     notify: function(message) {
       notifMess = message
     },
+    notifyOnce: function(message) {
+      notifMess = '@once ' + message
+    },
     done: function() {
       resetStdout();
       callback(output, notifMess);
