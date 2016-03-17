@@ -40,7 +40,7 @@ function formatMail(check, user, notif) {
 
   return new sendgrid.Email({
     to: user.notificationEmail,
-    from: 'other@example.com', // TODO update me
+    from: process.env.CHECKIT_MAIL_SENDER,
     subject: '[check-it notification] ' + check.name,
     html: (
       'You just received a notification from <a href="http://check-it.io">check-it.io</a> :<br>' +
