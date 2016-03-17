@@ -14,20 +14,21 @@ define([
 
     mixins: [ModalMixin],
 
-    watch: {
-      'user.notificationEnabled': function(enabled) {
-        if (enabled && !this.$data.user.notificationEmail) {
-          this.$data.user.notificationEmail = this.$data.user.email
-        }
-      }
-    },
-
     data: function() {
       return {
         user: Auth.user,
         loaderNotificationEnabled: false,
         loaderNotificationEmail: false,
         passwordSuccess: null
+      }
+    },
+
+    watch: {
+      'user.notificationEnabled': function(enabled) {
+        if (enabled && !this.$data.user.notificationEmail) {
+          this.$data.user.notificationEmail = this.$data.user.email
+          this.updateNotificationEmail()
+        }
       }
     },
 

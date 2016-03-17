@@ -23,5 +23,7 @@
 - rename [check=] attributes to [test=]
  -demistify firebase resumeSession (auth token expired)
 - Cmd+Enter not working if focus is on check.name
+- move to es6
+- security for "rate-limits"
 - dont make editor full height when in full screen
 - when check open and editing, duplicate it (but don't run it) (maybe)

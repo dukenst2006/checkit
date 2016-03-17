@@ -1,7 +1,7 @@
 var util = require('util')
+var mail = require('./mail')
 var cluster = require('./cluster')()
 var firebase = require('./firebase')
-var sendgrid  = require('sendgrid')(process.env.CHECKIT_SENDGRID_API_KEY)
 
 function runCheck(checkSnap) {
   var check = checkSnap.val()
@@ -16,7 +16,7 @@ function runCheck(checkSnap) {
     setTimeout(function() {
 
       cluster.run(check.code, function(output, notifMess, err) {
-        util.log('update', checkSnap.key(), '"' + notifMess + '"', output, err)
+        util.log('update', checkSnap.key(), err)
 
         var notifs = check.notifs || []
 
@@ -28,8 +28,15 @@ function runCheck(checkSnap) {
             notifMess = notifMess.substr(6)
           }
 
-          //sendMail(checkSnap, notifMess, once)
-          notifs.unshift([notifMess, new Date().toUTCString()])
+          // TODO once
+
+          var notif = [notifMess, new Date().toUTCString()]
+          notifs.unshift(notif)
+
+          var userId = checkSnap.ref().parent().key()
+          firebase.child('users').child(userId).once('value', function(userSnap) {
+            mail.sendMail(userSnap, check, notif)
+          })
         }
 
         checkSnap.ref().update({
@@ -47,26 +54,6 @@ function runCheck(checkSnap) {
   })
 }
 
-function sendMail(checkSnap, notifMess, once) {
-  var check = checkSnap.val()
-  var userId = checkSnap.ref().parent().key()
-
-  firebase.child('users').child(userId).once('value', function(userSnap) {
-    if (user.notifications && user.notifications.enabled) {
-      sendgrid.send({
-        to: user.notification.email,
-        from: 'other@example.com', // TODO update me
-        subject: '[notification] ' + check.name,
-        text: 'New notification'
-      }, function(err, json) {
-        if (err) return console.error(err)
-        console.log(json)
-      })
-    }
-  })
-}
-
-
 
 // Authenticate
 // ------------
@@ -83,7 +70,7 @@ function startLoop() {
   setInterval(function() {
     util.log('loop')
     runLoop()
-  }, process.env.CHECKIT_POLL_INTERVAL)
+  }, process.env.CHECKIT_CHECK_INTERVAL)
 }
 
 function runLoop() {
