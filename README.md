@@ -18,8 +18,6 @@
 
 # TODO
 
- -demistify firebase resumeSession (auth token expired)
-- Cmd+Enter not working if focus is on check.name
 - move to es6
 - security for "rate-limits"
 - dont make editor full height when in full screen
