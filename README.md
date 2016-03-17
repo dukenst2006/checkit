@@ -18,7 +18,6 @@
 
 # TODO
 
-- move to es6
-- security for "rate-limits"
 - dont make editor full height when in full screen
+- move to es6
 - when check open and editing, duplicate it (but don't run it) (maybe)

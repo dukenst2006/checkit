@@ -19,6 +19,10 @@
     "queue": {
       ".write": true,
       ".read": true
+    },
+    "rate-limits": {
+      ".write": false,
+      ".read": false
     }
   }
 }
