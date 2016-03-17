@@ -5,6 +5,7 @@ var firebase = require('./firebase')
 
 function runCheck(checkSnap) {
   var check = checkSnap.val()
+  var initialStatus = check.status
 
   if (!check || check.code == undefined || check.disabled) return false
 
@@ -18,6 +19,7 @@ function runCheck(checkSnap) {
       cluster.run(check.code, function(output, notifMess, err) {
         util.log('update', checkSnap.key(), err)
 
+        var status = err ? 'error' : (notifMess ? 'notification' : 'ok')
         var notifs = check.notifs || []
 
         if (notifMess) {
@@ -33,15 +35,17 @@ function runCheck(checkSnap) {
           var notif = [notifMess, new Date().toUTCString()]
           notifs.unshift(notif)
 
-          var userId = checkSnap.ref().parent().key()
-          firebase.child('users').child(userId).once('value', function(userSnap) {
-            mail.sendMail(userSnap, check, notif)
-          })
+          if (!once || initialStatus !== status) {
+            var userId = checkSnap.ref().parent().key()
+            firebase.child('users').child(userId).once('value', function(userSnap) {
+              mail.sendMail(userSnap, check, notif)
+            })
+          }
         }
 
         checkSnap.ref().update({
           ago: +(new Date()),
-          status: err ? 'error' : (notifMess ? 'notification' : 'ok'),
+          status: status,
           pending: false,
           output: output || null,
           notifs: notifs.slice(0, 20),
