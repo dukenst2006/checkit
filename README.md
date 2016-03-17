@@ -18,7 +18,6 @@
 
 # TODO
 
-- rename [check=] attributes to [test=]
  -demistify firebase resumeSession (auth token expired)
 - Cmd+Enter not working if focus is on check.name
 - move to es6

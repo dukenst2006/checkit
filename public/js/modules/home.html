@@ -7,7 +7,7 @@
     </a>
 
     <div class="editor-window" v-editor>
-      <textarea class="editor-textarea" v-model="check.code" v-on="keydown: onEditorKeypress" tabindex="2" check="check-code"></textarea>
+      <textarea class="editor-textarea" v-model="check.code" v-on="keydown: onEditorKeypress" tabindex="2" test="check-code"></textarea>
       <pre class="editor-pre">
         <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
       </pre>
@@ -40,9 +40,9 @@
     </div>
 
     <div class="editor-bar">
-      <input v-model="check.name" tabindex="1" check="check-name">
-      <button type="button" class="btn __delete icon-trash" v-on="click: deleteCheck()" v-if="check.id" check="delete-button"></button>
-      <button type="button" class="btn tt-trigger" check="save-button" v-on="click: saveCheck"
+      <input v-model="check.name" tabindex="1" test="check-name">
+      <button type="button" class="btn __delete icon-trash" v-on="click: deleteCheck()" v-if="check.id" test="delete-button"></button>
+      <button type="button" class="btn tt-trigger" test="save-button" v-on="click: saveCheck"
         data-tooltip="Or press Cmd/metaKey + ENTER"
       >Save/Run</button>
     </div>

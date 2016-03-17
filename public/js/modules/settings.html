@@ -33,14 +33,14 @@
       <li class="settings_password" v-if="user.provider == 'password'">
         <label class="__left">Password</label>
         <div class="__right">
-          <span v-if="passwordSuccess" class="text __success" check="password-success">{{ passwordSuccess }}</span>
-          <a v-on="click: updatePassword" check="change-password">Change Password</a>
+          <span v-if="passwordSuccess" class="text __success" test="password-success">{{ passwordSuccess }}</span>
+          <a v-on="click: updatePassword" test="change-password">Change Password</a>
         </div>
       </li>
       <!--
       <li class="_|" v-if="user.provider == 'password'">
         <div class="__right">
-          <a class="red" check="delete-user" v-on="click: deleteUser">Delete Account</a>
+          <a class="red" test="delete-user" v-on="click: deleteUser">Delete Account</a>
         </div>
       </li>
       -->

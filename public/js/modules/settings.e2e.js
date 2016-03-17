@@ -19,14 +19,14 @@ define([
 
     describe('changePassword()', function() {
       beforeEach(function(done) {
-        Utils.waitForElementVisible('[check=change-password]', done)
+        Utils.waitForElementVisible('[test=change-password]', done)
       })
 
       it('shows an error for invalid password', function(done) {
         spyOn(window, 'alert')
         spyOn(window, 'prompt').and.returnValue('invalid pass')
 
-        Utils.triggerEvent('click', document.querySelector('[check=change-password]'))
+        Utils.triggerEvent('click', document.querySelector('[test=change-password]'))
 
         Utils.waitFor(window.alert.calls.count, function() {
           expect(window.alert).toHaveBeenCalled()
@@ -37,10 +37,10 @@ define([
       it('successfully change password', function(done) {
         spyOn(window, 'prompt').and.returnValue('****')
 
-        Utils.triggerEvent('click', document.querySelector('[check=change-password]'))
+        Utils.triggerEvent('click', document.querySelector('[test=change-password]'))
 
-        Utils.waitForElementExists('[check=password-success]', function() {
-          expect(document.querySelector('[check=password-success]').textContent).toContain('Password successfully updated.')
+        Utils.waitForElementExists('[test=password-success]', function() {
+          expect(document.querySelector('[test=password-success]').textContent).toContain('Password successfully updated.')
           done()
         })
       })
@@ -49,14 +49,14 @@ define([
     /*
     describe('deleteUser()', function() {
       beforeEach(function(done) {
-        Utils.waitForElementVisible('[check=delete-user]', done)
+        Utils.waitForElementVisible('[test=delete-user]', done)
       })
 
       it('shows an error for invalid password', function(done) {
         spyOn(window, 'alert')
         spyOn(window, 'prompt').and.returnValue('invalid pass')
 
-        Utils.triggerEvent('click', document.querySelector('[check=delete-user]'))
+        Utils.triggerEvent('click', document.querySelector('[test=delete-user]'))
 
         Utils.waitFor(window.alert.calls.count, function() {
           expect(window.alert).toHaveBeenCalled()
@@ -67,7 +67,7 @@ define([
       it('successfully delete account', function(done) {
         spyOn(window, 'prompt').and.returnValue('****')
 
-        Utils.triggerEvent('click', document.querySelector('[check=delete-user]'))
+        Utils.triggerEvent('click', document.querySelector('[test=delete-user]'))
 
         Utils.waitFor(function() {
           return ! Auth.isAuthenticated()

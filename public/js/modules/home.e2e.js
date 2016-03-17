@@ -36,18 +36,18 @@ define([
         Utils.triggerEvent('click', $newCheck)
 
         Utils.waitForElementVisible('.editor.__show', function() {
-          Utils.value(document.querySelector('.editor [check=check-name]'), 'check name')
-          Utils.value(document.querySelector('.editor [check=check-code]'), 'if (false) notify()')
+          Utils.value(document.querySelector('.editor [test=check-name]'), 'check name')
+          Utils.value(document.querySelector('.editor [test=check-code]'), 'if (false) notify()')
 
           expect(document.querySelector('.__current')).not.toBeNull()
 
-          Utils.triggerEvent('click', document.querySelector('.editor [check=save-button]'))
+          Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'))
           Utils.waitForElementExists('.editor .editor-message .__status.__ok', function() {
             expect(document.querySelector('.item.__saved')).toBeDefined()
 
             document.querySelector('.editor textarea').value = 'throw new Error()'
 
-            Utils.triggerEvent('click', document.querySelector('.editor [check=save-button]'))
+            Utils.triggerEvent('click', document.querySelector('.editor [test=save-button]'))
             Utils.waitForElementExists('.editor .editor-message .__status.__error', function() {
 
               window.confirm = function() { return true }
