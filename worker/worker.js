@@ -23,19 +23,10 @@ function runCheck(checkSnap) {
         var notifs = check.notifs || []
 
         if (notifMess) {
-          var once = false
-
-          if (notifMess.indexOf('@once ') === 0) {
-            once = true
-            notifMess = notifMess.substr(6)
-          }
-
-          // TODO once
-
           var notif = [notifMess, new Date().toUTCString()]
           notifs.unshift(notif)
 
-          if (!once || initialStatus !== status) {
+          if (initialStatus !== status) {
             var userId = checkSnap.ref().parent().key()
             firebase.child('users').child(userId).once('value', function(userSnap) {
               mail.sendMail(userSnap, check, notif)
