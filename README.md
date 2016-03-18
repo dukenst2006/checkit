@@ -18,6 +18,6 @@
 
 # TODO
 
-- dont make editor full height when in full screen
 - move to es6
+- merge notify() and notifyOnce()
 - when check open and editing, duplicate it (but don't run it) (maybe)

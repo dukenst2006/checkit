@@ -49,7 +49,7 @@ define([
     window.mozRequestAnimationFrame    ||
     function (callback) { window.setTimeout(callback, 1000 / 60) }
 
-  var gridItemsContainer, editor, closeCtrl
+  var main, gridItemsContainer, editor, closeCtrl
 
   return Vue.component('dashboard', {
 
@@ -80,6 +80,7 @@ define([
     },
 
     ready: function() {
+      main = document.querySelector('.main')
       gridItemsContainer = document.querySelector('.items')
       editor = document.querySelector('.editor')
       closeCtrl = editor.querySelector('.editor-close')
@@ -188,6 +189,7 @@ define([
         var item = event.target.closest('.item') || event.target
         var placeholder = document.createElement('div')
 
+        main.classList.add('__editor')
         placeholder.classList.add('placeholder')
 
         var coords = this.itemCoords(item)
@@ -233,7 +235,7 @@ define([
         }
 
         item.classList.add('__current')
-        item.parentNode.appendChild(placeholder)
+        item.parentNode.parentNode.appendChild(placeholder)
 
         setTimeout(function() {
           placeholder.classList.add('__trans-in')
@@ -283,6 +285,7 @@ define([
           this.ref.child(this.$data.check.id).off('value', this.checkListener)
         }
 
+        main.classList.remove('__editor')
         editor.classList.remove('__show')
         closeCtrl.classList.remove('__show')
 
@@ -316,8 +319,8 @@ define([
             ? (gridItem.offsetWidth + 10) / gridItemsContainer.offsetWidth
             : gridItem.offsetWidth / (gridItemsContainer.offsetWidth - 20),
           height: isNew
-            ? (gridItem.offsetHeight + 10) / (viewPortY() - 70)
-            : gridItem.offsetHeight / (viewPortY() - 70)
+            ? (gridItem.offsetHeight + 10) / Math.min(viewPortY() - 70, 800)
+            : gridItem.offsetHeight / Math.min(viewPortY() - 70, 800)
         }
       }
     }
