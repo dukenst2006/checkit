@@ -1,8 +1,8 @@
-<div class="overlay __settings" v-ref="settingsModal">
-  <article class="modal" v-class="open: isOpen">
+<div class="overlay __settings">
+  <article class="modal" class="{{ isOpen ? 'open': '' }}">
     <header class="modal_header">
       <h2 class="modal_title">Settings</h2>
-      <a class="logout-user" title="Logout" v-on="click: logout"><i class="icon-logout"></i></a>
+      <a class="logout-user" title="Logout" v-on:click="logout"><i class="icon-logout"></i></a>
     </header>
     <article class="modal_content">
       <ul class="settings_table list-unstyled">
@@ -19,7 +19,7 @@
           <div class="__right">
             <i class="icon-loader" v-show="loaderNotificationEnabled"></i>
             <label class="switch">
-              <input type="checkbox" v-model="user.notificationEnabled" v-on="change: updateNotificationEnabled">
+              <input type="checkbox" v-model="user.notificationEnabled" v-on:change="updateNotificationEnabled">
               <i></i>
             </label>
           </div>
@@ -28,20 +28,20 @@
           <label class="__left">Email Notifications Recipient</label>
           <div class="__right">
             <i class="icon-loader" v-show="loaderNotificationEmail"></i>
-            <input type="text" v-model="user.notificationEmail" v-on="keyup: updateNotificationEmail | debounce 600">
+            <input type="text" v-model="user.notificationEmail" v-on:keyup="updateNotificationEmail | debounce 600">
           </div>
         </li>
         <li class="settings_password" v-if="user.provider == 'password'">
           <label class="__left">Password</label>
           <div class="__right">
             <span v-if="passwordSuccess" class="text __success" test="password-success">{{ passwordSuccess }}</span>
-            <a v-on="click: updatePassword" test="change-password">Change Password</a>
+            <a v-on:click="updatePassword" test="change-password">Change Password</a>
           </div>
         </li>
         <!--
         <li class="_|" v-if="user.provider == 'password'">
           <div class="__right">
-            <a class="red" test="delete-user" v-on="click: deleteUser">Delete Account</a>
+            <a class="red" test="delete-user" v-on:click="deleteUser">Delete Account</a>
           </div>
         </li>
         -->

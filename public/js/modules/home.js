@@ -171,7 +171,8 @@ define([
       },
 
       _toggleEditorMessage: function(paneVisible, paneHidden) {
-        var classList = this.$$.editorMessage.classList
+        // TODO fixme editormessage => editorMessage
+        var classList = this.$els.editormessage.classList
         classList.remove(paneHidden)
 
         if (!classList.contains('__expand')) {

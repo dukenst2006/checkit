@@ -26,7 +26,8 @@ define([
 
     methods: {
       openSettingsModal: function() {
-        this.$.settingsModal.open()
+        // TODO fixme settingsmodal => settingsModal
+        this.$refs.settingsmodal.open()
       }
     }
   })

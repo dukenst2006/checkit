@@ -39,8 +39,7 @@ define([
         return 'current'
       },
 
-      signIn: function(event) {
-        event.preventDefault()
+      signIn: function() {
         this.$data.message = ''
         this.$data.loading = true
 
@@ -80,8 +79,7 @@ define([
         }.bind(this))
       },
 
-      signUp: function(event) {
-        event.preventDefault()
+      signUp: function() {
         this.$data.message = ''
         this.$data.loading = true
 
@@ -106,8 +104,7 @@ define([
         }.bind(this))
       },
 
-      resetPassword: function(event) {
-        event.preventDefault()
+      resetPassword: function() {
         this.$data.message = ''
 
         firebase.resetPassword({ email: this.$data.user.email }, function(err) {
