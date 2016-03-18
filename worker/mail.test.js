@@ -41,16 +41,18 @@ describe('mail', function() {
     it('set rateLimit if none saved', function(done) {
       var spy = chai.spy(function() {})
 
-      rateLimitRef.parent().once('child_added', function(snap) {
-        var rateLimit = snap.val()
-        expect(spy).to.have.been.called.once()
-        expect(rateLimit.count).to.equal(1)
-        expect(rateLimit.since).to.be.above(new Date().getTime() - 100)
-        expect(rateLimit.since).to.be.below(new Date().getTime())
-        done()
-      })
-
       mail.rateLimitMail(userId, spy)
+
+      setTimeout(function() {
+        rateLimitRef.once('value', function(snap) {
+          var rateLimit = snap.val()
+          expect(spy).to.have.been.called.once()
+          expect(rateLimit.count).to.equal(1)
+          expect(rateLimit.since).to.be.above(new Date().getTime() - 500)
+          expect(rateLimit.since).to.be.below(new Date().getTime())
+          done()
+        })
+      }, 300)
     })
 
     it('update rateLimit if "since" is too old', function(done) {
