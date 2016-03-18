@@ -9,6 +9,8 @@ define([
 
     template: template,
 
+    replace: false,
+
     data: function() {
       return {
         authUser: Auth.user,

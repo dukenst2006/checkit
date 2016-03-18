@@ -6,7 +6,7 @@ require.config({
 
   paths: {
     fb: "https://cdn.firebase.com/js/client/2.4.1/firebase",
-    vue: "https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min",
+    vue: "https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.16/vue.min",
     es6: "https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min",
 
     text:     '../libs/requirejs-text/text',

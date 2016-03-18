@@ -7,6 +7,5 @@
   </a>
 </header>
 
-<div class="main page" v-component="{{ component }}"></div>
-
-<div class="overlay __settings" v-component="settings" v-ref="settingsModal"></div>
+<component is="{{ component }}"></component>
+<component is="settings"></component>

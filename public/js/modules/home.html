@@ -1,75 +1,79 @@
-<section class="home wrap">
+<div class="main page">
 
-  <form class="editor" v-if="check">
+  <section class="home wrap">
 
-    <a class="editor-close" aria-label="close" v-on="click: hideEditor">
-      <i class="icon-cancel"></i>
-    </a>
+    <form class="editor" v-if="check">
 
-    <div class="editor-window" v-editor>
-      <textarea class="editor-textarea" v-model="check.code" v-on="keydown: metaEnterSave" tabindex="2" test="check-code"></textarea>
-      <pre class="editor-pre">
-        <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
-      </pre>
+      <a class="editor-close" aria-label="close" v-on="click: hideEditor">
+        <i class="icon-cancel"></i>
+      </a>
 
-      <div class="editor-message __expand __expand-status"
-       v-if="check.status || check.pending"
-       v-el="editorMessage">
-        <a class="expand-title __status" v-class="'__' + check.status" v-if="check.status" v-on="click: toggleEditorMessageStatus()">
-          <i v-class="'icon-' + check.status"></i>
-          <span> {{ check.status }}</span>
-        </a>
-        <a class="expand-title __history" v-on="click: toggleEditorMessageHistory()" v-if="check.notifs && check.notifs.length">
-          <i v-class="'icon-' + check.status"></i>
-          <span> see all notifications</span>
-        </a>
-        <a class="expand-title __pending" v-if="check.pending">
-          <i class="icon-pending"></i>
-          <i class="dotter"> running ...</i>
-        </a>
-        <div class="expand-content __status" v-class="'__' + check.status">
-          <pre v-if="check.status == 'notification'"><b><i>notification:</i></b><br>{{{ check.notifs[0] | formatNotif }}}</pre>
-          <pre v-if="check.error"><b><i>error:</i></b><br>{{ check.error }}</pre>
-          <pre v-if="check.output"><b><i>output:</i></b><br>{{ check.output }}</pre>
-        </div>
-        <pre class="expand-content __history">
-          <span v-repeat="notif: check.notifs">{{{ notif | formatNotif }}}<br></span>
-          <span><i>(only last 20 notifications are shown)</i></span>
+      <div class="editor-window" v-editor>
+        <textarea class="editor-textarea" v-model="check.code" v-on="keydown: metaEnterSave" tabindex="2" test="check-code"></textarea>
+        <pre class="editor-pre">
+          <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
         </pre>
+
+        <div class="editor-message __expand __expand-status"
+         v-if="check.status || check.pending"
+         v-el="editorMessage">
+          <a class="expand-title __status" v-class="'__' + check.status" v-if="check.status" v-on="click: toggleEditorMessageStatus()">
+            <i v-class="'icon-' + check.status"></i>
+            <span> {{ check.status }}</span>
+          </a>
+          <a class="expand-title __history" v-on="click: toggleEditorMessageHistory()" v-if="check.notifs && check.notifs.length">
+            <i v-class="'icon-' + check.status"></i>
+            <span> see all notifications</span>
+          </a>
+          <a class="expand-title __pending" v-if="check.pending">
+            <i class="icon-pending"></i>
+            <i class="dotter"> running ...</i>
+          </a>
+          <div class="expand-content __status" v-class="'__' + check.status">
+            <pre v-if="check.status == 'notification'"><b><i>notification:</i></b><br>{{{ check.notifs[0] | formatNotif }}}</pre>
+            <pre v-if="check.error"><b><i>error:</i></b><br>{{ check.error }}</pre>
+            <pre v-if="check.output"><b><i>output:</i></b><br>{{ check.output }}</pre>
+          </div>
+          <pre class="expand-content __history">
+            <span v-repeat="notif: check.notifs">{{{ notif | formatNotif }}}<br></span>
+            <span><i>(only last 20 notifications are shown)</i></span>
+          </pre>
+        </div>
       </div>
+
+      <div class="editor-bar">
+        <input v-model="check.name" v-on="keydown: metaEnterSave" tabindex="1" test="check-name">
+        <button type="button" class="btn __delete icon-trash" v-on="click: deleteCheck()" v-if="check.id" test="delete-button"></button>
+        <button type="button" class="btn tt-trigger" test="save-button" v-on="click: saveCheck"
+          data-tooltip="Or press Cmd/metaKey + ENTER"
+        >Save/Run</button>
+      </div>
+
+    </form>
+
+    <div class="items">
+      <a class="item __saved" v-repeat="check: checks" v-on="click: loadEditor($event, check)">
+        <h1 class="item__title">{{{ check.name | formatName }}}</h1>
+        <hr>
+        <p>
+          <i v-class="'icon-' + (check.pending ? 'pending': check.status)"></i>
+          <span v-if="check.ago"> ~ <span v-ago="check.ago"></span> ago</span>
+        </p>
+      </a>
+
+      <p class="_|_ __empty" v-if="!checks.length && checksLoaded">Empty</p>
     </div>
 
-    <div class="editor-bar">
-      <input v-model="check.name" v-on="keydown: metaEnterSave" tabindex="1" test="check-name">
-      <button type="button" class="btn __delete icon-trash" v-on="click: deleteCheck()" v-if="check.id" test="delete-button"></button>
-      <button type="button" class="btn tt-trigger" test="save-button" v-on="click: saveCheck"
-        data-tooltip="Or press Cmd/metaKey + ENTER"
-      >Save/Run</button>
-    </div>
+    <center v-if="!checksLoaded">
+      <p><i class="icon-loader"></i> loading</p>
+    </center>
+  </section>
 
-  </form>
-
-  <div class="items">
-    <a class="item __saved" v-repeat="check: checks" v-on="click: loadEditor($event, check)">
-      <h1 class="item__title">{{{ check.name | formatName }}}</h1>
-      <hr>
-      <p>
-        <i v-class="'icon-' + (check.pending ? 'pending': check.status)"></i>
-        <span v-if="check.ago"> ~ <span v-ago="check.ago"></span> ago</span>
-      </p>
+  <footer class="check-something">
+    <a class="btn __primary" v-on="click: loadEditor($event)">
+      <i class="icon-plus"></i>
+      check something
     </a>
+  </footer>
 
-    <p class="_|_ __empty" v-if="!checks.length && checksLoaded">Empty</p>
-  </div>
-
-  <center v-if="!checksLoaded">
-    <p><i class="icon-loader"></i> loading</p>
-  </center>
-</section>
-
-<footer class="check-something">
-  <a class="btn __primary" v-on="click: loadEditor($event)">
-    <i class="icon-plus"></i>
-    check something
-  </a>
-</footer>
+</div>
