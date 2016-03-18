@@ -80,7 +80,7 @@ define([
     },
 
     ready: function() {
-      main = document.querySelector('.main')
+      main = document.querySelector('main')
       gridItemsContainer = document.querySelector('.items')
       editor = document.querySelector('.editor')
       closeCtrl = editor.querySelector('.editor-close')

@@ -20,6 +20,5 @@
 
 - move to es6
 - remove public/js/.git
-- use <main> tag
 - send sms
 - when check open and editing, duplicate it (but don't run it) (maybe)
