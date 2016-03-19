@@ -45,11 +45,11 @@ describe('cluster', function() {
 
     it('handle async errors', function(done) {
       var code = (
-        'request("https://example.com", function(error, response, body) {' +
+        'setTimeout(function() {' +
           'log("log");' +
           'throw new Error();' +
           'done()' +
-        '})'
+        '}, 200)'
       )
       cluster.run(code, [], function(output, notifMess, storage, err) {
         expect(output).to.equal('log')

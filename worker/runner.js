@@ -1,7 +1,8 @@
-var vm = require('vm');
-var util = require('util');
-var domain = require('domain');
-var request = require('request');
+var vm = require('vm')
+var util = require('util')
+var domain = require('domain')
+var request = require('request')
+var xml2js = require('xml2js')
 
 module.exports.run = function(code, storage, callback) {
   var output = ''
@@ -10,6 +11,7 @@ module.exports.run = function(code, storage, callback) {
     log: console.log,
     request: request,
     setTimeout: setTimeout,
+    parseXml: xml2js.parseString,
     notify: function(message) {
       notifMess = message
     },
@@ -20,17 +22,17 @@ module.exports.run = function(code, storage, callback) {
       }
     },
     done: function() {
-      resetStdout();
-      callback(output, notifMess, storage);
+      resetStdout()
+      callback(output, notifMess, storage)
     }
-  };
+  }
 
   // Hook stdout: http://stackoverflow.com/questions/12805125/access-logs-from-console-log-in-node-js-vm-module
-  var initialStdout = process.stdout.write;
+  var initialStdout = process.stdout.write
 
   function resetStdout() {
-    process.stdout.write = initialStdout;
-    output = output.replace(/\n$/, ''); // remove last line-break
+    process.stdout.write = initialStdout
+    output = output.replace(/\n$/, '') // remove last line-break
   }
 
   process.stdout.write = function(str) {
@@ -38,12 +40,12 @@ module.exports.run = function(code, storage, callback) {
     if (str.length > 1000) str = str.slice(0, 999)
 
     output += str
-  };
+  }
 
-  var vmDomain = domain.create();
+  var vmDomain = domain.create()
 
   vmDomain.on('error', function(err) {
-    resetStdout();
+    resetStdout()
 
     // happens when done() is called after timeout
     if (err.message == 'channel closed') return
@@ -51,7 +53,7 @@ module.exports.run = function(code, storage, callback) {
     callback(output, notifMess, storage, {
       name: err.name,
       message: err.message
-    });
+    })
   })
 
   if (code.search('done()') == -1) {
@@ -60,13 +62,13 @@ module.exports.run = function(code, storage, callback) {
 
   vmDomain.run(function() {
     try {
-      vm.runInNewContext(code, context, 'line');
+      vm.runInNewContext(code, context, 'line')
     } catch(err) {
-      resetStdout();
+      resetStdout()
       callback(output, notifMess, storage, {
         name: err.name,
         message: err.message
-      });
+      })
     }
   })
 }

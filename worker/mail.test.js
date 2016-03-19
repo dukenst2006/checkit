@@ -88,8 +88,8 @@ describe('mail', function() {
           rateLimitRef.once('value', function(snap) {
             var rateLimit = snap.val()
             expect(spy).not.to.have.been.called()
-            expect(rateLimit.count).to.equal(15)
-            expect(rateLimit.since).to.be.above(new Date().getTime() - 2000)
+            expect(rateLimit.count).to.equal(process.env.CHECKIT_MAIL_LIMIT)
+            expect(rateLimit.since).to.be.above(new Date().getTime() - 3000)
             expect(rateLimit.since).to.be.below(new Date().getTime())
             done()
           })

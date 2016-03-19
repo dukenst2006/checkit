@@ -75,6 +75,19 @@ describe('runner', function() {
       })
     })
 
+    it('allows parseXml()', function(done) {
+      runner.run(
+        'var xml = "<?xml version=\'1.0\' encoding=\'UTF-8\'?><root><child foo=\'bar\'></child></root>";' +
+        'parseXml(xml, function(err, result) { log(result.root.child[0].$.foo); done() })',
+        [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('bar')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
+
     it('allows once()', function(done) {
       runner.run('once(0, function() { log("ok") })', [], function(output, notifMess, storage, err) {
         expect(output).to.equal('ok')

@@ -23,7 +23,8 @@
     "firebase": "^2.2.4",
     "request": "^2.55.0",
     "sendgrid": "^2.0.0",
-    "worker-farm": "^1.2.0"
+    "worker-farm": "^1.2.0",
+    "xml2js": "^0.4.16"
   },
   "jshintConfig": {
     "asi": true
