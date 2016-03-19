@@ -314,13 +314,13 @@ define([
         var isNew = ! gridItem.classList.contains('item')
 
         return {
-          left: isNew ? gridItem.offsetLeft - 5 : gridItem.offsetLeft,
-          top: isNew ? gridItem.offsetTop - 5 :  gridItem.offsetTop,
+          left: isNew ? gridItem.offsetLeft : gridItem.offsetLeft,
+          top: isNew ? gridItem.offsetTop :  gridItem.offsetTop,
           width: isNew
-            ? (gridItem.offsetWidth + 10) / gridItemsContainer.offsetWidth
+            ? (gridItem.offsetWidth + 4) / gridItemsContainer.offsetWidth
             : gridItem.offsetWidth / (gridItemsContainer.offsetWidth - 20),
           height: isNew
-            ? (gridItem.offsetHeight + 10) / Math.min(viewPortY() - 70, 800)
+            ? (gridItem.offsetHeight) / Math.min(viewPortY() - 70, 800)
             : gridItem.offsetHeight / Math.min(viewPortY() - 70, 800)
         }
       }
