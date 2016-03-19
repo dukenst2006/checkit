@@ -18,7 +18,7 @@ describe('mail', function() {
     checkRef.once('child_added', function(snap) {
       check = snap.val()
       checkId = snap.key()
-    });
+    })
     checkRef.push({
       name: 'foo',
       code: 'var a = 1'
@@ -26,15 +26,15 @@ describe('mail', function() {
       if (err) throw err
       done()
     })
-  });
+  })
 
   afterEach(function(done) {
-    checkRef.remove(done);
-  });
+    checkRef.remove(done)
+  })
 
   afterEach(function(done) {
-    rateLimitRef.remove(done);
-  });
+    rateLimitRef.remove(done)
+  })
 
   describe('rateLimitMail', function() {
 
@@ -125,5 +125,5 @@ describe('mail', function() {
       expect(email).to.be.an.instanceof(sendgrid.Email)
     })
 
-  });
-});
+  })
+})

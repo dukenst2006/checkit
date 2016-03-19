@@ -1,39 +1,62 @@
-var worker = require('./worker');
-var firebase = require('./firebase');
-var expect = require('chai').expect;
+var worker = require('./worker')
+var firebase = require('./firebase')
+var expect = require('chai').expect
 
 describe('worker', function() {
-  var checkId
-  var checkUserRef = firebase.child('checks').child('check_user')
+  var checkId, singleCheckRef
+  var checkRef = firebase.child('checks').child('check_user')
 
   beforeEach(worker.start)
 
   beforeEach(function(done) {
-    checkUserRef.once('child_added', function(snap) {
+    checkRef.once('child_added', function(snap) {
       checkId = snap.key()
-    });
-    checkUserRef.push({
+    })
+    singleCheckRef = checkRef.push({
       name: 'foo',
-      code: 'var a = 1'
+      status: 'notification',
+      code: 'once(0, function() { log(1); notify(2); done() })'
     }, function(err) {
       if (err) throw err
       done()
     })
-  });
+  })
 
   afterEach(function(done) {
-    checkUserRef.remove(done);
-  });
+    singleCheckRef.off('value')
+    checkRef.remove(done)
+  })
 
-  describe('events', function() {
+  describe('runCheck()', function() {
+    it('works', function(done) {
+      singleCheckRef.once('value', function(snap) {
+        singleCheckRef.on('value', function(snap) {
+          var check = snap.val()
+
+          if (check.pending === false) {
+            expect(check.ago).to.not.be.undefined
+            expect(check.notifs.length).to.equal(1)
+            expect(check.output).to.equal('1')
+            expect(check.status).to.equal('notification')
+            expect(check.storage.length).to.equal(1)
+            done()
+          }
+        })
+
+        worker.runCheck(snap)
+      })
+    })
+  })
+
+  describe('runLoop()', function() {
     it('run all checks', function(done) {
-      checkUserRef.once('child_changed', function(checkSnap) {
+      checkRef.once('child_changed', function(checkSnap) {
         var check = checkSnap.val()
         expect(check.pending).to.equal(true)
 
-        checkUserRef.once('child_changed', function(checkSnap) {
+        checkRef.once('child_changed', function(checkSnap) {
           var check = checkSnap.val()
-          expect(check.status).to.equal('ok')
+          expect(check.status).to.equal('notification')
           done()
         })
       })
@@ -41,19 +64,19 @@ describe('worker', function() {
     })
   })
 
-  describe('queue', function() {
+  describe('startQueue()', function() {
     it('run check when child is added', function(done) {
 
-      checkUserRef.once('child_changed', function(snap) {
+      checkRef.once('child_changed', function(snap) {
         expect(snap.val().pending).to.equal(true)
 
-        checkUserRef.once('child_changed', function(snap) {
+        checkRef.once('child_changed', function(snap) {
           var check = snap.val()
-          expect(check.status).to.equal('ok')
+          expect(check.status).to.equal('notification')
           expect(check.ago).to.be.below(+(new Date()))
           expect(check.ago).to.be.above(+(new Date()) - 1000)
-          expect(check.output).to.equal(undefined)
-          expect(check.notifs).to.equal(undefined)
+          expect(check.output).to.equal('1')
+          expect(check.notifs.length).to.equal(1)
           expect(check.err).to.equal(undefined)
 
           firebase.child('queue').once('value', function(snap) {
@@ -71,4 +94,4 @@ describe('worker', function() {
       worker.startQueue()
     })
   })
-});
+})

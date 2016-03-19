@@ -1,71 +1,100 @@
-var expect = require('chai').expect;
-var runner = require('./runner');
+var expect = require('chai').expect
+var runner = require('./runner')
 
 describe('runner', function() {
 
   describe('run()', function() {
 
     it('pass synchronously', function(done) {
-      runner.run('', function(output, notifMess, err) {
-        expect(output).to.equal('');
-        expect(notifMess).to.equal(null);
-        expect(err).to.equal(undefined);
-        done();
-      });
-    });
+      runner.run('', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
 
     it('pass asynchronously', function(done) {
-      runner.run('setTimeout(done, 20)', function(output, notifMess, err) {
-        expect(output).to.equal('');
-        expect(notifMess).to.equal(null);
-        expect(err).to.equal(undefined);
-        done();
-      });
-    });
-
-    it('notify', function(done) {
-      runner.run('notify("notify message")', function(output, notifMess, err) {
-        expect(output).to.equal('');
-        expect(notifMess).to.equal('notify message');
+      runner.run('setTimeout(done, 20)', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
         expect(err).to.equal(undefined)
-        done();
-      });
-    });
+        done()
+      })
+    })
 
     it('fails', function(done) {
-      runner.run('throw new Error()', function(output, notifMess, err) {
-        expect(output).to.equal('');
-        expect(notifMess).to.equal(null);
+      runner.run('throw new Error()', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
         expect(err.name).to.equal('Error')
-        done();
-      });
-    });
+        done()
+      })
+    })
 
     it('handles javascript error', function(done) {
-      runner.run('unknowMethod()', function(output, notifMess, err) {
-        expect(output).to.equal('');
-        expect(notifMess).to.equal(null);
-        expect(err.name).to.equal('ReferenceError');
-        done();
-      });
-    });
-
-    it('allows console.log()', function(done) {
-      runner.run('console.log("foo"); console.log("bar");', function(output, notifMess, err) {
-        expect(output).to.equal('foo\nbar');
-        expect(notifMess).to.equal(null);
-        expect(err).to.equal(undefined)
-        done();
-      });
-    });
+      runner.run('unknowMethod()', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
+        expect(err.name).to.equal('ReferenceError')
+        done()
+      })
+    })
 
     it('limits output to 1000 chars', function(done) {
-      runner.run('console.log(new Array(1000).join("abcdef"))', function(output, notifMess, err) {
-        expect(output.length).to.be.below(1000);
-        expect(notifMess).to.equal(null);
+      runner.run('log(new Array(1000).join("abcdef"))', [], function(output, notifMess, storage, err) {
+        expect(output.length).to.be.below(1000)
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
         expect(err).to.equal(undefined)
-        done();
-      });
+        done()
+      })
     })
-  });
-});
+
+    it('allows notify()', function(done) {
+      runner.run('notify("notify message")', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('')
+        expect(notifMess).to.equal('notify message')
+        expect(storage.length).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
+
+    it('allows log()', function(done) {
+      runner.run('log("foo"); log("bar");', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('foo\nbar')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
+
+    it('allows once()', function(done) {
+      runner.run('once(0, function() { log("ok") })', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('ok')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(1)
+        expect(storage[0]).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
+
+    it('restricts with once()', function(done) {
+      runner.run('once(0, function() { log("ok") })', [0], function(output, notifMess, storage, err) {
+        expect(output).to.equal('')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(1)
+        expect(storage[0]).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
+  })
+})

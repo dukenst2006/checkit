@@ -16,7 +16,7 @@ function runCheck(checkSnap) {
     // for tests, should be at least 0
     setTimeout(function() {
 
-      cluster.run(check.code, function(output, notifMess, err) {
+      cluster.run(check.code, check.storage || [], function(output, notifMess, storage, err) {
         util.log('update', checkSnap.key(), err)
 
         var status = err ? 'error' : (notifMess ? 'notification' : 'ok')
@@ -39,6 +39,7 @@ function runCheck(checkSnap) {
           status: status,
           pending: false,
           output: output || null,
+          storage: storage,
           notifs: notifs.slice(0, 20),
           error: err ? (err.name + ': ' + err.message) : null
         }, function(error) {
@@ -98,6 +99,7 @@ function startQueue() {
 
 module.exports = {
   start: start,
+  runCheck: runCheck,
   runLoop: runLoop,
   startLoop: startLoop,
   startQueue: startQueue

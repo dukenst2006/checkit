@@ -3,21 +3,25 @@ var util = require('util');
 var domain = require('domain');
 var request = require('request');
 
-module.exports.run = function(code, callback) {
+module.exports.run = function(code, storage, callback) {
   var output = ''
   var notifMess = null
   var context = {
-    console: {
-      log: console.log
-    },
+    log: console.log,
     request: request,
     setTimeout: setTimeout,
     notify: function(message) {
       notifMess = message
     },
+    once: function(key, cb) {
+      if (storage.indexOf(key) == -1) {
+        storage.push(key)
+        cb(key)
+      }
+    },
     done: function() {
       resetStdout();
-      callback(output, notifMess);
+      callback(output, notifMess, storage);
     }
   };
 
@@ -44,7 +48,7 @@ module.exports.run = function(code, callback) {
     // happens when done() is called after timeout
     if (err.message == 'channel closed') return
 
-    callback(output, notifMess, {
+    callback(output, notifMess, storage, {
       name: err.name,
       message: err.message
     });
@@ -59,7 +63,7 @@ module.exports.run = function(code, callback) {
       vm.runInNewContext(code, context, 'line');
     } catch(err) {
       resetStdout();
-      callback(output, notifMess, {
+      callback(output, notifMess, storage, {
         name: err.name,
         message: err.message
       });
