@@ -79,7 +79,7 @@ describe('mail', function() {
       var spy = chai.spy(function() {})
 
       rateLimitRef.set({
-        count: 15,
+        count: process.env.CHECKIT_MAIL_LIMIT,
         since: new Date().getTime()
       }, function() {
         mail.rateLimitMail(userId, function() {}, spy)
