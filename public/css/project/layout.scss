@@ -34,7 +34,7 @@ a {
   user-select: none;
   margin-bottom: 32px !important;
   padding: 8px;
-  padding-bottom: 16px;
+  padding-bottom: 12px;
   position: relative;
   background: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.12);
@@ -56,6 +56,15 @@ a {
   margin: 0;
   display: inline-block;
   font-size: 22px;
+}
+
+.header_help {
+  color: #a7adba;
+  float: left;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  margin-left: 10px;
 }
 
 .header_settings {

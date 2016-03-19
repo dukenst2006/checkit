@@ -1,8 +1,11 @@
 <header class="header page _|_">
+  <a class="header_help" href="https://github.com/julesbou/checkit-help/blob/master/README.md" target="_blank">
+    Help
+  </a>
   <h1 class="header_title">
     <a class="__active" href="/">Check & Notify</a>
   </h1>
-  <a class="header_settings pull-right" title="Settings" v-on:click="openSettingsModal" v-if="authUser.uid">
+  <a class="header_settings" title="Settings" v-on:click="openSettingsModal" v-if="authUser.uid">
     <i class="icon-cog"></i>
   </a>
 </header>

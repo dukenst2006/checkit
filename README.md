@@ -19,6 +19,5 @@
 # TODO
 
 - move to es6
-- remove public/js/.git
 - send sms
 - when check open and editing, duplicate it (but don't run it) (maybe)
