@@ -1,6 +1,6 @@
 <main class="page">
 
-  <section class="home wrap">
+  <section class="home">
 
     <form class="editor" v-if="check">
 
@@ -58,8 +58,6 @@
           <span v-if="check.ago"> ~ <span v-ago="check.ago"></span> ago</span>
         </p>
       </a>
-
-      <p class="_|_ __empty" v-if="!checks.length && checksLoaded">Empty</p>
     </div>
 
     <center v-if="!checksLoaded">

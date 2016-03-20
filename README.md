@@ -13,11 +13,11 @@ __notify() once()__
 
 # TODO
 
-- move "check-something" to top
 - fix timeout (test result come after timeout)
 - limit check.storage max length
-- send sms
 - when editing code - cancel changes break
+
+- send sms
 - move to es6
 - badge like github
 - when check open and editing, duplicate it (but don't run it) (maybe)
