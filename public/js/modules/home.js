@@ -4,8 +4,7 @@ define([
   'services/firebase',
   'text!./home.html',
   'directives/ago',
-  'directives/editor',
-  'directives/colorize'
+  'directives/editor'
 ], function(Vue, Auth, firebase, template) {
 
   function viewPortY() {

@@ -27,6 +27,10 @@ define([
       }.bind(this))
     },
 
+    update: function(newVal, oldVal) {
+      Vue.nextTick(this.colorize.bind(this))
+    },
+
     colorize: function() {
       // https://github.com/ccampbell/rainbow/issues/177
       var breaksCount

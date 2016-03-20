@@ -14,7 +14,6 @@ __notify() once()__
 # TODO
 
 - fix timeout (test result come after timeout)
-- limit check.storage max length
 - when editing code - cancel changes break
 
 - send sms

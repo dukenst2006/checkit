@@ -8,10 +8,10 @@
         <i class="icon-cancel"></i>
       </a>
 
-      <div class="editor-window" v-editor>
+      <div class="editor-window" v-editor="check.code">
         <textarea class="editor-textarea" v-model="check.code" v-on:keydown="metaEnterSave" tabindex="2" test="check-code"></textarea>
         <pre class="editor-pre">
-          <code class="editor-code" data-language="javascript" v-colorize="check.code"></code>
+          <code class="editor-code" data-language="javascript">{{ check.code }}</code>
         </pre>
 
         <div class="editor-message __expand __expand-status" v-if="check.status || check.pending" v-el:editorMessage>
