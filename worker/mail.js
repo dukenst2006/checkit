@@ -1,14 +1,17 @@
 var util = require('util')
 var firebase = require('./firebase')
-var sendgrid  = require('sendgrid')(process.env.CHECKIT_SENDGRID_API_KEY)
+
+var domain = process.env.CHECKIT_MAIL_DOMAIN
+var apiKey = process.env.CHECKIT_MAIL_API_KEY
+var mailgun = require('mailgun-js')({ apiKey: apiKey, domain: domain })
 
 function sendMail(userSnap, check, notif) {
   var user = userSnap.val()
   if (user.notificationEnabled && user.notificationEmail) {
     rateLimitMail(userSnap.key(), function() {
       util.log('send mail', user.notificationEmail)
-      sendgrid.send(formatMail(check, user, notif), function(err, json) {
-        if (err) console.error(err)
+      mailgun.messages().send(formatMail(check, user, notif), function(err, body) {
+        if (err) console.error('MAIL ERROR', err)
       })
     })
   }
@@ -38,9 +41,9 @@ function formatMail(check, user, notif) {
   var notifMess = notif[0]
   var notifDate = new Date(notif[1]).toLocaleString()
 
-  return new sendgrid.Email({
-    to: user.notificationEmail,
+  return {
     from: process.env.CHECKIT_MAIL_SENDER,
+    to: user.notificationEmail,
     subject: '[check-it notification] ' + check.name,
     html: (
       'You just received a notification from <a href="http://check-it.io">check-it.io</a> :<br>' +
@@ -50,7 +53,8 @@ function formatMail(check, user, notif) {
       '</blockquote>' +
       '<br>' +
       '<em>You received this mail because you have enabled <i>"Email Notifications"<i> in the application.</em><br>' +
-      '<em>You can disable this setting to stop receiving these emails.</em>'
+      '<em>You can disable this setting to stop receiving these emails.</em><br><br>' +
+      '<a href="%unsubscribe_url%">Unsubscribe</a>'
     ),
     text: (
       'You just received a notification from check-it.io : \n\n' +
@@ -59,9 +63,10 @@ function formatMail(check, user, notif) {
       '> Notification: ' + notif[0] + '\n\n' +
       '\n\n' +
       'You received this mail because you have enabled "Email Notifications" in the application.\n' +
-      'You can disable this setting to stop receiving these emails.'
+      'You can disable this setting to stop receiving these emails.\n\n' +
+      'Unsubscribe: %unsubscribe_url%'
     )
-  })
+  }
 }
 
 module.exports = {

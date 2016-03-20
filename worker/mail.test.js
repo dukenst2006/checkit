@@ -1,6 +1,5 @@
 var mail = require('./mail')
 var firebase = require('./firebase')
-var sendgrid  = require('sendgrid')(process.env.CHECKIT_SENDGRID_API_KEY)
 
 var chai = require('chai')
 var expect = chai.expect
@@ -122,7 +121,11 @@ describe('mail', function() {
 
     it('works', function() {
       var email = mail.formatMail(checkRef, { notificationEmail: 'test@mail.com'}, ['message', new Date().toUTCString()])
-      expect(email).to.be.an.instanceof(sendgrid.Email)
+      expect(email.from).to.equal(process.env.CHECKIT_MAIL_SENDER)
+      expect(email.to).to.equal('test@mail.com')
+      expect(email.subject).to.not.be.undefined
+      expect(email.text).to.not.be.undefined
+      expect(email.html).to.not.be.undefined
     })
 
   })
