@@ -52,7 +52,9 @@ define([
 
               window.confirm = function() { return true }
               Utils.triggerEvent('click', document.querySelector('.editor .btn.__delete'))
-              Utils.waitForElementExists('.items .__empty', function() {
+              Utils.waitFor(function() {
+                return document.querySelector('.items .item') === null
+              }, function() {
                 expect(document.querySelector('.__current')).toBeNull()
                 done()
               })

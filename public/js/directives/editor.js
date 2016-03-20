@@ -4,6 +4,9 @@ define([
   'behave'
 ], function(Vue, Rainbow, Behave) {
 
+  var startsWithNewLineReg = /^(\r\n|\n|\r)*/g
+  var newLineReg = /\r\n|\r|\n/
+
   return Vue.directive('editor', {
 
     bind: function() {
@@ -36,9 +39,8 @@ define([
       var breaksCount
 
       function fixCode(code) {
-        var startsWithNewLine = /^(\r\n|\n|\r)*/g
-        breaksCount = code.match(startsWithNewLine)[0].split(/\r\n|\r|\n/).length - 1
-        return code.replace(startsWithNewLine, '')
+        breaksCount = code.match(startsWithNewLineReg)[0].split(newLineReg).length - 1
+        return code.replace(startsWithNewLineReg, '')
       }
 
       function revertFixCode(code) {
