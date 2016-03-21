@@ -10,7 +10,7 @@ module.exports = function(options) {
   return {
     run: function(code, storage, callback) {
       var ended
-      var timeout = (options && options.timeout) || process.env.CHECKIT_CHECK_TIMEOUT
+      var timeout = ((options && options.timeout) || process.env.CHECKIT_CHECK_TIMEOUT) * 1000
 
       var timer = setTimeout(function() {
         ended = true

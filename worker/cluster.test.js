@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-var cluster = require('./cluster')({ timeout: 1000 })
+var cluster = require('./cluster')({ timeout: 1 })
 
 describe('cluster', function() {
 

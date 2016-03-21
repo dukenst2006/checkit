@@ -13,9 +13,9 @@ __notify() once()__
 
 # TODO
 
-- use codemirror
 - set timeout to 10min
 
+- use codemirror
 - send sms
 - move to es6
 - badge like github

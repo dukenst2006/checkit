@@ -66,7 +66,7 @@ function startLoop() {
   setInterval(function() {
     util.log('loop')
     runLoop()
-  }, process.env.CHECKIT_CHECK_INTERVAL)
+  }, process.env.CHECKIT_CHECK_INTERVAL * 1000)
 }
 
 function runLoop() {
