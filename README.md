@@ -13,8 +13,11 @@ __notify() once()__
 
 # TODO
 
-- send sms
+- debug multi window sync
+- set timeout to 10min
 - add animation for remove
+
+- send sms
 - move to es6
 - badge like github
 - when check open and editing, duplicate it (but don't run it) (maybe)

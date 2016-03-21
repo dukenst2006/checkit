@@ -34,7 +34,6 @@ a {
   user-select: none;
   margin-bottom: 32px !important;
   padding: 8px;
-  padding-bottom: 12px;
   position: relative;
   background: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.12);
@@ -50,6 +49,12 @@ a {
     @extend .__S;
     @extend .__green;
   }
+}
+
+.header_col {
+  float: left;
+  width: 33%;
+  min-height: 1px;
 }
 
 .header_title {
@@ -71,8 +76,7 @@ a {
   color: #a7adba;
   font-size: 28px;
   line-height: 26px;
-  position: absolute;
-  right: 10px;
+  text-align: right;
 
   &:hover {
     color: #2980B9;

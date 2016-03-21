@@ -160,6 +160,7 @@ define([
         if (!confirm('Are you sure you want to delete it?')) return false
 
         this.ref.child(this.$data.check.id).remove()
+        this.$data.check = {}
         this.hideEditor()
       },
 
@@ -275,6 +276,11 @@ define([
           item = items[items.length - 1]
         }
 
+        // check removal
+        if (!this.$data.check.id) {
+          item = document.querySelector('.check-something .btn')
+        }
+
         if (this.checkListener && this.$data.check.id) {
           this.ref.child(this.$data.check.id).off('value', this.checkListener)
         }
@@ -284,8 +290,6 @@ define([
         main.classList.remove('__editor')
         editor.classList.remove('__show')
         closeCtrl.classList.remove('__show')
-
-        //this.$data.check = {}
 
         var coords = this.itemCoords(item)
 
