@@ -115,6 +115,14 @@ define([
 
     methods: {
 
+      onTextareaKeydown: function(event) {
+        if (event.keyCode === 90 && event.metaKey) { // z
+          event.preventDefault()
+        } else {
+          this.onKeydown(event)
+        }
+      },
+
       onKeydown: function(event) {
         if (event.keyCode === 13 && event.metaKey) { // ENTER
           event.preventDefault()

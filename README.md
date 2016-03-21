@@ -13,9 +13,8 @@ __notify() once()__
 
 # TODO
 
-- debug multi window sync
+- use codemirror
 - set timeout to 10min
-- add animation for remove
 
 - send sms
 - move to es6
