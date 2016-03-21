@@ -9,7 +9,9 @@
       </a>
 
       <div class="editor-window" v-editor="check.code">
-        <textarea class="editor-textarea" v-model="check.code" v-on:keydown="onKeydown" tabindex="2" test="check-code"></textarea>
+        <textarea class="editor-textarea" v-model="check.code" v-on:keydown="onKeydown" tabindex="2" test="check-code"
+         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        ></textarea>
         <pre class="editor-pre">
           <code class="editor-code" data-language="javascript">{{ check.code }}</code>
         </pre>

@@ -219,19 +219,7 @@ define([
           notifs: []
         }, check) : {
           name: 'Checking something ..',
-          code: [
-            "// here's an example of what we call a \"check\"",
-            "// you can check whatever you want in JavaScript",
-            "",
-            "// log() is useful to print/debug any value",
-            "log('this will be printed in the output window');",
-            "",
-            "// dumb example, check when Math.random() is superior than 0.8",
-            "if (Math.random() > 0.8) {",
-            "  // use notfiy(mess) when the condition is met",
-            "  notify('Math.random() is superior to 0.8');",
-            "}"
-          ].join('\n'),
+          code: '',
           ago: '',
           pending: false,
           notifs: [],

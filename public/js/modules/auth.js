@@ -74,8 +74,10 @@ define([
                 name: authData[provider].displayName,
                 provider: provider
               })
+
+              this.saveDefaultCheck(authData)
             }
-          })
+          }.bind(this))
         }.bind(this))
       },
 
@@ -100,8 +102,37 @@ define([
 
             // save new user's profile
             firebase.child('users/' + authData.uid).set(this.$data.user)
+
+            this.saveDefaultCheck(authData)
           }.bind(this))
         }.bind(this))
+      },
+
+      saveDefaultCheck: function(authData) {
+        firebase.child('checks/' + authData.uid).push({
+          name: 'Check `example.com` is down',
+          status: 'ok',
+          output: 'domain "example.com" is up',
+          ago: new Date().getTime(),
+          pending: false,
+          code: [
+            '// send a request, see https://github.com/request/request',
+            'request(\'http://example.com\', function (error, response, body) {',
+            '',
+            '  // if statusCode is non 200',
+            '  if (!error && response.statusCode != 200) {',
+            '    notify(\'domain "example.com" is down\');',
+            '  }',
+            '',
+            '  // else everything is fine',
+            '  else {',
+            '    log(\'domain "example.com" is up\');',
+            '  }',
+            '',
+            '  done();',
+            '});'
+          ].join('\n')
+        })
       },
 
       resetPassword: function() {
