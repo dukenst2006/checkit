@@ -99,6 +99,12 @@ define([
           this.$data.check.notifs = updated.notifs
         }
       }.bind(this)
+
+      document.addEventListener('keydown', function(event) {
+        if (this.$data.check.name && event.keyCode == 27) { // ESC
+          this.hideEditor()
+        }
+      }.bind(this))
     },
 
     beforeDestroy: function() {
@@ -109,8 +115,8 @@ define([
 
     methods: {
 
-      metaEnterSave: function(event) {
-        if (event.keyCode === 13 && event.metaKey) {
+      onKeydown: function(event) {
+        if (event.keyCode === 13 && event.metaKey) { // ENTER
           event.preventDefault()
           this.saveCheck()
         }
@@ -153,8 +159,8 @@ define([
       deleteCheck: function() {
         if (!confirm('Are you sure you want to delete it?')) return false
 
-        this.hideEditor()
         this.ref.child(this.$data.check.id).remove()
+        this.hideEditor()
       },
 
       pushQueue: function() {
@@ -284,6 +290,8 @@ define([
         if (this.checkListener && this.$data.check.id) {
           this.ref.child(this.$data.check.id).off('value', this.checkListener)
         }
+
+        this.$data.check = {}
 
         main.classList.remove('__editor')
         editor.classList.remove('__show')

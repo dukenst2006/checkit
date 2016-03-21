@@ -13,9 +13,7 @@ __notify() once()__
 
 # TODO
 
-- fix timeout (test result come after timeout)
-- when editing code - cancel changes break
-
+- default data account creation
 - send sms
 - move to es6
 - badge like github
