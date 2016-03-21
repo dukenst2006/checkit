@@ -75,6 +75,16 @@ describe('runner', function() {
       })
     })
 
+    it('allows moment()', function(done) {
+      runner.run('log(moment("2010-01-01").isSame(new Date(), "day"));', [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('false')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
+
     it('allows parseXml()', function(done) {
       runner.run(
         'var xml = "<?xml version=\'1.0\' encoding=\'UTF-8\'?><root><child foo=\'bar\'></child></root>";' +

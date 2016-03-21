@@ -2,6 +2,7 @@ var vm = require('vm')
 var util = require('util')
 var domain = require('domain')
 var request = require('request')
+var moment = require('moment')
 var xml2js = require('xml2js')
 
 module.exports.run = function(code, storage, callback) {
@@ -12,6 +13,7 @@ module.exports.run = function(code, storage, callback) {
     request: request,
     setTimeout: setTimeout,
     parseXml: xml2js.parseString,
+    moment: moment,
     notify: function(message) {
       notifMess = message
     },
