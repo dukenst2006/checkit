@@ -68,7 +68,7 @@ define([
         if (this.$data.loadSampleData) {
           var checksRef = firebase.child('checks/' + this.$data.user.uid)
           var queueRef = firebase.child('queue')
-          var checks = window.CHECKIT_EXAMPLES
+          var checks = window.CHECKIT_EXAMPLES.slice(0, 3)
 
           for (var i = 0; i < checks.length; i++) {
             var check = Object.assign(checks[i], {

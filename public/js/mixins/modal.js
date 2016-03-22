@@ -35,7 +35,9 @@ define({
 
       // wait for css animation
       setTimeout(function() {
-        this.$el.style.display = 'none'
+        if (this.$el) {
+          this.$el.style.display = 'none'
+        }
       }.bind(this), 300)
     }
   }
