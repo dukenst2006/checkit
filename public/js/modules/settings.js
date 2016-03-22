@@ -23,15 +23,6 @@ define([
       }
     },
 
-    watch: {
-      'user.notificationEnabled': function(enabled) {
-        if (enabled && !this.$data.user.notificationEmail) {
-          this.$data.user.notificationEmail = this.$data.user.email
-          this.updateNotificationEmail()
-        }
-      }
-    },
-
     methods: {
 
       updateNotificationEnabled: function() {

@@ -56,5 +56,5 @@ require(['bootstrap'], function() {
 // include styles
 var link = document.createElement('link')
 link.rel = 'stylesheet'
-link.href = '/base/public/var/styles.css'
+link.href = '/base/public/dist/styles.css'
 document.head.appendChild(link)

@@ -1,7 +1,7 @@
 ({
-  baseUrl: "public/js",
-  out: "public/var/build.js",
-  mainConfigFile: "public/js/bootstrap.js",
+  baseUrl: "../public/js",
+  out: "../public/dist/build.js",
+  mainConfigFile: "../public/js/bootstrap.js",
   generateSourceMaps: true,
   optimize: "uglify2",
   preserveLicenseComments: false,

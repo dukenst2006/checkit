@@ -2,119 +2,12 @@
   position: relative;
   border-radius: 2px;
   background: #fff;
+  margin: 200px auto 0;
+  padding: 20px 20px 0;
   overflow: hidden;
-  padding: 0 20px;
-  margin-bottom: 20px !important;
+  width: 300px;
 
-  @include tablet {
-    margin: 0 auto;
-    width: 75%;
-  }
-
-  @include mobile {
-    width: 100%;
-  }
-}
-
-.auth_content {
-  .notif {
-    background: lighten(color(sun-flower), 40%);
-    padding: 14px;
-    margin: 14px 0 0 0;
-  }
-
-  form {
-    padding: 20px;
-
-    .btn {
-      margin-top: 12px;
-      display: inline-block;
-    }
-
-    .form-label {
-      display: inline-block;
-      margin-top: 16px;
-      margin-left: 8px;
-    }
-
-    .reset-pass {
-      max-height: none;
-      margin: -32px 0 0 0;
-      display: block;
-      position: absolute;
-      right: 30px;
-      width: 24px;
-      height: 24px;
-      overflow: hidden;
-      border-radius: 50%;
-      text-indent: -999px;
-      background: color(silver);
-
-      b {
-        color: #FFF;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-        text-indent: -9999px;
-        font-size: 16px;
-
-        &::before {
-          content: '?';
-          line-height: 24px;
-          text-indent: 0;
-          display: block;
-        }
-      }
-    }
-  }
-}
-
-.auth_form {
-  input, select, textarea {
-    width: 100%;
-    padding: 11px 10px 11px 14px;
-    display: block;
-    margin: 0;
-    border: 1px solid #e3e3e3;
-    transition: all 0.3s;
-    background: #fff;
-    font: 16px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
-    box-sizing: border-box;
-    opacity: .85;
-
-    &:first-of-type {
-      border-radius: 3px 3px 0 0;
-    }
-
-    &:last-of-type {
-      border-radius: 0 0 3px 3px;
-    }
-
-    &:first-of-type:last-of-type {
-      border-radius: 3px;
-    }
-
-    & ~ input {
-      border-top: none;
-    }
-
-    &:focus {
-      opacity: 1;
-    }
-
-    &[disabled] {
-      border: none;
-    }
-  }
-}
-.auth_footer {
-  text-align: center;
-  margin-bottom: 20px;
-
-  .auth_subtitle {
-    padding: 8px 0 12px 0;
+  .title {
     margin: 0;
     line-height: 1;
     font-weight: 700;
@@ -126,6 +19,7 @@
     height: auto;
     overflow: hidden;
     text-align: center;
+    margin-bottom: 20px;
 
     &::before, &::after {
       position: absolute;
@@ -145,6 +39,23 @@
     &::after {
       margin-left: 1em;
     }
+  }
+}
+
+.auth.__login {
+  .notif {
+    background: lighten(color(sun-flower), 40%);
+    padding: 14px;
+  }
+
+  .buttons {
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .notif, .buttons {
+    margin: 0;
+    margin-bottom: 20px;
   }
 
   .social {
@@ -196,37 +107,8 @@
   }
 }
 
-.auth_slider {
-  @extend %clearfix;
-  height: 175px;
-  transition: height 0.3s;
-
-  .auth_title {
-    margin: 12px 0;
-  }
-
-  &.__top {
-    height: 40px;
-    text-align: center;
-  }
-
-  > * {
-    width: 100%;
-    position: absolute;
-    box-sizing: border-box;
-
-    transition: all ease-out 0.3s, opacity ease-in 0.4s;
-    left: 0;
-    opacity: 1;
-
-    &.slide-left {
-      left: -100%;
-      opacity: 0;
-    }
-
-    &.slide-right {
-      left: 100%;
-      opacity: 0;
-    }
+.auth.__config {
+  .switch i {
+    float: right;
   }
 }

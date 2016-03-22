@@ -13,8 +13,7 @@ __notify() once()__
 
 # TODO
 
-- set timeout to 10min
-
+- add run all button
 - use codemirror
 - send sms
 - move to es6

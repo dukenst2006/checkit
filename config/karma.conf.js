@@ -12,8 +12,9 @@ module.exports = function (config) {
       { pattern: 'public/img/**/*', included: false },
       { pattern: 'public/fonts/*', included: false },
       { pattern: 'public/libs/**/*.js', included: false },
-      { pattern: 'public/var/*.css', included: false },
-      { pattern: 'public/var/*.map', included: false }
+      { pattern: 'public/dist/examples.js', included: false },
+      { pattern: 'public/dist/*.css', included: false },
+      { pattern: 'public/dist/*.map', included: false }
     ],
 
     proxies: {

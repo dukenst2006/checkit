@@ -1,0 +1,33 @@
+.form {
+  .form-control {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #3F3F44;
+    display: block;
+    height: 34px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #fff;
+    border: 1px solid #CBCBD2;
+    border-radius: 2px;
+    transition: border-color ease-in-out .15s;
+
+    font-family: 'Exo 2', sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+
+    &:focus {
+      border-color: #2980B9;
+      outline: 0;
+    }
+
+    &.__full {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  .form-spacer {
+    margin-bottom: 20px;
+  }
+}

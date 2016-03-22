@@ -106,4 +106,9 @@
     float: right;
     margin-right: 0 !important;
   }
+
+  &.__full {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

@@ -5,4 +5,4 @@ config/nginx.conf
 
 public/js/config.js
 public/libs/
-public/var/
+public/dist/

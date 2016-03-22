@@ -39,18 +39,17 @@ require.config({
 })
 
 define([
-  'modules/layout',
   'services/auth'
-], function (Layout, Auth) {
+], function (Auth) {
 
   Auth.start()
 
   require([
-    './modules/layout',
+    './layout',
     './modules/auth',
     './modules/home',
     './modules/settings'
-  ], function() {
+  ], function(Layout) {
     Layout.$mount(document.body)
   })
 })

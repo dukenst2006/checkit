@@ -5,7 +5,6 @@ define([
   return {
     user: {
       uid: null,
-      email: null,
       provider: null,
       notificationEnabled: null,
       notificationEmail: null
@@ -22,7 +21,9 @@ define([
       var self = this
 
       firebase.onAuth(function(authData) {
-        // athenticated, fetch profile
+        window.userUID = authData && authData.uid
+
+        // authenticated, fetch profile
         if (authData) {
           self.user.uid = authData.uid
 

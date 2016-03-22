@@ -5,9 +5,13 @@ var firebase = require('./firebase')
 
 function runCheck(checkSnap) {
   var check = checkSnap.val()
-  var initialStatus = check.status
 
-  if (!check || check.code == undefined || check.disabled) return false
+  if (!check || check.code == undefined || check.disabled) {
+    util.log('abort', check)
+    return false
+  }
+
+  var initialStatus = check.status
 
   checkSnap.ref().update({
     pending: true
