@@ -22,9 +22,11 @@
         </li>
         <li v-show="user.notificationEnabled">
           <label class="__left">Email Notifications Recipient</label>
-          <div class="__right">
+          <div class="__right form">
             <i class="icon-loader" v-show="loaderNotificationEmail"></i>
-            <input type="text" v-model="user.notificationEmail" v-on:keyup="updateNotificationEmail | debounce 600">
+            <input type="text" class="form-control __small" placeholder="Email" autocorrect="false"
+              v-model="user.notificationEmail"
+              v-on:keyup="updateNotificationEmail | debounce 600">
           </div>
         </li>
         <li class="settings_password" v-if="user.provider == 'password'">

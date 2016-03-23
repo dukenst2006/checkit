@@ -25,6 +25,11 @@
       width: 100%;
       box-sizing: border-box;
     }
+
+    &.__small {
+      margin: 6px 0;
+      height: 26px;
+    }
   }
 
   .form-spacer {
