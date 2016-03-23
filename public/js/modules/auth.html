@@ -1,13 +1,16 @@
 <main class="page">
   <div class="auth __login" v-show="showLogin">
     <p class="notif" v-show="message">{{ message }}</p>
-    <h4 class="title">Sign In using</h4>
+    <h4 class="title">Sign In</h4>
     <div class="buttons">
       <button class="btn social __twitter" v-on:click="login('twitter')">Twitter</button>
-      <button class="btn social __facebook" v-on:click="login('facebook')">Facebook</button>
-      <button class="btn social __google" v-on:click="login('google')">GPlus</button>
       <button class="btn social __github" v-on:click="login('github')">Github</button>
+      <button class="btn social __google" v-on:click="login('google')">GPlus</button>
+      <button class="btn social __facebook" v-on:click="login('facebook')">Facebook</button>
     </div>
+    <p class="_|_">
+      <small>We only ask <em>read</em> permission</small>
+    </p>
   </div>
   <div class="auth __config" v-else>
     <h4 class="title">One last step</h4>

@@ -1,0 +1,14 @@
+<header class="header page _|_">
+  <div class="header_col" v-bind:style="{ visibility: component=='dashboard' ? 'visible' : 'hidden' }">
+    <a class="header_help" href="https://github.com/julesbou/checkit-www/blob/master/README.md" target="_blank">Help</a>
+  </div>
+  <h1 class="header_col header_title">
+    <a class="__active" href="/">Check It</a>
+  </h1>
+  <a class="header_col header_settings" title="Settings" v-on:click="openSettingsModal" v-show="component=='dashboard'">
+    <i class="icon-cog"></i>
+  </a>
+</header>
+
+<component :is="component"></component>
+<component is="settings"  v-ref:settingsModal></component>

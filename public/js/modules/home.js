@@ -115,11 +115,6 @@ define([
 
     methods: {
 
-      openSettingsModal: function() {
-        // TODO fixme settingsmodal => settingsModal
-        this.$refs.settingsmodal.open()
-      },
-
       onTextareaKeydown: function(event) {
         if (event.keyCode === 90 && event.metaKey) { // z
           event.preventDefault()

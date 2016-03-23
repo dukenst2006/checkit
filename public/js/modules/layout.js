@@ -1,12 +1,13 @@
 define([
   'vue',
   'services/auth',
-  'services/firebase'
-], function(Vue, Auth, firebase) {
+  'services/firebase',
+  'text!./layout.html'
+], function(Vue, Auth, firebase, template) {
 
   return new Vue({
 
-    template: '<component :is="component"></component>',
+    template: template,
 
     replace: false,
 
@@ -33,6 +34,15 @@ define([
           this.preventComponentChange = false
         }
       }.bind(this))
+    },
+
+    methods: {
+
+      openSettingsModal: function() {
+        // TODO fixme settingsmodal => settingsModal
+        this.$refs.settingsmodal.open()
+      }
+
     }
   })
 

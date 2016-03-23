@@ -45,7 +45,7 @@ define([
   Auth.start()
 
   require([
-    './layout',
+    './modules/layout',
     './modules/auth',
     './modules/home',
     './modules/settings'
