@@ -38,6 +38,7 @@ a {
   background: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.12);
   border-bottom: 1px solid color(clouds);
+  animation: fade-header .4s backwards;
 
   @media (min-width: 960px) {
     padding-left: 10px !important;
@@ -86,4 +87,18 @@ a {
 main {
   position: relative;
   height: 100%;
+}
+
+@keyframes fade-header {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
 }

@@ -2,6 +2,7 @@ main {
   .items, .check-something {
     opacity: 1;
     transition: opacity .4s;
+    animation: fade .6s backwards 1s;
   }
 
   &.__editor {
