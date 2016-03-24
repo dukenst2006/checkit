@@ -23,7 +23,7 @@ define([
           notificationEnabled: false,
           notificationEmail: null
         },
-        showLogin: true,
+        showLogin: false,
         loadSampleData: true,
         message: null
       }

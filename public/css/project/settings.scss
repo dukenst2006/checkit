@@ -1,10 +1,15 @@
 .overlay.__settings {
+  background: rgba(13,37,69,.175);
 
   .modal {
     background: #fff;
-    box-shadow: 0 0 95px 5px rgba(0,0,0,0.6);
     flex-direction: column;
     display: flex;
+    box-shadow: 0 5px 40px rgba(6, 21, 44, 0.3);
+
+    width: 300px;
+    margin-left: -150px;
+
 
     .modal_header {
       background: #ECF0F1;
@@ -12,6 +17,7 @@
 
     .modal_content {
       background: #FFF;
+      padding: 20px;
       overflow-y: scroll;
       flex: 1;
       height: auto;
@@ -24,75 +30,21 @@
       border-top: 1px solid #ddd;
     }
   }
-}
 
-.logout-user {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 28px;
-  color: #a7adba;
-
-  &:hover {
-    color: #2980B9;
-  }
-}
-
-.settings_table {
-
-  .delete-user {
-    background: #EA6064;
-    color: #fff;
-    border-color: #f93338;
+  .logout-user {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 28px;
+    color: #a7adba;
 
     &:hover {
-    background: #fa6569;
+      color: #2980B9;
     }
   }
 
-
-  > li {
-    @extend .clearfix;
-    padding: 0 12px;
-    height: 42px;
-    border-bottom: 1px solid color(clouds);
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    .__left, &.__left {
-      float: left;
-      line-height: 42px;
-    }
-
-    .__right, &.__right {
-      float: right;
-      line-height: 42px;
-      text-align: right;
-      min-width: 60%;
-
-      input {
-        width: 80%;
-        text-align: right;
-        float: right;
-      }
-
-      .switch i {
-        vertical-align: text-top;
-      }
-
-      .btn {
-        margin-right: 0;
-      }
-
-      p {
-        margin-bottom: 0;
-      }
-
-      [disabled] {
-        text-align: right;
-      }
-    }
+  .switch i {
+    vertical-align: text-top;
+    float: right;
   }
 }

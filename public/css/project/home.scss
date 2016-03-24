@@ -422,6 +422,10 @@ main {
     margin: 0;
     margin-bottom: 8px;
     line-height: 0.8;
+
+    &:hover {
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
   }
 
   i {

@@ -43,16 +43,16 @@
   // ========================================================================
 
   &.__default {
-    background: #e0e0e0;
-    color: rgba(0,0,0,.6);
+    background: #fff;
+    color: #008cdd;
 
     &:hover {
-      color: rgba(0,0,0,.8);
-      background: #e8e8e8;
+      color: #008cdd;
+      background: #fafafa;
     }
     &:active {
-      color: rgba(0,0,0,.8);
-      background: #ccc;
+      color: #008cdd;
+      background: #fafafa;
     }
   }
 

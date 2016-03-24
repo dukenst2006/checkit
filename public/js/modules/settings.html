@@ -4,46 +4,22 @@
       <h2 class="modal_title">Settings</h2>
       <a class="logout-user" title="Logout" v-on:click="logout"><i class="icon-logout"></i></a>
     </header>
-    <article class="modal_content">
-      <ul class="settings_table list-unstyled">
-        <li v-if="user.email">
-          <label class="__left">Email</label>
-          <div class="__right">{{ user.email }}</div>
-        </li>
-        <li>
-          <label class="__left">Enable Email Notifications</label>
-          <div class="__right">
-            <i class="icon-loader" v-show="loaderNotificationEnabled"></i>
-            <label class="switch">
-              <input type="checkbox" v-model="user.notificationEnabled" v-on:change="updateNotificationEnabled">
-              <i></i>
-            </label>
-          </div>
-        </li>
-        <li v-show="user.notificationEnabled">
-          <label class="__left">Email Notifications Recipient</label>
-          <div class="__right form">
-            <i class="icon-loader" v-show="loaderNotificationEmail"></i>
-            <input type="text" class="form-control __small" placeholder="Email" autocorrect="false"
-              v-model="user.notificationEmail"
-              v-on:keyup="updateNotificationEmail | debounce 600">
-          </div>
-        </li>
-        <li class="settings_password" v-if="user.provider == 'password'">
-          <label class="__left">Password</label>
-          <div class="__right">
-            <span v-if="passwordSuccess" class="text __success" test="password-success">{{ passwordSuccess }}</span>
-            <a v-on:click="updatePassword" test="change-password">Change Password</a>
-          </div>
-        </li>
-        <!--
-        <li class="_|" v-if="user.provider == 'password'">
-          <div class="__right">
-            <a class="red" test="delete-user" v-on:click="deleteUser">Delete Account</a>
-          </div>
-        </li>
-        -->
-      </ul>
+    <article class="modal_content form">
+      <div class="form-spacer">
+        <i class="icon-loader" v-show="loaderNotificationEnabled"></i>
+        <label class="switch">
+          Email Notifications
+          <input type="checkbox" v-model="user.notificationEnabled" v-on:change="updateNotificationEnabled">
+          <i></i>
+        </label>
+      </div>
+      <div class="form-spacer">
+        <input type="text" class="form-control __full" placeholder="Email" autocorrect="false"
+          v-show="user.notificationEnabled"
+          v-model="user.notificationEmail"
+          v-on:keyup="updateNotificationEmail | debounce 600">
+        <i class="icon-loader" v-show="loaderNotificationEmail"></i>
+      </div>
     </article>
   </article>
 </div>
