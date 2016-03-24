@@ -104,6 +104,7 @@ main {
       padding: 10px;
       color: #fff;
       font-size: 13px;
+      -webkit-font-smoothing: antialiased;
       margin-bottom: 20px;
 
       .editor-code {
@@ -240,6 +241,7 @@ main {
       color: #F0F0F0;
       padding: 7px;
       font-size: 16px;
+      -webkit-font-smoothing: antialiased;
       text-shadow: 0 0 2px #000;
       width: 100%;
     }
@@ -254,11 +256,13 @@ main {
       color: #8FB4B4;
       background: #363E46;
 
-      &:hover {
-        color: #363E46;
-        background: #8FB4B4;
-        &::before {
+      &.__save {
+        &:hover {
           color: #363E46;
+          background: $blue;
+          &::before {
+            color: #363E46;
+          }
         }
       }
 
@@ -418,10 +422,11 @@ main {
   padding-top: 60px;
 
   .btn {
-    border-radius: 20px;
     margin: 0;
     margin-bottom: 8px;
     line-height: 0.8;
+    color: #fff;
+    background: $blue;
 
     &:hover {
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);

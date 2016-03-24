@@ -44,14 +44,14 @@
 
   &.__default {
     background: #fff;
-    color: #008cdd;
+    color: $blue;
 
     &:hover {
-      color: #008cdd;
+      color: $blue;
       background: #fafafa;
     }
     &:active {
-      color: #008cdd;
+      color: $blue;
       background: #fafafa;
     }
   }
@@ -73,11 +73,11 @@
   }
 
   &.__primary {
-    background: #3b83c0;
+    background: $blue;
     color: #fff;
 
-    &:hover { background: #458ac6; }
-    &:active { background: #3370a5; }
+    &:hover { background: #009EF9; }
+    &:active { background: #0077BB; }
   }
 
   &.__danger {

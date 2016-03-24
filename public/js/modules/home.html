@@ -43,8 +43,8 @@
       <div class="editor-bar">
         <input v-model="check.name" v-on:keydown="onKeydown" tabindex="1" test="check-name">
         <button type="button" class="btn __delete icon-trash" v-on:click="deleteCheck()" v-if="check.id" test="delete-button"></button>
-        <button type="button" class="btn tt-trigger" test="save-button" v-on:click="saveCheck"
-          data-tooltip="Or press Cmd/metaKey + ENTER"
+        <button type="button" class="btn __save" test="save-button" v-on:click="saveCheck"
+          data-tooltip="Or press Cmd+ENTER"
         >Save/Run</button>
       </div>
     </form>
@@ -66,7 +66,7 @@
   </section>
 
   <footer class="check-something">
-    <a class="btn" v-on:click="loadEditor($event)">
+    <a class="btn __primary" v-on:click="loadEditor($event)">
       <i class="icon-plus"></i> Check something
     </a>
   </footer>
