@@ -5,41 +5,47 @@ env:
 		var fs = require('fs'); \
 		require('dotenv').load({ path: 'config/env' }); \
 		var conf = 'define({\"FIREBASE\": \"' + process.env.CHECKIT_FIREBASE_URL + '\"})'; \
-		fs.writeFileSync('public/js/config.js', conf); \
+		fs.writeFileSync('app/js/config.js', conf); \
 	"
 
 css:
-	node-sass public/css/main.scss public/dist/styles.css
-	autoprefixer-cli -o public/dist/styles.css public/dist/styles.css
+	node-sass app/css/main.scss app/dist/styles.css
+	autoprefixer-cli -o app/dist/styles.css app/dist/styles.css
+	lessc www/css/base.less | autoprefixer-cli -o www/dist/styles.css
 
 examples:
-	../checkit-www/convert.js
-	cp ../checkit-www/dist/examples.js ./public/dist/
+	./scripts/convert-examples.js
 
 build:
 	r.js -o config/build.js
 
 watch:
-	chokidar 'public/css/**/*.scss' -c 'make css'
-
-start_web:
-	nodemon web.js
+	make css
+	chokidar 'app/css/**/*.scss' 'www/css/**/*.less' -c 'make css'
 
 start_worker:
-	nodemon worker.js
+	nodemon scripts/worker.js
+
+publish:
+	git checkout master
+	make css
+	make examples
+	git add -f www/dist/examples.js
+	-git commit -m "publish"
+	git subtree push --prefix dist origin gh-pages
 
 test_worker:
-	mocha worker/*.test.js --require worker.js --timeout 5000
+	mocha worker/*.test.js --require scripts/worker.js --timeout 5000
 
 test_security:
 	mocha security.test.js --timeout 5000
 
 test_chrome:
-	node worker.js &
+	node scripts/worker.js &
 	karma start config/karma.conf.js --single-run --browsers Chrome
-	-pkill -f "node worker.js"
+	-pkill -f "node scripts/worker.js"
 
 test_ff:
-	node worker.js &
+	node scripts/worker.js &
 	karma start config/karma.conf.js --single-run --browsers Firefox
-	-pkill -f "node worker.js"
+	-pkill -f "node scripts/worker.js"

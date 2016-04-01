@@ -1,10 +1,10 @@
-README.md
-
 node_modules/
 
 config/env
 config/nginx.conf
 
-public/js/config.js
-public/libs/
-public/dist/
+app/js/config.js
+app/libs/
+app/dist/
+
+www/dist/

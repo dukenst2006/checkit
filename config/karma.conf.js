@@ -6,24 +6,24 @@ module.exports = function (config) {
     frameworks: ['jasmine', 'requirejs'],
 
     files: [
-      'public/js/test.js',
-      { pattern: 'public/js/**/*.js', included: false },
-      { pattern: 'public/js/**/*.html', included: false },
-      { pattern: 'public/img/**/*', included: false },
-      { pattern: 'public/fonts/*', included: false },
-      { pattern: 'public/libs/**/*.js', included: false },
-      { pattern: 'public/dist/examples.js', included: false },
-      { pattern: 'public/dist/*.css', included: false },
-      { pattern: 'public/dist/*.map', included: false }
+      'app/js/test.js',
+      { pattern: 'app/js/**/*.js', included: false },
+      { pattern: 'app/js/**/*.html', included: false },
+      { pattern: 'app/img/**/*', included: false },
+      { pattern: 'app/fonts/*', included: false },
+      { pattern: 'app/libs/**/*.js', included: false },
+      { pattern: 'app/dist/examples.js', included: false },
+      { pattern: 'app/dist/*.css', included: false },
+      { pattern: 'app/dist/*.map', included: false }
     ],
 
     proxies: {
-      '/img/': '/base/public/img/',
-      '/fonts/': '/base/public/fonts/'
+      '/img/': '/base/app/img/',
+      '/fonts/': '/base/app/fonts/'
     },
 
     exclude: [
-      'public/libs/**/*spec.js'
+      'app/libs/**/*spec.js'
     ],
 
     reporters: ['mocha'],

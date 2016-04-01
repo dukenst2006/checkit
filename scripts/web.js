@@ -13,5 +13,5 @@ app.use('/', (req, res, next) => {
   next()
 })
 
-app.use(express.static(__dirname + '/public', { index: 'prod.html' }))
+app.use(express.static(__dirname + '/../app', { index: 'prod.html' }))
 app.listen(port)

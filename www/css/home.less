@@ -1,0 +1,224 @@
+
+.elevator-speech {
+  animation: fade-title .7s backwards .2s;
+  will-change: transform;
+
+  .speech {
+    font-weight: 300;
+    line-height: 34px;
+    font-size: 26px;
+     margin: 0 30px;
+  }
+}
+
+.call-to-action {
+  display: flex;
+  justify-content: center;
+  animation: fade-buttons .7s backwards .6s;
+  will-change: transform;
+
+  .btn {
+    padding: 12px 16px 12px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px 0px rgba(0,0,0,.1);
+    transition: box-shadow .4s;
+    display: block;
+    float: left;
+
+    &:hover {
+      box-shadow: 0 2px 20px 4px rgba(0,0,0,.2);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    &.btn-demo {
+      background: #543f86;
+      color: #fff;
+      position: relative;
+      padding-left: 50px;
+
+      &::before {
+        content: '</>';
+        font-size: 12px;
+        margin-right: 12px;
+        border-radius: 4px;
+        padding: 0 1px 1px;
+        position: absolute;
+        left: 18px;
+        top: 12px;
+
+      }
+    }
+
+    &.btn-login {
+      background: linear-gradient(#fff,hsla(0,0%,100%,.9));
+      color: #008cdd;
+      margin-left: 24px;
+      position: relative;
+      padding-right: 30px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 18px;
+        right: 14px;
+        width: 7px;
+        height: 7px;
+        border: 3px solid #008cdd;
+        border-left: none;
+        border-bottom: none;
+        transform: rotate(45deg);
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+
+.demo {
+  will-change: max-height;
+  max-height: 500px;
+  margin: 0;
+  display: none;
+  animation: fade-demo .8s backwards;
+  will-change: transform, max-height;
+
+  .demo-title {
+    opacity: 0;
+    transition: all .4s;
+    transform: translateY(-100%);
+    font-size: 20px;
+    height: 27px;
+
+    &.in {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+
+    code {
+      background: rgba(64, 64, 64, .1);
+      padding: 0px 4px 2px 4px;
+      border-radius: 4px;
+      line-height: 23px;
+      display: inline-block;
+    }
+  }
+
+  .demo-editor {
+    box-sizing: border-box;
+    position: relative;
+    background: #2B313B;
+    height: 400px;
+    border: 1px solid #1C1F26;
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    text-align: left;
+
+    pre {
+      margin: 0;
+      padding: 8px;
+      line-height: 20px;
+      color: #fff;
+      font-size: 13px;
+      white-space: pre-wrap;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .next {
+      color: #543f86;
+      position: absolute;
+      bottom: 20px;
+      right: 25px;
+      cursor: pointer;
+      line-height: 40px;
+      padding: 0px 24px 6px 6px;
+      line-height: 23px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFF;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 4px;
+      display: none;
+      transition: opacity .5s;
+      animation: next 1.5s infinite;
+
+      &.__show {
+        display: block;
+      }
+
+      .arrow::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 8px;
+        height: 8px;
+        border: 1px solid #FFF;
+        border-left: none;
+        border-bottom: none;
+        transform: rotate(45deg);
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .demo-text {
+    background: #f4e6a0;
+    padding: 8px 20px 12px;
+    border-radius: 4px;
+    width: 85%;
+    margin: 0 auto;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+
+@keyframes fade-title {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(40px);
+  }
+}
+
+@keyframes fade-buttons {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-50deg) translateY(30px);
+  }
+}
+
+@keyframes fade-demo {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(1000px) scale(0.05);
+  }
+}
+
+@keyframes next {
+  to {
+    transform: translateX(10%) ;
+    opacity: 0.6;
+  }
+}

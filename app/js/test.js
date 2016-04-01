@@ -12,7 +12,7 @@ for (var file in karma.files) {
 
 // test specific config
 require.config({
-  baseUrl: 'base/public/js'
+  baseUrl: 'base/app/js'
 })
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000
@@ -24,9 +24,6 @@ require(['bootstrap'], function() {
   var tests = Object.keys(karma.files).filter(function(file) {
     return /(spec|e2e)\.js$/.test(file)
   })
-
-  //tests = ['base/public/js/security.e2e.js']
-  //tests = ['base/public/js/modules/settings.e2e.js']
 
   require(['services/test-utils'], function(Utils) {
     window.authUser = {}
@@ -56,5 +53,5 @@ require(['bootstrap'], function() {
 // include styles
 var link = document.createElement('link')
 link.rel = 'stylesheet'
-link.href = '/base/public/dist/styles.css'
+link.href = '/base/app/dist/styles.css'
 document.head.appendChild(link)
