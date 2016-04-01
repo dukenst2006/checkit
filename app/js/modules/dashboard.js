@@ -165,6 +165,10 @@ define([
         }
 
         else {
+          if (window.ga) {
+            ga('send', 'event', 'App', 'create-check')
+          }
+
           this.ref.push(check).once('value', function() {
             this.$data.check = Object.assign({}, this.$data.check, this.$data.checks[this.$data.checks.length - 1])
             this.ref.child(this.$data.check.id).on('value', this.checkListener)

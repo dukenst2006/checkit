@@ -85,6 +85,10 @@ define([
           }
         }
 
+        if (window.ga) {
+          ga('send', 'event', 'App', 'create-account')
+        }
+
         this.$dispatch('set-component', 'dashboard')
       }
     }
