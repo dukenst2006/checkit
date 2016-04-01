@@ -2,7 +2,7 @@ define([
   'vue',
   'services/auth',
   'services/firebase',
-  'text!./home.html',
+  'text!./dashboard.html',
   'directives/ago',
   'directives/editor'
 ], function(Vue, Auth, firebase, template) {

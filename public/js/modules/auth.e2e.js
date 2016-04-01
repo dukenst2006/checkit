@@ -4,7 +4,7 @@ define([
   'services/test-utils'
 ], function(firebase, Auth, Utils) {
 
-  describe('components/auth', function() {
+  describe('modules/auth', function() {
     var $auth, $notif
 
     beforeEach(function(done) {

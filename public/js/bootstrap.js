@@ -47,7 +47,7 @@ define([
   require([
     './modules/layout',
     './modules/auth',
-    './modules/home',
+    './modules/dashboard',
     './modules/settings'
   ], function(Layout) {
     Layout.$mount(document.body)
