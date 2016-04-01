@@ -19,6 +19,8 @@
       background: #FFF;
       padding: 20px;
       overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
       flex: 1;
       height: auto;
       position: relative;
@@ -31,8 +33,8 @@
     }
   }
 
-  .sticky {
-    float: right;
+  .btn-logout {
+    margin-top: auto;
   }
 
   .switch i {

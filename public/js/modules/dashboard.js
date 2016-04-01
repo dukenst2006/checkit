@@ -48,6 +48,9 @@ define([
     window.mozRequestAnimationFrame    ||
     function (callback) { window.setTimeout(callback, 1000 / 60) }
 
+
+  // ----------------------
+
   var main, gridItemsContainer, editor, closeCtrl
 
   return Vue.component('dashboard', {
@@ -62,18 +65,27 @@ define([
       },
       formatNotif: function(notif) {
         return '<i>[' + new Date(notif[1]).toLocaleString() + ']</i> ' + notif[0]
+      },
+      checkStatus: function(status) {
+        switch (status) {
+          case 'ok':
+            return 'no notification';
+          default:
+            return status;
+        }
       }
     },
 
     data: function() {
-      if (!Auth.user.uid) throw new Error('must be logged')
+      if (!Auth.user.uid) {
+        throw new Error('must be logged')
+      }
 
       this.ref = firebase.child('checks').child(Auth.user.uid)
 
       return {
         checksLoaded: false,
         check: {},
-        //check: { name: null, code: null, status: null, output: null, pending: null, error: null, notifs: [] },
         checks: firebase.collection(this.ref)
       }
     },
@@ -90,10 +102,16 @@ define([
 
       this.checkListener = function(snap) {
         var updated = snap.val()
+
+        // prevent updates before run completion
+        if (this.$data.check.pending && updated.pending) {
+          return
+        }
+
         if (updated) {
+          this.$data.check.pending = updated.pending
           this.$data.check.ago = updated.ago
           this.$data.check.status = updated.status
-          this.$data.check.pending = updated.pending
           this.$data.check.output = updated.output
           this.$data.check.error = updated.error
           this.$data.check.notifs = updated.notifs
@@ -133,14 +151,8 @@ define([
       saveCheck: function() {
         var check = this.$data.check
 
-        requestAnimationFrame(function() {
-          check.pending = true
-
-          // reset check
-          if (check.status === 'error') {
-            //check.output = check.error = ''
-          }
-        })
+        check.pending = true
+        check.status = check.output = check.error = ''
 
         // fix check.code not always updated
         check.code = this.$el.querySelector('textarea').value
@@ -149,9 +161,7 @@ define([
           this.ref.child(check.id).update({
             name: check.name,
             code: check.code
-          }, function() {
-            this.pushQueue()
-          }.bind(this))
+          }, this.pushQueue.bind(this))
         }
 
         else {
@@ -165,7 +175,9 @@ define([
       },
 
       deleteCheck: function() {
-        if (!confirm('Are you sure you want to delete it?')) return false
+        if (!confirm('Are you sure you want to delete it?')) {
+          return false
+        }
 
         this.ref.child(this.$data.check.id).remove()
         this.$data.check = {}

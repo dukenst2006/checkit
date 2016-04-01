@@ -19,9 +19,7 @@
           v-on:keyup="updateNotificationEmail | debounce 600">
         <i class="icon-loader" v-show="loaderNotificationEmail"></i>
       </div>
-      <div class="sticky">
-        <a class="btn __basic btn-logout" title="Logout" v-on:click="logout">Logout <i class="icon-logout"></i></a>
-      </div>
+      <a class="btn __full __default btn-logout" title="Logout" v-on:click="logout">Logout <i class="icon-logout"></i></a>
     </article>
   </article>
 </div>

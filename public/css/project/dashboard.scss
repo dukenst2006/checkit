@@ -307,28 +307,27 @@ main {
   }
 }
 
+.icon {
+  &-ok {
+    @extend .icon-ok;
+  }
+  &-error {
+    @extend .icon-attention-alt;
+  }
+  &-notification {
+    @extend .icon-bell;
+  }
+  &-pending {
+    @extend .icon-spin1;
+    &::before {
+      @extend .animate-spin;
+    }
+  }
+}
 
 .dashboard {
   margin-left: -10px;
   margin-right: -10px;
-
-  .icon {
-    &-ok {
-      @extend .icon-ok;
-    }
-    &-error {
-      @extend .icon-attention-alt;
-    }
-    &-notification {
-      @extend .icon-bell;
-    }
-    &-pending {
-      @extend .icon-spin1;
-      &::before {
-        @extend .animate-spin;
-      }
-    }
-  }
 
   .item {
     display: inline-block;

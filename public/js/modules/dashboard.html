@@ -18,7 +18,7 @@
         <div class="editor-message __expand __expand-status" v-if="check.status || check.pending" v-el:editorMessage>
           <a class="expand-title __status __{{ check.status }}" v-if="check.status" v-on:click="toggleEditorMessageStatus()">
             <i class="icon-{{ check.status }}"></i>
-            <span> {{ check.status }}</span>
+            <span> {{ check.status | checkStatus }}</span>
           </a>
           <a class="expand-title __history" v-on:click="toggleEditorMessageHistory()" v-if="check.notifs && check.notifs.length">
             <i class="icon-{{ check.status }}"></i>
@@ -54,7 +54,8 @@
         <h1 class="item__title">{{{ check.name | formatName }}}</h1>
         <hr>
         <p>
-          <i class="icon-{{ check.pending ? 'pending': check.status }}"></i>
+          <i v-if="check.pending" class="icon-pending"></i>
+          <i v-if="check.status == 'notification'" class="icon-notification"></i>
           <span v-if="check.ago"> ~ <span v-ago="check.ago"></span> ago</span>
         </p>
       </a>
