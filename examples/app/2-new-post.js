@@ -6,13 +6,15 @@ request('http://martinfowler.com/feed.atom', function(err, resp, body) {
     // get list of posts
     parseXml(body, function(err, result) {
       // date of last post
-      var lastPostDate = result.feed.entry[0].updated[0]
+      var lastPostDate = result.feed.entry[0].updated[0];
       // is last post today?
       if (moment(lastPostDate).isSame(new Date(), 'day')) {
         // send notification/email
-        notify('New post on martinfowler.com')
+        notify('New post on martinfowler.com');
+      } else {
+        log('No new post on martinfowler.com');
       }
-      done()
-    })
-  } else done()
-})
+      done();
+    });
+  } else done();
+});

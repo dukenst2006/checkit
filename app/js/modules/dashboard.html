@@ -55,7 +55,7 @@
         <hr>
         <p>
           <i v-if="check.pending" class="icon-pending"></i>
-          <i v-if="check.status == 'notification'" class="icon-notification"></i>
+          <i v-else class="icon-{{ check.status }}"></i>
           <span v-if="check.ago"> ~ <span v-ago="check.ago"></span> ago</span>
         </p>
       </a>

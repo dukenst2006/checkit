@@ -5,7 +5,9 @@ request('http://example.com', function (err, resp, body) {
   // check if response fails
   if (resp.statusCode != 200) {
     // send notification/email
-    notify('"example.com" is down')
+    notify('example.com is down');
+  } else {
+    log('example.com is working normally');
   }
-  done()
-})
+  done();
+});

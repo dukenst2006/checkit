@@ -14,7 +14,8 @@ css:
 	lessc www/css/base.less | autoprefixer-cli -o www/dist/styles.css
 
 examples:
-	./scripts/convert-examples.js
+	node scripts/convert-examples.js app
+	node scripts/convert-examples.js www
 
 build:
 	r.js -o config/build.js

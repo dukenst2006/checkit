@@ -4,13 +4,18 @@ var fs = require('fs')
 var path = require('path')
 var util = require('util')
 
+var dir = process.argv.slice(2)[0];
 var baseDir = path.resolve(__dirname) + '/../'
 
-fs.readdir(baseDir + '/examples', function(err, files) {
+if (!dir) {
+  throw new Error('Must provide directory argument (either app or www)');
+}
+
+fs.readdir(baseDir + '/examples/' + dir, function(err, files) {
   if (err) throw err
 
   var examples = files.map(function(file) {
-    var content = fs.readFileSync(baseDir + 'examples/' + file, 'utf8')
+    var content = fs.readFileSync(baseDir + 'examples/' + dir + '/' + file, 'utf8')
 
     return {
       name: content.match(/^\/\/ TITLE (.*)$/m, '')[1],
@@ -18,11 +23,7 @@ fs.readdir(baseDir + '/examples', function(err, files) {
     }
   })
 
-  fs.writeFile(baseDir + 'app/dist/examples.js', 'window.CHECKIT_EXAMPLES=' + JSON.stringify(examples), function(err) {
-    if (err) throw err
-  })
-
-  fs.writeFile(baseDir + 'www/dist/examples.js', 'window.CHECKIT_EXAMPLES=' + JSON.stringify(examples), function(err) {
+  fs.writeFile(baseDir + dir + '/dist/examples.js', 'window.CHECKIT_EXAMPLES=' + JSON.stringify(examples), function(err) {
     if (err) throw err
   })
 })
