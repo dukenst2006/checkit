@@ -6,5 +6,3 @@ config/nginx.conf
 app/js/config.js
 app/libs/
 app/dist/
-
-www/dist/

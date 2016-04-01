@@ -21,11 +21,6 @@ start_worker:
 	nodemon scripts/worker.js
 
 publish:
-	git checkout master
-	make css
-	make examples
-	git add -f www/dist/
-	-git commit -m "publish"
 	# git push origin `git subtree split --prefix www master`:gh-pages --force
 	git subtree push --prefix www origin gh-pages
 
