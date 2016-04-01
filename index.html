@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- design inspired from https://stripe.com/atlas -->
+<html>
+  <head>
+    <title>Check It - Check whatever you want in Javascript</title>
+    <link rel="stylesheet" href="dist/styles.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="logo">Check It</h1>
+    </header>
+    <main>
+      <section class="elevator-speech">
+        <p class="speech">
+          Automatically runs Javascript code to check whatever you want.
+        </p>
+      </section>
+      <section class="call-to-action">
+        <button class="btn btn-demo">Show me an example</button>
+        <a href="https://app.check-it.io" class="btn btn-login">Go to application</a>
+      </section>
+      <section class="demo">
+        <p class="demo-title"></p>
+        <div class="demo-editor">
+          <pre></pre>
+          <a class="next">Next Example <span class="arrow"></span></a>
+        </div>
+        <div class="demo-text">
+          <h3>How it works</h3>
+          <p >
+            Copy-paste this example in our application and we take care to execute it every 10 minutes,
+            if the condition is met, we will send you an email.
+          </p>
+        </div>
+
+      </section>
+    </main>
+
+    <div class="flex-spacer"></div>
+
+    <footer>
+      <small><em>Created by <a href="https://twitter.com/julesbou" target="_blank">@julesbou</a></em></small>
+    </footer>
+
+    <script src="dist/examples.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="dist/rainbow.min.js"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-19244753-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
