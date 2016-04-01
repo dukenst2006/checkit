@@ -2,7 +2,6 @@
   <article class="modal" class="{{ isOpen ? 'open': '' }}">
     <header class="modal_header">
       <h2 class="modal_title">Settings</h2>
-      <a class="logout-user" title="Logout" v-on:click="logout"><i class="icon-logout"></i></a>
     </header>
     <article class="modal_content form">
       <div class="form-spacer">
@@ -19,6 +18,9 @@
           v-model="user.notificationEmail"
           v-on:keyup="updateNotificationEmail | debounce 600">
         <i class="icon-loader" v-show="loaderNotificationEmail"></i>
+      </div>
+      <div class="sticky">
+        <a class="btn __basic btn-logout" title="Logout" v-on:click="logout">Logout <i class="icon-logout"></i></a>
       </div>
     </article>
   </article>

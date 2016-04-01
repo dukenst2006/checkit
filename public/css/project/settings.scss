@@ -31,16 +31,8 @@
     }
   }
 
-  .logout-user {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 28px;
-    color: #a7adba;
-
-    &:hover {
-      color: #2980B9;
-    }
+  .sticky {
+    float: right;
   }
 
   .switch i {
