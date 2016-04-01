@@ -1,4 +1,4 @@
-.PHONY: env web worker
+.PHONY: examples worker
 
 env:
 	node -e " \
@@ -30,9 +30,10 @@ publish:
 	git checkout master
 	make css
 	make examples
-	git add -f www/dist/examples.js
+	git add -f www/dist/
 	-git commit -m "publish"
-	git subtree push --prefix dist origin gh-pages
+	# git push origin `git subtree split --prefix www master`:gh-pages --force
+	git subtree push --prefix www origin gh-pages
 
 test_worker:
 	mocha worker/*.test.js --require scripts/worker.js --timeout 5000
