@@ -1,7 +1,5 @@
-- add example with notif
 - editor bottom styling
 - track GA events in app
-- move /www/css to scss
 - add run all button
 - button to clear notifs
 - use codemirror

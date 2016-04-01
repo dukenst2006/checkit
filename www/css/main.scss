@@ -84,6 +84,6 @@ footer {
   }
 }
 
-@import 'home.less';
-@import 'editor.less';
-@import (inline) url(https://fonts.googleapis.com/css?family=Exo+2:200,600);
+@import 'home.scss';
+@import 'editor.scss';
+@import url(https://fonts.googleapis.com/css?family=Exo+2:200,600);

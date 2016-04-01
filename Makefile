@@ -1,17 +1,11 @@
 .PHONY: examples worker
 
-env:
-	node -e " \
-		var fs = require('fs'); \
-		require('dotenv').load({ path: 'config/env' }); \
-		var conf = 'define({\"FIREBASE\": \"' + process.env.CHECKIT_FIREBASE_URL + '\"})'; \
-		fs.writeFileSync('app/js/config.js', conf); \
-	"
-
 css:
-	node-sass app/css/main.scss app/dist/styles.css
-	autoprefixer-cli -o app/dist/styles.css app/dist/styles.css
-	lessc www/css/base.less | autoprefixer-cli -o www/dist/styles.css
+	cat app/css/main.scss | node-sass --include-path app/css | autoprefixer-cli -o app/dist/styles.css
+	cat www/css/main.scss | node-sass --include-path www/css | autoprefixer-cli -o www/dist/styles.css
+
+env:
+	node scripts/env.js
 
 examples:
 	node scripts/convert-examples.js app
@@ -21,7 +15,6 @@ build:
 	r.js -o config/build.js
 
 watch:
-	make css
 	chokidar 'app/css/**/*.scss' 'www/css/**/*.less' -c 'make css'
 
 start_worker:
