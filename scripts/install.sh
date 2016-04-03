@@ -26,4 +26,5 @@ npm prune
 
 make css
 make env
+make examples
 make build
