@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "heroku-postbuild": "./install.sh"
+    "heroku-postbuild": "./scripts/install.sh"
   },
   "engines": {
     "node": "5.8.x"

@@ -2,6 +2,8 @@
 
 // send request to example.com
 request('http://example.com', function (err, resp, body) {
+  if (err) throw err;
+
   // check if response fails
   if (resp.statusCode != 200) {
     // send notification/email

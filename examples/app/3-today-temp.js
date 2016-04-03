@@ -8,6 +8,8 @@ var url ='http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' 
 
 // request api for today's weather
 request({ url: url, json: true }, function(err, resp, body) {
+  if (err) throw err;
+
   // check if temperature below 0
   if (resp.statusCode == 200 && body.main.temp_min > 0) {
     // send notification/email

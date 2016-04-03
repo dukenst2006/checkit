@@ -2,6 +2,8 @@
 
 // fetch RSS feed
 request('http://martinfowler.com/feed.atom', function(err, resp, body) {
+  if (err) throw err;
+
   if (resp.statusCode == 200) {
     // get list of posts
     parseXml(body, function(err, result) {

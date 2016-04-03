@@ -1,7 +1,8 @@
 - editor bottom styling
+- add jsdom
+- use codemirror
 - add run all button
 - button to clear notifs
-- use codemirror
 - send sms?
 - move to es6
 - badge like github
