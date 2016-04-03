@@ -27,8 +27,10 @@ define([
     },
 
     created: function() {
+      log('--> auth.created')
       firebase.onAuth(function(authData) {
         if (!this.preventComponentChange) {
+          log('--> set component')
           this.component = authData ? 'dashboard' : 'auth'
         } else {
           this.preventComponentChange = false

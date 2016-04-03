@@ -38,11 +38,18 @@ require.config({
 
 })
 
+window.log = function(msg) {
+  if (console && console.log) {
+    console.log(msg)
+  }
+}
+
 define([
   'services/auth'
 ], function (Auth) {
 
   Auth.start()
+  log('--> auth.start')
 
   require([
     './modules/layout',
@@ -50,6 +57,7 @@ define([
     './modules/dashboard',
     './modules/settings'
   ], function(Layout) {
+    log('--> mount')
     Layout.$mount(document.body)
   })
 })
