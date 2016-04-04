@@ -3,6 +3,7 @@ var util = require('util')
 var domain = require('domain')
 var request = require('request')
 var moment = require('moment')
+var jsdom = require('jsdom');
 var xml2js = require('xml2js')
 
 module.exports.run = function(code, storage, callback) {
@@ -13,6 +14,7 @@ module.exports.run = function(code, storage, callback) {
     request: request,
     setTimeout: setTimeout,
     parseXml: xml2js.parseString,
+    jsdom: jsdom,
     moment: moment,
     notify: function(message) {
       notifMess = message

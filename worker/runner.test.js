@@ -119,5 +119,22 @@ describe('runner', function() {
         done()
       })
     })
+
+    it('works with jsdom', function(done) {
+      var code = (
+        'jsdom.env(\'<p><span>foo</span> bar</p>\', function (err, window) {' +
+          'log(window.document.querySelector(\'span\').textContent);' +
+          'done()' +
+        '});'
+      );
+
+      runner.run(code, [], function(output, notifMess, storage, err) {
+        expect(output).to.equal('foo')
+        expect(notifMess).to.equal(null)
+        expect(storage.length).to.equal(0)
+        expect(err).to.equal(undefined)
+        done()
+      })
+    })
   })
 })

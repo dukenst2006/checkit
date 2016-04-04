@@ -40,6 +40,7 @@ Method | Description
 `request(url, callback)` | send an http request, [see `request()` module](https://github.com/request/request)
 `parseXml(str, callback)` | shortcut method of [`xml2js.parseString()`](https://github.com/Leonidas-from-XIV/node-xml2js)
 `moment()` | [momentjs library](http://momentjs.com/docs/)
+`jsdom` | [jsdom library](https://github.com/tmpvar/jsdom)
 `done()` | required if your code is asynchronous, place it at the very end of your code execution
 
 _You would like to see a method added here? [Create an issue and tell us](https://github.com/julesbou/checkit-help/issues/new)._
