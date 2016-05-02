@@ -12,3 +12,9 @@ $tablet-width: 940px;
     @content;
   }
 }
+
+@mixin desktop {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}

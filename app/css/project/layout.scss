@@ -46,9 +46,8 @@ a {
     box-sizing: initial !important;
   }
 
-  button, .btn {
-    @extend .__S;
-    @extend .__green;
+  @include mobile {
+    height: 44px;
   }
 }
 

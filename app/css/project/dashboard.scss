@@ -198,25 +198,29 @@ main {
     }
 
     .__ok {
-      ,a, pre, .dotter:before {
+      background: color(emerald);
+      a, pre, .dotter:before {
         background: color(emerald);
       }
     }
 
     .__error {
-      ,a, pre, .dotter:before {
+      background: color(alizarin);
+      a, pre, .dotter:before {
         background: color(alizarin);
       }
     }
 
     .__notification, .__history {
-      ,a, pre, .dotter:before {
+      background: color(sun-flower);
+      a, pre, .dotter:before {
         background: color(sun-flower);
       }
     }
 
     .__pending {
-      ,a, pre, .dotter:before {
+      background: #FEE798;
+      a, pre, .dotter:before {
         background: #FEE798;
       }
 

@@ -7,9 +7,10 @@
     display: flex;
     box-shadow: 0 5px 40px rgba(6, 21, 44, 0.3);
 
-    width: 300px;
-    margin-left: -150px;
-
+    @include desktop {
+      width: 300px;
+      margin-left: -150px;
+    }
 
     .modal_header {
       background: #ECF0F1;

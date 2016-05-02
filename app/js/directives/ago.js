@@ -33,14 +33,14 @@ define([
     bind: function() {
       this.interval = setInterval(function() {
         if (this.timestamp) {
-          this.el.innerText = ago(this.timestamp)
+          this.el.textContent = ago(this.timestamp)
         }
       }.bind(this), 1000)
     },
 
     update: function (timestamp) {
       this.timestamp = timestamp
-      this.el.innerText = ago(timestamp)
+      this.el.textContent = ago(timestamp)
     },
 
     unbind: function() {
