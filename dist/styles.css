@@ -95,13 +95,13 @@ footer {
   header {
     text-align: center;
     width: auto; }
+
   main {
     max-width: 398px; }
     main section {
       width: auto;
       margin-left: 2px !important;
       margin-right: 2px !important; } }
-
 .elevator-speech {
   -webkit-animation: fade-title .7s backwards .2s;
           animation: fade-title .7s backwards .2s;
@@ -283,45 +283,38 @@ footer {
     opacity: 0;
     -webkit-transform: scale(0.92) translateY(40px);
             transform: scale(0.92) translateY(40px); } }
-
 @-webkit-keyframes fade-buttons {
   0% {
     opacity: 0;
     -webkit-transform: perspective(800px) rotateX(-50deg) translateY(30px);
             transform: perspective(800px) rotateX(-50deg) translateY(30px); } }
-
 @keyframes fade-buttons {
   0% {
     opacity: 0;
     -webkit-transform: perspective(800px) rotateX(-50deg) translateY(30px);
             transform: perspective(800px) rotateX(-50deg) translateY(30px); } }
-
 @-webkit-keyframes fade-demo {
   0% {
     opacity: 0;
     max-height: 0;
     -webkit-transform: translateY(1000px) scale(0.05);
             transform: translateY(1000px) scale(0.05); } }
-
 @keyframes fade-demo {
   0% {
     opacity: 0;
     max-height: 0;
     -webkit-transform: translateY(1000px) scale(0.05);
             transform: translateY(1000px) scale(0.05); } }
-
 @-webkit-keyframes next {
   to {
     -webkit-transform: translateX(10%);
             transform: translateX(10%);
     opacity: 0.6; } }
-
 @keyframes next {
   to {
     -webkit-transform: translateX(10%);
             transform: translateX(10%);
     opacity: 0.6; } }
-
 pre .comment {
   color: #727272; }
 
@@ -351,4 +344,3 @@ pre .support, *[data-language="c"] .function.call {
 
 pre .variable.global, pre .variable.class, pre .variable.instance {
   color: #FF6400; }
-
