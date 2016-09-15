@@ -104,8 +104,7 @@ footer {
       margin-right: 2px !important; } }
 .elevator-speech {
   -webkit-animation: fade-title .7s backwards .2s;
-          animation: fade-title .7s backwards .2s;
-  will-change: transform; }
+          animation: fade-title .7s backwards .2s; }
   .elevator-speech .speech {
     font-weight: 300;
     line-height: 34px;
@@ -122,8 +121,7 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-animation: fade-buttons .7s backwards .6s;
-          animation: fade-buttons .7s backwards .6s;
-  will-change: transform; }
+          animation: fade-buttons .7s backwards .6s; }
   .call-to-action .btn {
     padding: 12px 16px 12px 16px;
     text-decoration: none;
@@ -181,13 +179,11 @@ footer {
         padding: 0; }
 
 .demo {
-  will-change: max-height;
   max-height: 500px;
   margin: 0;
   display: none;
   -webkit-animation: fade-demo .8s backwards;
-          animation: fade-demo .8s backwards;
-  will-change: transform, max-height; }
+          animation: fade-demo .8s backwards; }
   .demo .demo-title {
     opacity: 0;
     -webkit-transition: all .4s;
