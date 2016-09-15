@@ -15,7 +15,7 @@ build:
 	r.js -o config/build.js
 
 watch:
-	chokidar 'app/css/**/*.scss' 'www/css/**/*.less' -c 'make css'
+	chokidar 'app/css/**/*.scss' 'www/css/**/*.scss' 'www/css/**/*.less' -c 'make css'
 
 start_worker:
 	nodemon scripts/worker.js

@@ -1,6 +1,5 @@
 .elevator-speech {
   animation: fade-title .7s backwards .2s;
-  will-change: transform;
 
   .speech {
     font-weight: 300;
@@ -14,7 +13,6 @@
   display: flex;
   justify-content: center;
   animation: fade-buttons .7s backwards .6s;
-  will-change: transform;
 
   .btn {
     padding: 12px 16px 12px 16px;
@@ -85,12 +83,10 @@
 
 
 .demo {
-  will-change: max-height;
   max-height: 500px;
   margin: 0;
   display: none;
   animation: fade-demo .8s backwards;
-  will-change: transform, max-height;
 
   .demo-title {
     opacity: 0;
