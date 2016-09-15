@@ -1,8 +1,8 @@
 .PHONY: examples worker
 
 css:
-	cat app/css/main.scss | node-sass --include-path app/css | autoprefixer-cli -o app/dist/styles.css
-	cat www/css/main.scss | node-sass --include-path www/css | autoprefixer-cli -o www/dist/styles.css
+	sass app/css/main.scss --load-path app/css | autoprefixer-cli -o app/dist/styles.css
+	sass www/css/main.scss --load-path www/css | autoprefixer-cli -o www/dist/styles.css
 
 env:
 	node scripts/env.js

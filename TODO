@@ -1,6 +1,8 @@
 - editor bottom styling
-- add jsdom
+- move tests to /test
+- add travisci
 - use codemirror
+- https://preactjs.com/guide/getting-started
 - add run all button
 - button to clear notifs
 - send sms?
